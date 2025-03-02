@@ -5,6 +5,6 @@ public class UIManager : MonoBehaviour
 {
     public void MapPressed()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Map");
     }
 }
