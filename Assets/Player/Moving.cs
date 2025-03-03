@@ -3,10 +3,9 @@ using UnityEngine;
 public class Moving : MonoBehaviour
 {
     public float PlayerSpeed = 1.0f;
-    public float DashDistance = 0.5f;
+    public float DashDistance = 0.3f;
     public float DashCooldown = 3.0f;
     public float DashTimer = 0.0f;
-    public float PlayerWidth = 0.5f;
 
     void Move()
     {
@@ -15,8 +14,8 @@ public class Moving : MonoBehaviour
     }
     void Dash()
     {
-        //以1080P螢幕中心為(0,0)的座標系統
-        Vector3 MousePos = new Vector3(Input.mousePosition.x - 960, Input.mousePosition.y - 540, 0);
+        //以螢幕中心為原點的座標系統
+        Vector3 MousePos = new Vector3(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2, 0);
         //終點座標
         Vector3 Posf = Vector3.Normalize(MousePos) * DashDistance;
         //射線檢測
