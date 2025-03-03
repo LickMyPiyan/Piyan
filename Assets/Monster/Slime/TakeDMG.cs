@@ -3,7 +3,7 @@ using UnityEngine;
 public class TakeDMG : MonoBehaviour
 {
     public int SlimeHealth = 100;
-    public void HitSlime(int damage)
+    public void TakeSlimeDMG(int damage)
     {
         SlimeHealth -= damage;
     }

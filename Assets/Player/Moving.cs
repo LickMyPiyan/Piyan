@@ -3,9 +3,9 @@ using UnityEngine;
 public class Moving : MonoBehaviour
 {
     public float PlayerSpeed = 1.0f;
-    public float DashDistance = 0.3f;
+    public float DashDistance = 3.0f;
     public float DashCooldown = 3.0f;
-    public float DashTimer = 0.0f;
+    float DashTimer = 0.0f;
 
     void Move()
     {

@@ -19,11 +19,10 @@ public class Sword : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    TakeDMG Hit;
 
     void Start()
     {
-        Hit = FindFirstObjectByType<TakeDMG>();
+        
     }
 
     // Update is called once per frame
@@ -35,7 +34,7 @@ public class Sword : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= AttackCD)
         {
-            Hit.HitSlime(Damage);
+            other.gameObject.GetComponent<TakeDMG>().TakeSlimeDMG(Damage);
             Timer = Time.time;
         }
     }
