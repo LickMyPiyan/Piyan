@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class TakeDMG : MonoBehaviour
+public class SlimeDMG : MonoBehaviour
 {
-    public int SlimeHealth = 100;
+    public ALLDATA data;
     public void TakeSlimeDMG(int damage)
     {
-        SlimeHealth -= damage;
+        data.SlimeHealth -= damage;
     }
     void Die()
     {
-        if(SlimeHealth <= 0)
+        if(data.SlimeHealth <= 0)
         {
             Destroy(gameObject);
         }

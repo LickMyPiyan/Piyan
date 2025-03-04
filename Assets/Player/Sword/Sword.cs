@@ -1,9 +1,8 @@
 using UnityEngine;
 public class Sword : MonoBehaviour
 {
+    public ALLDATA data;
     float Timer = 0;
-    float AttackCD = 0.5f;
-    public int Damage = 100;
     void RotateToMouse()
     {
         //以螢幕中心為原點的座標系統
@@ -18,12 +17,6 @@ public class Sword : MonoBehaviour
         //旋轉
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -32,9 +25,9 @@ public class Sword : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= AttackCD)
+        if (other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= data.AttackCD)
         {
-            other.gameObject.GetComponent<TakeDMG>().TakeSlimeDMG(Damage);
+            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(data.Damage);
             Timer = Time.time;
         }
     }
