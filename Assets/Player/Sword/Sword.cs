@@ -1,7 +1,8 @@
 using UnityEngine;
 public class Sword : MonoBehaviour
 {
-    public ALLDATA data;
+    public float SwordAttackCD = 0.5f;
+    public int SwordDamage = 100;
     float Timer = 0;
     void RotateToMouse()
     {
@@ -25,9 +26,9 @@ public class Sword : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= data.AttackCD)
+        if (other.gameObject != null && other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
         {
-            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(data.Damage);
+            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
             Timer = Time.time;
         }
     }

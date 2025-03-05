@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class SlimeGenerate : MonoBehaviour
 {
-    public ALLDATA data;
+    public int SlimeNum = 3;
+    public float SlimeSpawnRange = 5;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for(int i = 0; i < data.SlimeNum; i++)
+        for(int i = 0; i < SlimeNum; i++)
         {
-            Instantiate(Resources.Load("Slime"), new Vector3(Random.Range(-data.SlimeSpawnRange, data.SlimeSpawnRange), Random.Range(-data.SlimeSpawnRange,data.SlimeSpawnRange), 0), Quaternion.identity);
+            Instantiate(Resources.Load("Slime"), new Vector3(Random.Range(-SlimeSpawnRange, SlimeSpawnRange), Random.Range(-SlimeSpawnRange,SlimeSpawnRange), 0), Quaternion.identity);
         }
     }
 

@@ -1,16 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlimeMoving : MonoBehaviour
 {
-    public ALLDATA data;
-    float Timer = 0;
-    Transform player = GameObject.Find("Player").transform;
+    public float SlimeMovimgSpeed = 1.0f;
     void Move()
     {
-        if(Time.time - Timer > data.SlimeJumpCD)
+        Transform player = GameObject.Find("Player").transform;
+        if (player != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, 10.0f);
-            Timer = Time.time;
+            transform.position += new Vector3((player.position.x - transform.position.x) / Vector3.Distance(transform.position, player.position), (player.position.y - transform.position.y) / Vector3.Distance(transform.position, player.position), 0) * SlimeMovimgSpeed * Time.deltaTime;
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +21,6 @@ public class SlimeMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 }
