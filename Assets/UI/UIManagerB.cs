@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManagerB : MonoBehaviour
 {
+    public Image PlayerHealth;
+    public float MaxHealth = 100f;
+    public float CurrentHealth = 100f;
+    //都先用100 能讀到再說
     public GameObject PauseUI;
 
     public void Paused()
@@ -25,6 +30,8 @@ public class UIManagerB : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerHealth.fillAmount = CurrentHealth / MaxHealth;
+
         if (Input.GetKeyDown(KeyCode.Escape) && PauseUI.activeSelf)
         {
             Resume();
