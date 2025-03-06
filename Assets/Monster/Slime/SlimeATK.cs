@@ -6,9 +6,9 @@ public class SlimeATK : MonoBehaviour
     public float SlimeATKCD = 1.0f;
     public int SlimeATKDMG = 10;
     float Timer = 0;
-    void SlimeAttack()
+    void OnCollisionStay2D(Collision2D other)
     {
-        if(Vector2.Distance(transform.position, GameObject.Find("Player").transform.position) < SlimeATKRange && Time.time - Timer >= SlimeATKCD)
+        if(other.gameObject != null && other.gameObject.tag == "Player" && Time.time - Timer > SlimeATKCD)
         {
             GameObject.Find("Player").GetComponent<PlayerDMG>().TakePlayerDMG(SlimeATKDMG);
             Timer = Time.time;
@@ -23,6 +23,6 @@ public class SlimeATK : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SlimeAttack();
+        
     }
 }
