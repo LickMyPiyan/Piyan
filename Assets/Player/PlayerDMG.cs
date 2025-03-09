@@ -4,9 +4,18 @@ public class PlayerDMG : MonoBehaviour
 {
     public int PlayerHealth = 100;
     bool win = false;
+    public GameObject Hurt;
+
+    public void GotHurt()
+    {
+        Hurt.SetActive(true);
+        Hurt.SetActive(false);
+    }
+    
     public void TakePlayerDMG(int damage)
     {
         PlayerHealth -= damage;
+        GotHurt();
     }
     void Die()
     {
