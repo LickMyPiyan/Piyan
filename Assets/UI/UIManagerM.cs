@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,10 @@ public class UIManagerM : MonoBehaviour
     public GameObject EnterE01;
     public GameObject Shop01;
     public GameObject EnterS01;
+    //Loading畫面
+    public GameObject Loading;
+    public Image LoadingScreen;
+    public float transitionDuration = 0.3f;
     //抓滑鼠位置
     private Vector3 MousePosI;
     private Vector3 MousePosF;
@@ -53,17 +58,51 @@ public class UIManagerM : MonoBehaviour
         switch (GameState)
         {
             case 0:
-                SceneManager.LoadScene("Battle01");
+                StartCoroutine(LoadOutAndSwitchScene("Battle01"));
             break;
 
             case 1:
-                SceneManager.LoadScene("Event01");
+                StartCoroutine(LoadOutAndSwitchScene("Event01"));
             break;
 
             case 2:
-                SceneManager.LoadScene("Shop01");
+                StartCoroutine(LoadOutAndSwitchScene("Shop01"));
             break;
         }
+    }
+
+    private IEnumerator LoadOutAndSwitchScene(string sceneName)
+    {
+        yield return StartCoroutine(LoadOut());
+        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public IEnumerator LoadIn()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < transitionDuration)
+        {
+            LoadingScreen.fillAmount = Mathf.Lerp(1, 0, elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        LoadingScreen.fillAmount = 0;
+        Loading.SetActive(false);
+    }
+
+    public IEnumerator LoadOut()
+    {
+        Loading.SetActive(true);
+        float elapsedTime = 0f;
+        while (elapsedTime < transitionDuration)
+        {
+            LoadingScreen.fillOrigin = 1;
+            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        LoadingScreen.fillAmount = 1;
     }
 
     //節點UI移動
@@ -108,6 +147,8 @@ public class UIManagerM : MonoBehaviour
             (Event01, EnterE01),
             (Shop01, EnterS01)
         };
+
+        StartCoroutine(LoadIn());
 
         MainCamera = Camera.main;
 
