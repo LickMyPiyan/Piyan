@@ -18,7 +18,22 @@ public class Sword : MonoBehaviour
         //旋轉
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
-
+    void HitSlime(Collider2D other)
+    {
+        if (other.gameObject != null && other.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        {
+            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
+            Timer = Time.time;
+        }
+    }
+    void HitFlower(Collider2D other)
+    {
+        if (other.gameObject != null && other.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        {
+            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
+            Timer = Time.time;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,10 +41,6 @@ public class Sword : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject != null && other.gameObject.tag == "Enemy" && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
-        {
-            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
-            Timer = Time.time;
-        }
+        HitSlime(other);
     }
 }
