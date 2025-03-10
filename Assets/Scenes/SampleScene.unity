@@ -119,81 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &30329931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 30329932}
-  - component: {fileID: 30329934}
-  - component: {fileID: 30329933}
-  m_Layer: 5
-  m_Name: Hurt
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &30329932
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30329931}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1200855477}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &30329933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30329931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.6981132, g: 0, b: 0, a: 0.29411766}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &30329934
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30329931}
-  m_CullTransparentMesh: 1
 --- !u!1 &92013665
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8c28a5ce6ac17439260bded3ff310a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSpeed: 3
+  PlayerSpeed: 1.5
   DashDistance: 2
   DashCooldown: 2
 --- !u!58 &381127581
@@ -532,7 +457,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: 100
-  Hurt: {fileID: 0}
 --- !u!114 &381127586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412617ca0353f6f44a6d876b0d560837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 5
+  SlimeNum: 10
   SlimeSpawnRange: 10
 --- !u!1 &591702338
 GameObject:
@@ -1342,7 +1266,6 @@ RectTransform:
   - {fileID: 1760123375}
   - {fileID: 5235305329110017660}
   - {fileID: 967794763}
-  - {fileID: 30329932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2351,10 +2274,6 @@ PrefabInstance:
     - target: {fileID: 6206848692904576084, guid: d2bbb5155bfc2dc48802ea98c79d19ec, type: 3}
       propertyPath: m_Name
       value: SlimeHealth
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206848692904576084, guid: d2bbb5155bfc2dc48802ea98c79d19ec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
