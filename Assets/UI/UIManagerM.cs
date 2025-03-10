@@ -1,41 +1,82 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIManagerM : MonoBehaviour
 {
+    //抓場景裡的物件
     public GameObject StartUI;
     public GameObject Battle01;
     public GameObject EnterB01;
-    public Vector3 MousePosI;
-    public Vector3 MousePosF;
+    public GameObject Event01;
+    public GameObject EnterE01;
+    public GameObject Shop01;
+    public GameObject EnterS01;
+    //抓滑鼠位置
+    private Vector3 MousePosI;
+    private Vector3 MousePosF;
+    //設定相機移動範圍
     public Vector3 minCameraPosition = new Vector3( 0 , 0, -10);
     public Vector3 maxCameraPosition = new Vector3( 10 , 6, -10);
+    //遊戲進度計數(static讓它在切場景時不變)
+    public static int GameState;
+    //UI跟物件配對清單
+    private List<(GameObject, GameObject)> followPairs;
 
+    //宣告攝影機
     Camera MainCamera;
 
 
-    public void BattlePressed()
+    //更新UI狀態
+    void UpdateUIState()
+    {
+        EnterB01.GetComponent<Button>().interactable = (GameState == 0);
+        EnterE01.GetComponent<Button>().interactable = (GameState == 1);
+        EnterS01.GetComponent<Button>().interactable = (GameState == 2);
+    }
+    
+    //開關進節點UI
+    public void ButtonPressed()
     {
         StartUI.SetActive(true);
     }
 
-    public void BattleUnPressed()
+    public void UnPressed()
     {
         StartUI.SetActive(false);
     }
 
+    //按開始可以進不同的節點
     public void StartPressed()
     {
-        SceneManager.LoadScene("BattleP01");
+        switch (GameState)
+        {
+            case 0:
+                SceneManager.LoadScene("Battle01");
+            break;
+
+            case 1:
+                SceneManager.LoadScene("Event01");
+            break;
+
+            case 2:
+                SceneManager.LoadScene("Shop01");
+            break;
+        }
     }
 
+    //節點UI移動
     void Follow()
     {
-        Vector3 screenPosition = MainCamera.WorldToScreenPoint(Battle01.transform.position);
-        EnterB01.GetComponent<RectTransform>().position = screenPosition;
+        foreach (var (gameObject, uiElement) in followPairs)
+        {
+            Vector3 position = MainCamera.WorldToScreenPoint(gameObject.transform.position);
+            uiElement.GetComponent<RectTransform>().position = position;
+        }
     }
 
+    //滑鼠拉相機
     void CameraMove()
     {
         if (Input.GetMouseButtonDown(0))
@@ -60,18 +101,28 @@ public class UIManagerM : MonoBehaviour
 
     void Start()
     {
-        StartUI.SetActive(false);
+        //宣告UI跟物件配對
+        followPairs = new List<(GameObject, GameObject)>
+        {
+            (Battle01, EnterB01),
+            (Event01, EnterE01),
+            (Shop01, EnterS01)
+        };
 
         MainCamera = Camera.main;
+
+        UpdateUIState();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            BattleUnPressed();
+            UnPressed();
         }
+
         Follow();
+        
         CameraMove();
     }
 }

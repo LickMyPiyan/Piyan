@@ -15,8 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Map.unity
     guid: cdd09676cfe12fe47b985090484e7d9a
   - enabled: 1
-    path: Assets/Scenes/BattleP01.unity
-    guid: 0f12ab65e7afa154fa0ecbf34fb75478
+    path: Assets/Scenes/Battles/Battle01.unity
+    guid: a8e331259efa19344badc0f914651385
+  - enabled: 1
+    path: Assets/Scenes/Events/Event01.unity
+    guid: adc4928d4d6722e4a973fd52d2af1b75
+  - enabled: 1
+    path: Assets/Scenes/Shops/Shop01.unity
+    guid: 642c137bd3e513c4dad27cd59f992807
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
