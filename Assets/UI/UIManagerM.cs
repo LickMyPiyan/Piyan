@@ -10,15 +10,10 @@ public class UIManagerM : MonoBehaviour
     //抓場景裡的物件
     public GameObject StartUI;
     public TextMeshProUGUI StageName;
-    public GameObject EnterB01;
-    public GameObject EnterE01;
-    public GameObject EnterS01;
-    public GameObject EnterB02;
-    public GameObject EnterE02;
-    public GameObject EnterS02;
-    public GameObject EnterB03;
-    public GameObject EnterE03;
-    public GameObject EnterS03;
+    public GameObject EnterB01, EnterE01, EnterS01, 
+                    EnterB02, EnterE02, EnterS02, 
+                    EnterB03, EnterE03, EnterS03;
+    public static List<GameObject> EnterButtons;
     //Loading畫面
     public GameObject Loading;
     public Image LoadingScreen;
@@ -41,9 +36,7 @@ public class UIManagerM : MonoBehaviour
     //更新UI狀態
     void UpdateUIState()
     {
-        var buttons = new List<GameObject> { EnterB01, EnterE01, EnterS01,
-                                             EnterB02, EnterE02, EnterS02, 
-                                             EnterB03, EnterE03, EnterS03};
+        var buttons = EnterButtons;
         for (int i = 0; i < buttons.Count; i++)
         {
             if (buttons[i] != null)
@@ -128,6 +121,10 @@ public class UIManagerM : MonoBehaviour
 
     void Start()
     {
+        EnterButtons = new List<GameObject> {EnterB01, EnterE01, EnterS01,
+                                            EnterB02, EnterE02, EnterS02, 
+                                            EnterB03, EnterE03, EnterS03};
+
         //宣告UI跟物件配對
         followPairs = new List<(Vector3, GameObject)>
         {

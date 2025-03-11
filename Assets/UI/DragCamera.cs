@@ -9,9 +9,10 @@ public class DragCamera : MonoBehaviour
     private Vector3 MousePosI;
     private Vector3 MousePosF;
     //設定相機移動範圍
-    public Vector3 minCameraPosition = new Vector3( 0 , 0, -10);
-    public Vector3 maxCameraPosition = new Vector3( 10 , 6, -10);
+    public Vector3 minCameraPosition;
+    public Vector3 maxCameraPosition;
     Camera MainCamera;
+    private List<GameObject> EnterButtons;
 
     //滑鼠拉相機
     void CameraMove()
@@ -25,26 +26,55 @@ public class DragCamera : MonoBehaviour
         {
             MousePosF = MainCamera.ScreenToWorldPoint(Input.mousePosition);
             MainCamera.transform.position += MousePosI - MousePosF;
+        }
 
-            MainCamera.transform.position = new Vector3
+        MainCamera.transform.position = new Vector3
             (
                 Mathf.Clamp(MainCamera.transform.position.x, minCameraPosition.x, maxCameraPosition.x),
                 Mathf.Clamp(MainCamera.transform.position.y, minCameraPosition.y, maxCameraPosition.y),
                 Mathf.Clamp(MainCamera.transform.position.z, minCameraPosition.z, maxCameraPosition.z)
             );
-        }
 
+    }
+
+    void CameraZoom()
+    {
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            MainCamera.orthographicSize -= 1;
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            MainCamera.orthographicSize += 1;
+        }
+        MainCamera.orthographicSize = Mathf.Clamp(MainCamera.orthographicSize, 4, 8);
+        float MoveRange = (8-MainCamera.orthographicSize)/3;
+        minCameraPosition = new Vector3(5-5*MoveRange, 3-3*MoveRange, -10);
+        maxCameraPosition = new Vector3(5+5*MoveRange, 3+3*MoveRange, -10);
+        ScaleButtons();
+    }
+
+    void ScaleButtons()
+    {
+        float scaleFactor = 10 / MainCamera.orthographicSize;
+        foreach (GameObject button in EnterButtons)
+        {
+            button.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        }
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         MainCamera = Camera.main;
+        EnterButtons = UIManagerM.EnterButtons;
+        MainCamera.orthographicSize = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
         CameraMove();
+        CameraZoom();
     }
 }
