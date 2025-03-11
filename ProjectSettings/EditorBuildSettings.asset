@@ -15,14 +15,50 @@ EditorBuildSettings:
     path: Assets/Scenes/Map.unity
     guid: cdd09676cfe12fe47b985090484e7d9a
   - enabled: 1
-    path: Assets/Scenes/Battles/Battle01.unity
+    path: Assets/Scenes/Battles/BattleP01.unity
     guid: a8e331259efa19344badc0f914651385
   - enabled: 1
-    path: Assets/Scenes/Events/Event01.unity
+    path: Assets/Scenes/Events/EventP01.unity
     guid: adc4928d4d6722e4a973fd52d2af1b75
   - enabled: 1
-    path: Assets/Scenes/Shops/Shop01.unity
+    path: Assets/Scenes/Events/EventP02.unity
+    guid: fbe3f67cf8060da4ebea72fa19ce706d
+  - enabled: 1
+    path: Assets/Scenes/Shops/ShopP01.unity
     guid: 642c137bd3e513c4dad27cd59f992807
+  - enabled: 1
+    path: Assets/Scenes/Battles/BattleF01.unity
+    guid: 32a50ea2bc76631429fd40587c7405b7
+  - enabled: 1
+    path: Assets/Scenes/Battles/BattleF02.unity
+    guid: 207c998ae81d1df4498bede849d2faf9
+  - enabled: 1
+    path: Assets/Scenes/Events/EventF01.unity
+    guid: 31a2a443f43abbf4e88457e233d14393
+  - enabled: 1
+    path: Assets/Scenes/Shops/ShopF01.unity
+    guid: c36f3a0900388a54292efa3f734e13ad
+  - enabled: 1
+    path: Assets/Scenes/Battles/BattleS01.unity
+    guid: 4bf1565049c11454ebeea389731ca79a
+  - enabled: 1
+    path: Assets/Scenes/Events/EventS01.unity
+    guid: 20a050b572f25444888a8c27bec8f93b
+  - enabled: 1
+    path: Assets/Scenes/Shops/ShopS01.unity
+    guid: 17a93a9ef792ccb47a8a08236c537f91
+  - enabled: 1
+    path: Assets/Scenes/Battles/BattleT01.unity
+    guid: 9e3eba5c32d208943bd3ff81d0344ba4
+  - enabled: 1
+    path: Assets/Scenes/Events/EventT01.unity
+    guid: a283a52bab3fcd545b4be4cc97189860
+  - enabled: 1
+    path: Assets/Scenes/Shops/ShopT01.unity
+    guid: 929b873ed1b9a254699b54b7df772bb9
+  - enabled: 1
+    path: Assets/Scenes/Battles/BossBattle01.unity
+    guid: a3c321246a7227d43af3c997478d050c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

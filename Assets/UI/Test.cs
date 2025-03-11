@@ -27,6 +27,7 @@ public class Test : MonoBehaviour
 
     public IEnumerator LoadIn()
     {
+        Loading.SetActive(true);
         float elapsedTime = 0f;
         while (elapsedTime < transitionDuration)
         {

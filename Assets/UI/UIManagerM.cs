@@ -3,31 +3,36 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIManagerM : MonoBehaviour
 {
     //抓場景裡的物件
     public GameObject StartUI;
-    public GameObject Battle01;
+    public TextMeshProUGUI StageName;
     public GameObject EnterB01;
-    public GameObject Event01;
     public GameObject EnterE01;
-    public GameObject Shop01;
     public GameObject EnterS01;
+    public GameObject EnterB02;
+    public GameObject EnterE02;
+    public GameObject EnterS02;
+    public GameObject EnterB03;
+    public GameObject EnterE03;
+    public GameObject EnterS03;
     //Loading畫面
     public GameObject Loading;
     public Image LoadingScreen;
     public float transitionDuration = 0.3f;
-    //抓滑鼠位置
-    private Vector3 MousePosI;
-    private Vector3 MousePosF;
-    //設定相機移動範圍
-    public Vector3 minCameraPosition = new Vector3( 0 , 0, -10);
-    public Vector3 maxCameraPosition = new Vector3( 10 , 6, -10);
     //遊戲進度計數(static讓它在切場景時不變)
     public static int GameState;
-    //UI跟物件配對清單
-    private List<(GameObject, GameObject)> followPairs;
+    //UI跟座標配對清單
+    private List<(Vector3, GameObject)> followPairs;
+    //場景名稱清單
+    private List<string> BattleScenes = new List<string> { "BattleP01", "BattleF01", "BattleF02", "BattleS01", "BattleT01", "BossBattle01" };
+    private List<string> EventScenes = new List<string> { "EventP01", "EventP02", "EventF01", "Events01", "EventT01" };
+    private List<string> ShopScenes = new List<string> { "ShopP01", "ShopF01", "ShopS01", "ShopT01" };
+    //選擇場景清單
+    private List<string> PickedScenes;
 
     //宣告攝影機
     Camera MainCamera;
@@ -36,15 +41,30 @@ public class UIManagerM : MonoBehaviour
     //更新UI狀態
     void UpdateUIState()
     {
-        EnterB01.GetComponent<Button>().interactable = (GameState == 0);
-        EnterE01.GetComponent<Button>().interactable = (GameState == 1);
-        EnterS01.GetComponent<Button>().interactable = (GameState == 2);
+        var buttons = new List<GameObject> { EnterB01, EnterE01, EnterS01,
+                                             EnterB02, EnterE02, EnterS02, 
+                                             EnterB03, EnterE03, EnterS03};
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (buttons[i] != null)
+            {
+                var button = buttons[i].GetComponent<Button>();
+                if (button != null)
+                {
+                    button.interactable = (GameState == i);
+                }
+            }
+        }
     }
     
     //開關進節點UI
     public void ButtonPressed()
     {
-        StartUI.SetActive(true);
+        if (GameState >= 0 && GameState < PickedScenes.Count)
+        {
+            StartUI.SetActive(true);
+            StageName.text = PickedScenes[GameState];
+        }
     }
 
     public void UnPressed()
@@ -55,22 +75,10 @@ public class UIManagerM : MonoBehaviour
     //按開始可以進不同的節點
     public void StartPressed()
     {
-        switch (GameState)
-        {
-            case 0:
-                StartCoroutine(LoadOutAndSwitchScene("Battle01"));
-            break;
-
-            case 1:
-                StartCoroutine(LoadOutAndSwitchScene("Event01"));
-            break;
-
-            case 2:
-                StartCoroutine(LoadOutAndSwitchScene("Shop01"));
-            break;
-        }
+        StartCoroutine(LoadOutAndSwitchScene(PickedScenes[GameState]));
     }
 
+    //離開節點切場景
     private IEnumerator LoadOutAndSwitchScene(string sceneName)
     {
         yield return StartCoroutine(LoadOut());
@@ -78,6 +86,7 @@ public class UIManagerM : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    //進入節點動畫
     public IEnumerator LoadIn()
     {
         float elapsedTime = 0f;
@@ -91,6 +100,7 @@ public class UIManagerM : MonoBehaviour
         Loading.SetActive(false);
     }
 
+    //離開節點動畫
     public IEnumerator LoadOut()
     {
         Loading.SetActive(true);
@@ -108,45 +118,40 @@ public class UIManagerM : MonoBehaviour
     //節點UI移動
     void Follow()
     {
-        foreach (var (gameObject, uiElement) in followPairs)
+        foreach (var (position, Button) in followPairs)
         {
-            Vector3 position = MainCamera.WorldToScreenPoint(gameObject.transform.position);
-            uiElement.GetComponent<RectTransform>().position = position;
+            var rectTransform = Button.GetComponent<RectTransform>();
+            Vector3 screenposition = MainCamera.WorldToScreenPoint(position);
+            rectTransform.position = screenposition;
         }
-    }
-
-    //滑鼠拉相機
-    void CameraMove()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            MousePosI = MainCamera.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            MousePosF = MainCamera.ScreenToWorldPoint(Input.mousePosition);
-            MainCamera.transform.position += MousePosI - MousePosF;
-
-            MainCamera.transform.position = new Vector3
-            (
-                Mathf.Clamp(MainCamera.transform.position.x, minCameraPosition.x, maxCameraPosition.x),
-                Mathf.Clamp(MainCamera.transform.position.y, minCameraPosition.y, maxCameraPosition.y),
-                Mathf.Clamp(MainCamera.transform.position.z, minCameraPosition.z, maxCameraPosition.z)
-            );
-        }
-
     }
 
     void Start()
     {
         //宣告UI跟物件配對
-        followPairs = new List<(GameObject, GameObject)>
+        followPairs = new List<(Vector3, GameObject)>
         {
-            (Battle01, EnterB01),
-            (Event01, EnterE01),
-            (Shop01, EnterS01)
+            (new Vector3(-6,1,0), EnterB01),
+            (new Vector3(-2,-3,0), EnterE01),
+            (new Vector3(2,1,0), EnterS01),
+            (new Vector3(-2,6,0), EnterB02),
+            (new Vector3(2,9,0), EnterE02),
+            (new Vector3(6,6,0), EnterS02),
+            (new Vector3(8,1,0), EnterB03),
+            (new Vector3(12,-3,0), EnterE03),
+            (new Vector3(14,2,0), EnterS03)
         };
+
+        //隨機挑選場景清單
+        int PickBF = Random.Range(1, 3);
+        int PickEP = Random.Range(0, 2);
+        PickedScenes = new List<string>();
+        PickedScenes.AddRange(new List<string> { BattleScenes[0], EventScenes[PickEP], ShopScenes[0], 
+                                                BattleScenes[PickBF], EventScenes[2], ShopScenes[1],
+                                                BattleScenes[3], EventScenes[3], ShopScenes[2],
+                                                BattleScenes[4], EventScenes[4], ShopScenes[3], BattleScenes[5] });
+
+        StartUI.SetActive(false);
 
         StartCoroutine(LoadIn());
 
@@ -163,7 +168,5 @@ public class UIManagerM : MonoBehaviour
         }
 
         Follow();
-        
-        CameraMove();
     }
 }
