@@ -18,14 +18,20 @@ public class Test : MonoBehaviour
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 
+    private IEnumerator LoadIn()
+    {
+        yield return StartCoroutine(LoadIn());
+        Loading.SetActive(false);
+    }
+
     private IEnumerator LoadOutAndSwitchScene(string sceneName)
     {
-        yield return StartCoroutine(LoadOut());
+        yield return StartCoroutine(LoadingQuit());
         yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
         SceneManager.LoadScene(sceneName);
     }
 
-    public IEnumerator LoadIn()
+    public IEnumerator LoadingEnter()
     {
         Loading.SetActive(true);
         float elapsedTime = 0f;
@@ -36,10 +42,9 @@ public class Test : MonoBehaviour
             yield return null;
         }
         LoadingScreen.fillAmount = 0;
-        Loading.SetActive(false);
     }
 
-    public IEnumerator LoadOut()
+    public IEnumerator LoadingQuit()
     {
         Loading.SetActive(true);
         float elapsedTime = 0f;
