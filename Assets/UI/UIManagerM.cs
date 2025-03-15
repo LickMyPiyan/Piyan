@@ -7,6 +7,7 @@ using TMPro;
 
 public class UIManagerM : MonoBehaviour
 {
+    public LoadScenes LoadScenes;
     //抓場景裡的物件
     public GameObject StartUI;
     public TextMeshProUGUI StageName;
@@ -14,9 +15,6 @@ public class UIManagerM : MonoBehaviour
                     EnterB02, EnterE02, EnterS02, 
                     EnterB03, EnterE03, EnterS03;
     public static List<GameObject> EnterButtons;
-    //Loading畫面
-    public GameObject Loading;
-    public Image LoadingScreen;
     public float transitionDuration = 0.3f;
     //遊戲進度計數(static讓它在切場景時不變)
     public static int GameState;
@@ -68,44 +66,21 @@ public class UIManagerM : MonoBehaviour
     //按開始可以進不同的節點
     public void StartPressed()
     {
-        StartCoroutine(LoadOutAndSwitchScene(PickedScenes[GameState]));
+        StartCoroutine(LoadScenes.LoadOutAndSwitchScene(PickedScenes[GameState]));
+        SaveCamera();
     }
 
-    //離開節點切場景
-    private IEnumerator LoadOutAndSwitchScene(string sceneName)
+    void SaveCamera()
     {
-        yield return StartCoroutine(LoadOut());
-        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
-        SceneManager.LoadScene(sceneName);
+        PlayerPrefs.SetFloat("zoom", MainCamera.orthographicSize);
+        PlayerPrefs.SetFloat("cameraX", MainCamera.transform.position.x); 
+        PlayerPrefs.SetFloat("cameraY", MainCamera.transform.position.y);
     }
 
-    //進入節點動畫
-    public IEnumerator LoadIn()
+    void LoadCamera()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < transitionDuration)
-        {
-            LoadingScreen.fillAmount = Mathf.Lerp(1, 0, elapsedTime / transitionDuration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        LoadingScreen.fillAmount = 0;
-        Loading.SetActive(false);
-    }
-
-    //離開節點動畫
-    public IEnumerator LoadOut()
-    {
-        Loading.SetActive(true);
-        float elapsedTime = 0f;
-        while (elapsedTime < transitionDuration)
-        {
-            LoadingScreen.fillOrigin = 1;
-            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, elapsedTime / transitionDuration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        LoadingScreen.fillAmount = 1;
+        MainCamera.orthographicSize = PlayerPrefs.GetFloat("zoom");
+        MainCamera.transform.position = new Vector3(PlayerPrefs.GetFloat("cameraX"), PlayerPrefs.GetFloat("cameraY"), -10);
     }
 
     //節點UI移動
@@ -150,11 +125,13 @@ public class UIManagerM : MonoBehaviour
 
         StartUI.SetActive(false);
 
-        StartCoroutine(LoadIn());
+        StartCoroutine(LoadScenes.LoadIn());
 
         MainCamera = Camera.main;
 
         UpdateUIState();
+
+        LoadCamera();
     }
 
     void Update()

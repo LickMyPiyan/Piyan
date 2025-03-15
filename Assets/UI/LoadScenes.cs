@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Test : MonoBehaviour
+public class LoadScenes : MonoBehaviour
 {
     public GameObject Loading;
     public Image LoadingScreen;
@@ -18,20 +18,12 @@ public class Test : MonoBehaviour
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 
-    private IEnumerator LoadIn()
+    public void MapPressed()
     {
-        yield return StartCoroutine(LoadingEnter());
-        Loading.SetActive(false);
+        StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 
-    private IEnumerator LoadOutAndSwitchScene(string sceneName)
-    {
-        yield return StartCoroutine(LoadingQuit());
-        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public IEnumerator LoadingEnter()
+    public IEnumerator LoadIn()
     {
         Loading.SetActive(true);
         float elapsedTime = 0f;
@@ -41,7 +33,14 @@ public class Test : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        LoadingScreen.fillAmount = 0;
+        Loading.SetActive(false); 
+    }
+
+    public IEnumerator LoadOutAndSwitchScene(string sceneName)
+    {
+        yield return StartCoroutine(LoadingQuit());
+        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
+        SceneManager.LoadScene(sceneName);
     }
 
     public IEnumerator LoadingQuit()
@@ -56,6 +55,23 @@ public class Test : MonoBehaviour
             yield return null;
         }
         LoadingScreen.fillAmount = 1;
+    }
+
+    public IEnumerator SpawnMob(string MobName, int Num, float MobSpawnRange)
+    {
+        Loading.transform.SetParent(null);
+        for (int i = 0; i < Num; i++)
+        {
+            GameObject Mob = Instantiate(Resources.Load(MobName), new Vector3(Random.Range(-MobSpawnRange, MobSpawnRange), Random.Range(-MobSpawnRange, MobSpawnRange), 0), Quaternion.identity) as GameObject;
+            GameObject healthBar = Instantiate(Resources.Load("MobHealth"), Vector3.zero, Quaternion.identity) as GameObject;
+            healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+
+            HealthBar MobHealth = healthBar.GetComponent<HealthBar>();
+            MobHealth.target = Mob.transform;
+            MobHealth.offset = new Vector3(0, -1, 0);
+        }
+        Loading.transform.SetParent(GameObject.Find("Canvas").transform);
+        yield return null;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

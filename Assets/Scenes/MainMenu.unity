@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200985575}
   - component: {fileID: 200985574}
+  - component: {fileID: 200985576}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -285,9 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d5e29cad0f2434ead26c63c2a05271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loading: {fileID: 1606533372}
-  LoadingScreen: {fileID: 1606533373}
-  transitionDuration: 0.3
+  LoadScenes: {fileID: 200985576}
 --- !u!4 &200985575
 Transform:
   m_ObjectHideFlags: 0
@@ -303,6 +302,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200985576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200985573}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loading: {fileID: 1606533372}
+  LoadingScreen: {fileID: 1606533373}
+  transitionDuration: 0.3
 --- !u!1 &275390074
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,8 +502,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 200985574}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 200985576}
+        m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
         m_MethodName: MapPressed
         m_Mode: 1
         m_Arguments:

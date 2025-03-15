@@ -1099,6 +1099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375375653}
   - component: {fileID: 375375654}
+  - component: {fileID: 375375655}
   m_Layer: 0
   m_Name: UIManagerM
   m_TagString: Untagged
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3f21a190d1bc242b0abe2ea462f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadScenes: {fileID: 375375655}
   StartUI: {fileID: 177308810}
   StageName: {fileID: 1250677160}
   EnterB01: {fileID: 491588484}
@@ -1144,6 +1146,19 @@ MonoBehaviour:
   EnterB03: {fileID: 108362521}
   EnterE03: {fileID: 1306293493}
   EnterS03: {fileID: 30473639}
+  transitionDuration: 0.3
+--- !u!114 &375375655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375375651}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Loading: {fileID: 2004987014}
   LoadingScreen: {fileID: 2004987016}
   transitionDuration: 0.3
