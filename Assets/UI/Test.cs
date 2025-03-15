@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
 
     private IEnumerator LoadIn()
     {
-        yield return StartCoroutine(LoadIn());
+        yield return StartCoroutine(LoadingEnter());
         Loading.SetActive(false);
     }
 

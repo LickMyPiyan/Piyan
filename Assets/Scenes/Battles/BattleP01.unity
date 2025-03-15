@@ -1315,7 +1315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwordAttackCD: 0.5
-  SwordDamage: 100
+  SwordDamage: 50
 --- !u!50 &879281194
 Rigidbody2D:
   serializedVersion: 5
@@ -1614,7 +1614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1147518213}
-  - component: {fileID: 1147518212}
+  - component: {fileID: 1147518215}
   m_Layer: 0
   m_Name: SlimeGenerator
   m_TagString: Untagged
@@ -1622,20 +1622,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1147518212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147518211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412617ca0353f6f44a6d876b0d560837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlimeNum: 3
-  SlimeSpawnRange: 10
 --- !u!4 &1147518213
 Transform:
   m_ObjectHideFlags: 0
@@ -1651,6 +1637,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1147518215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147518211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320ec0a31826f6e44bf8f2cc90144cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlimeNum: 3
+  SlimeSpawnRange: 5
+  MobHealth: {fileID: 9016273996583455929, guid: 5f97968af1085a54ea1767f49d969c58, type: 3}
+  uiCanvas: {fileID: 1278907312}
 --- !u!1 &1173142797
 GameObject:
   m_ObjectHideFlags: 0
