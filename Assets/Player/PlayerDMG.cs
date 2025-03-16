@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDMG : MonoBehaviour
 {
-    public int PlayerHealth = 100;
+    public float PlayerHealth = 100;
     bool win = false;
     public void TakePlayerDMG(int damage)
     {
@@ -26,7 +26,7 @@ public class PlayerDMG : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        PlayerHealth = PlayerPrefs.GetFloat("Hp");
     }
 
     // Update is called once per frame

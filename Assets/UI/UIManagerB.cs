@@ -8,6 +8,7 @@ public class UIManagerB : MonoBehaviour
     public PlayerDMG playerDMG;
     public float CurrentHealth => playerDMG.PlayerHealth;
     public GameObject PauseUI;
+    private bool win = false;
 
     public void Paused()
     {
@@ -19,6 +20,16 @@ public class UIManagerB : MonoBehaviour
     {
         PauseUI.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    void Win()
+    {
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && win == false)
+        {
+            Debug.Log("You Win!");
+            win = true;
+            PlayerPrefs.SetFloat("Hp", playerDMG.PlayerHealth);
+        }
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

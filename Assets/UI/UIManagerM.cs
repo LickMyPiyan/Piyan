@@ -9,7 +9,9 @@ public class UIManagerM : MonoBehaviour
 {
     public LoadScenes LoadScenes;
     //抓場景裡的物件
+    public GameObject BasicUI;
     public GameObject StartUI;
+    public GameObject CardUI;
     public TextMeshProUGUI StageName;
     public GameObject EnterB01, EnterE01, EnterS01, 
                     EnterB02, EnterE02, EnterS02, 
@@ -55,12 +57,24 @@ public class UIManagerM : MonoBehaviour
         {
             StartUI.SetActive(true);
             StageName.text = PickedScenes[GameState];
+            MainCamera.GetComponent<DragCamera>().enabled = false;
+            BasicUI.SetActive(false);
         }
+    }
+
+    public void CardPressed()
+    {
+        CardUI.SetActive(true);
+        MainCamera.GetComponent<DragCamera>().enabled = false;
+        BasicUI.SetActive(false);
     }
 
     public void UnPressed()
     {
         StartUI.SetActive(false);
+        CardUI.SetActive(false);
+        MainCamera.GetComponent<DragCamera>().enabled = true;
+        BasicUI.SetActive(true);
     }
 
     //按開始可以進不同的節點
@@ -124,6 +138,7 @@ public class UIManagerM : MonoBehaviour
                                                 BattleScenes[4], EventScenes[4], ShopScenes[3], BattleScenes[5] });
 
         StartUI.SetActive(false);
+        CardUI.SetActive(false);
 
         StartCoroutine(LoadScenes.LoadIn());
 
