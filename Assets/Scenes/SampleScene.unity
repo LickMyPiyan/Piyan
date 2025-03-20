@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412617ca0353f6f44a6d876b0d560837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 0
+  SlimeNum: 10
   SlimeSpawnRange: 10
 --- !u!1 &591702338
 GameObject:
@@ -1123,9 +1123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffd9a3e33ef9d84f89ad010ef50c858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlowerNum: 100
-  FlowerSpawnRangeInner: 5
-  FlowerSpawnRangeOuter: 10
+  FlowerNum: 10
+  FlowerSpawnRange: 10
 --- !u!4 &1103848026
 Transform:
   m_ObjectHideFlags: 0
