@@ -17,7 +17,7 @@ public class PlayerDMG : MonoBehaviour
     }
     void Win()
     {
-        if(GameObject.FindGameObjectsWithTag("Flower").Length == 0 && GameObject.FindGameObjectsWithTag("Slime").Length == 0 && win == false)
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && win == false)
         {
             Debug.Log("You Win!");
             win = true;
