@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffd9a3e33ef9d84f89ad010ef50c858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlowerNum: 10
+  FlowerNum: 3
   FlowerSpawnRange: 10
 --- !u!4 &1103848026
 Transform:
