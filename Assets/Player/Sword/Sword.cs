@@ -18,19 +18,19 @@ public class Sword : MonoBehaviour
         //旋轉
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
-    void HitSlime(Collider2D other)
+    void HitSlime(Collider2D gameObject)
     {
-        if (other.gameObject != null && other.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        if (gameObject.gameObject != null && gameObject.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
         {
-            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
             Timer = Time.time;
         }
     }
-    void HitFlower(Collider2D other)
+    void HitFlower(Collider2D gameObject)
     {
-        if (other.gameObject != null && other.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        if (gameObject.gameObject != null && gameObject.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
         {
-            other.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<FlowerDMG>().TakeFlowerDMG(SwordDamage);
             Timer = Time.time;
         }
     }
@@ -42,5 +42,6 @@ public class Sword : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         HitSlime(other);
+        HitFlower(other);
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wall
   - Slime
+  - Flower
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
