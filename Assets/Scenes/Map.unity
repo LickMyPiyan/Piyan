@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadScenes: {fileID: 375375655}
-  BasicUI: {fileID: 0}
+  BasicUI: {fileID: 2141542022}
   StartUI: {fileID: 177308810}
   CardUI: {fileID: 2029399152}
   StageName: {fileID: 1250677160}
@@ -1449,37 +1449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StackableCards:
-  - Regenaration
-  - AtkBoost
-  - SpdBoost
-  - ASpdBoost
-  SwordCards:
-  - SlowDown
-  - Vampirism
-  - BroadRange
-  - AtkCountUp
-  - Knockback
-  BowCards:
-  - ChargeAtkUp
-  - ChargeUnSlow
-  - QuickCharge
-  - MultiFire
-  - Punch
-  UsableCards:
-  - HpPlus
-  - AtkPlus
-  - SpdPlus
-  - ASpdPlus
-  - Revive
+  AvailableCards: []
   CardsOwned: []
-  CardsOwnedPos:
-  - {x: -300, y: 10, z: 0}
-  - {x: -180, y: 10, z: 0}
-  - {x: -60, y: 10, z: 0}
-  - {x: 60, y: 10, z: 0}
-  - {x: 180, y: 10, z: 0}
-  - {x: 300, y: 10, z: 0}
   CardUI: {fileID: 2029399152}
 --- !u!1 &377512310
 GameObject:
@@ -2287,7 +2258,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1352295301}
-  - {fileID: 1109419542}
+  - {fileID: 2141542023}
   - {fileID: 177308811}
   - {fileID: 2029399153}
   - {fileID: 2004987015}
@@ -2671,17 +2642,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109419541}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6.020455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 186535366}
-  m_Father: {fileID: 933328507}
+  m_Father: {fileID: 2141542023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -835.4673, y: -342.9829}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109419543
@@ -4335,6 +4306,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029399152}
   m_CullTransparentMesh: 1
+--- !u!1 &2141542022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141542023}
+  m_Layer: 0
+  m_Name: BasicUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2141542023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141542022}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 25.467346, y: -47.01706, z: -6.020455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1109419542}
+  m_Father: {fileID: 933328507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

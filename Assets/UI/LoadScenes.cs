@@ -59,24 +59,24 @@ public class LoadScenes : MonoBehaviour
 
     public IEnumerator SpawnMob(string MobName, int Num, float MobSpawnRange)
     {
-        Loading.transform.SetParent(null);
         for (int i = 0; i < Num; i++)
         {
             GameObject Mob = Instantiate(Resources.Load(MobName), new Vector3(Random.Range(-MobSpawnRange, MobSpawnRange), Random.Range(-MobSpawnRange, MobSpawnRange), 0), Quaternion.identity) as GameObject;
             GameObject healthBar = Instantiate(Resources.Load("MobHealth"), Vector3.zero, Quaternion.identity) as GameObject;
-            healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+            healthBar.transform.SetParent(GameObject.Find("MobHealthBars").transform);
 
             HealthBar MobHealth = healthBar.GetComponent<HealthBar>();
             MobHealth.target = Mob.transform;
             MobHealth.offset = new Vector3(0, -1, 0);
         }
-        Loading.transform.SetParent(GameObject.Find("Canvas").transform);
         yield return null;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Loading = GameObject.Find("Loading");
+        LoadingScreen = GameObject.Find("Loading").GetComponent<Image>();
         StartCoroutine(LoadIn());
     }
 

@@ -60,7 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92144cef85437004da1e67a59556f4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthBar: {fileID: 0}
-  MaxHealth: 100
+  Bar2: {fileID: 0}
+  loadScenes: {fileID: 0}
   playerDMG: {fileID: 0}
+  playerMoving: {fileID: 0}
   PauseUI: {fileID: 0}
+  WinUI: {fileID: 0}

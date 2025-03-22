@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
     private RectTransform rectTransform;
     private Camera mainCamera;
     public Image healthBar;
-    private int CurrentHealth;
+    private float CurrentHealth;
     private float maxHealth;
 
     void Start()

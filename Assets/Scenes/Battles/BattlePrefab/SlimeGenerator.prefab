@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadScenes: {fileID: 0}
-  Loading: {fileID: 0}
   SlimeNum: 3
   SlimeSpawnRange: 5
   MobHealth: {fileID: 9016273996583455929, guid: 5f97968af1085a54ea1767f49d969c58, type: 3}

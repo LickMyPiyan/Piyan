@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6335598382665374341}
   - component: {fileID: 7202970387573861132}
   - component: {fileID: 4407271564447606833}
-  - component: {fileID: 5227000261395393565}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5130253820304063142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -178,24 +177,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5130253820304063142}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d22b67220e06ead4eafc8106fed14465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerMaxHealth: 100
   PlayerHealth: 100
---- !u!114 &5227000261395393565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5130253820304063142}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a81ad3159114042be12ad391672788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  win: 0
 --- !u!1 &5634967731793973596
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwordAttackCD: 0.5
-  SwordDamage: 100
+  SwordDamage: 50
 --- !u!114 &2863586974277760704
 MonoBehaviour:
   m_ObjectHideFlags: 0

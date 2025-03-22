@@ -9,6 +9,7 @@ public class SlimeGeneraterTest : MonoBehaviour
 
     void Start()
     {
+        LoadScenes = GameObject.Find("UIManagerB").GetComponent<LoadScenes>();
         StartCoroutine(LoadScenes.SpawnMob("Slime", SlimeNum, SlimeSpawnRange));
     }
 
