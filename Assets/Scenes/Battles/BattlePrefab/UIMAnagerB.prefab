@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7972209437147689466}
   - component: {fileID: 409008592828388222}
   - component: {fileID: 1446842923677396768}
+  - component: {fileID: 8301809798031010872}
   m_Layer: 0
   m_Name: UIMAnagerB
   m_TagString: Untagged
@@ -61,8 +62,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bar2: {fileID: 0}
-  loadScenes: {fileID: 0}
+  Loading: {fileID: 0}
+  loadScenes: {fileID: 409008592828388222}
+  cardManager: {fileID: 8301809798031010872}
   playerDMG: {fileID: 0}
   playerMoving: {fileID: 0}
   PauseUI: {fileID: 0}
   WinUI: {fileID: 0}
+  DropUI: {fileID: 0}
+  CardsDropped: []
+--- !u!114 &8301809798031010872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6091454572518184817}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardUI: {fileID: 0}

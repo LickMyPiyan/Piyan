@@ -4,7 +4,7 @@ public class PlayerDMG : MonoBehaviour
 {
     public float PlayerMaxHealth = 100.0f;
     public float PlayerHealth = 100.0f;
-    public bool win = false;
+    public static bool win;
     public void TakePlayerDMG(int damage)
     {
         PlayerHealth -= damage;
@@ -29,6 +29,7 @@ public class PlayerDMG : MonoBehaviour
     void Start()
     {
         PlayerHealth = PlayerPrefs.GetFloat("Hp");
+        win = false;
     }
 
     // Update is called once per frame

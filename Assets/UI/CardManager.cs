@@ -7,12 +7,12 @@ using TMPro;
 
 public class CardManager: MonoBehaviour
 {
-    private List<string> StackableCards = new List<string>{"Regeneration","AtkBoost","SpdBoost","ASpdBoost"};
-    private List<string> SwordCards = new List<string>{"SlowDown","Vampirism","BroadRange","AtkCountUp","Knockback"};
-    private List<string> BowCards = new List<string>{"ChargeAtkUp","ChargeUnSlow","QuickCharge","MultiFire","Punch"};
-    private List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus","Revive"};
+    public static List<string> StackableCards = new List<string>{"Regeneration","AtkBoost","SpdBoost","ASpdBoost"};
+    public static List<string> SwordCards = new List<string>{"SlowDown","Vampirism","BroadRange","AtkCountUp","Knockback"};
+    public static List<string> BowCards = new List<string>{"ChargeAtkUp","ChargeUnSlow","QuickCharge","MultiFire","Punch"};
+    public static List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus","Revive"};
     public static List<string> AvailableCards;
-    public List<string> CardsOwned;
+    public static List<string> CardsOwned;
     private List<Vector3> CardsOwnedPos;
     public GameObject CardUI;
 
@@ -63,7 +63,6 @@ public class CardManager: MonoBehaviour
         AvailableCards = new List<string>{};
         AvailableCards.AddRange(SwordCards);
         AvailableCards.AddRange(BowCards);
-        AvailableCards.AddRange(UsableCards);
         for (int i = 0; i <CardsOwned.Count; i++)
         {
             if (AvailableCards.Contains(CardsOwned[i]) == true)
@@ -72,16 +71,17 @@ public class CardManager: MonoBehaviour
             }
         }
         AvailableCards.AddRange(StackableCards);
+        AvailableCards.AddRange(UsableCards);
+    }
+
+    void CardsOwnedArrange()
+    {
+
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        int startcard = Random.Range(0,StackableCards.Count);
-        int tester2 = Random.Range(0,SwordCards.Count);
-        int tester3 = Random.Range(0,UsableCards.Count);
-        CardsOwned = new List<string>{StackableCards[startcard],SwordCards[tester2],UsableCards[tester3]};
-
         AvailableCardsTweak();
         SetCardPos();
         ShowCardUI();

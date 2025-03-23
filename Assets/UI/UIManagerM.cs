@@ -80,8 +80,8 @@ public class UIManagerM : MonoBehaviour
     //按開始可以進不同的節點
     public void StartPressed()
     {
-        StartCoroutine(LoadScenes.LoadOutAndSwitchScene(PickedScenes[GameState]));
         SaveCamera();
+        StartCoroutine(LoadScenes.LoadOutAndSwitchScene(PickedScenes[GameState]));
     }
 
     void SaveCamera()
@@ -147,6 +147,8 @@ public class UIManagerM : MonoBehaviour
         UpdateUIState();
 
         LoadCamera();
+
+        PlayerDMG.win = false;
     }
 
     void Update()

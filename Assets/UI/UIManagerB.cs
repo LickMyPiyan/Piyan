@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class UIManagerB : MonoBehaviour
 {
     public Image Bar2;
+    public GameObject Loading;
     public LoadScenes loadScenes;
     public CardManager cardManager;
     public PlayerDMG playerDMG;
@@ -20,20 +20,60 @@ public class UIManagerB : MonoBehaviour
 
     private void connect()
     {
-        Bar2 = GameObject.Find("Bar2").GetComponent<Image>();
-        loadScenes = GameObject.Find("UIManagerB").GetComponent<LoadScenes>();
-        cardManager = GameObject.Find("UIManagerB").GetComponent<CardManager>();
-        playerDMG = GameObject.Find("Player").GetComponent<PlayerDMG>();
-        playerMoving = GameObject.Find("Player").GetComponent<PlayerMoving>();
-        PauseUI = GameObject.Find("PauseUI");
-        WinUI = GameObject.Find("WinUI");
-        DropUI = GameObject.Find("DropUI");
+        Bar2 = FindAndAssign<Image>("Bar2");
+        Loading = FindAndAssign("Loading");
+        loadScenes = FindAndAssign<LoadScenes>("UIManagerB");
+        cardManager = FindAndAssign<CardManager>("UIManagerB");
+        playerDMG = FindAndAssign<PlayerDMG>("Player");
+        playerMoving = FindAndAssign<PlayerMoving>("Player");
+        PauseUI = FindAndAssign("PauseUI");
+        WinUI = FindAndAssign("WinUI");
+        DropUI = FindAndAssign("DropUI");
 
-        PauseUI.transform.Find("Resume").GetComponent<Button>().onClick.AddListener(this.Resume);
+        if (PauseUI != null)
+        {
+            var resumeButton = PauseUI.transform.Find("Resume")?.GetComponent<Button>();
+            if (resumeButton != null)
+            {
+                resumeButton.onClick.AddListener(this.Resume);
+            }
 
-        PauseUI.transform.Find("Quit").GetComponent<Button>().onClick.AddListener(this.Quit);
+            var quitButton = PauseUI.transform.Find("Quit")?.GetComponent<Button>();
+            if (quitButton != null)
+            {
+                quitButton.onClick.AddListener(this.Quit);
+            }
+        }
 
-        WinUI.transform.Find("Next").GetComponent<Button>().onClick.AddListener(this.Next);
+        if (WinUI != null)
+        {
+            var nextButton = WinUI.transform.Find("Next")?.GetComponent<Button>();
+            if (nextButton != null)
+            {
+                nextButton.onClick.AddListener(this.Next);
+            }
+        }
+    }
+
+    private T FindAndAssign<T>(string name) where T : Component
+    {
+        var obj = GameObject.Find(name);
+        if (obj != null)
+        {
+            return obj.GetComponent<T>();
+        }
+        Debug.LogError($"GameObject '{name}' not found or missing '{typeof(T).Name}' component.");
+        return null;
+    }
+
+    private GameObject FindAndAssign(string name)
+    {
+        var obj = GameObject.Find(name);
+        if (obj == null)
+        {
+            Debug.LogError($"GameObject '{name}' not found.");
+        }
+        return obj;
     }
 
     public void HealthFill()
@@ -67,6 +107,9 @@ public class UIManagerB : MonoBehaviour
     {
         PauseUI.SetActive(false);
         WinUI.SetActive(true);
+        Loading.SetActive(true);
+        Loading.GetComponent<Image>().fillAmount = 0;
+        Loading.transform.SetParent(GameObject.Find("MobHealthBars").transform);
         Time.timeScale = 0;
         playerMoving.enabled = false;
     }
@@ -103,13 +146,15 @@ public class UIManagerB : MonoBehaviour
         for (int i = 0; i < CardsDropped.Count; i++)
         {
             GameObject Card = Instantiate(Resources.Load<GameObject>($"Cards/{CardsDropped[i]}"), Vector3.zero, Quaternion.identity);
-            GameObject Claim = Instantiate(Resources.Load<GameObject>($"Cards/Claim"), Vector3.zero, Quaternion.identity);
+            GameObject claim = Instantiate(Resources.Load<GameObject>($"Cards/Claim"), Vector3.zero, Quaternion.identity);
 
             Card.GetComponent<RectTransform>().localScale = new Vector3(3, 3, 1);
             Card.GetComponent<RectTransform>().position =  new Vector3(500*i - 500 + Screen.width/2, Screen.height/2, 0);
-            Claim.GetComponent<RectTransform>().position = Card.GetComponent<RectTransform>().position + new Vector3(0, -345, 0);
+            claim.GetComponent<RectTransform>().position = Card.GetComponent<RectTransform>().position + new Vector3(0, -345, 0);
 
-            Claim.transform.SetParent(DropUI.transform);
+            claim.GetComponent<Claim>().targetcard = CardsDropped[i];
+
+            claim.transform.SetParent(DropUI.transform);
             Card.transform.SetParent(DropUI.transform);
         }
         DropUI.SetActive(true);
@@ -118,7 +163,7 @@ public class UIManagerB : MonoBehaviour
 
     void ShowUI()
     {
-        if (playerDMG.win == false)
+        if (PlayerDMG.win == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && PauseUI.activeSelf)
             {

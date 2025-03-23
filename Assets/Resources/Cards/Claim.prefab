@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 7218358909960562993}
   - component: {fileID: 2064202069461653060}
   - component: {fileID: 8418588953040963974}
+  - component: {fileID: 4603140703158812291}
   m_Layer: 5
   m_Name: Claim
   m_TagString: Untagged
@@ -332,4 +333,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2064202069461653060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4603140703158812291}
+        m_TargetAssemblyTypeName: Claim, Assembly-CSharp
+        m_MethodName: ClaimCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4603140703158812291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485950101330009837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5bac401a48ade488232d13b55218b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loading: {fileID: 0}
+  LoadingScreen: {fileID: 0}
+  transitionDuration: 0.3
+  targetcard: 

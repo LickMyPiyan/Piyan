@@ -11,7 +11,7 @@ public class LoadScenes : MonoBehaviour
     public float transitionDuration = 0.3f;
     
     //離開節點
-    public void Out()
+    private void Out()
     {
         //加Map裡的遊戲進度計數
         UIManagerM.GameState++;
@@ -20,12 +20,18 @@ public class LoadScenes : MonoBehaviour
 
     public void MapPressed()
     {
+        int startcard = Random.Range(0,CardManager.StackableCards.Count);
+        int startcard2 = Random.Range(0,CardManager.SwordCards.Count);
+        int startcard3 = Random.Range(0,CardManager.UsableCards.Count);
+
+        CardManager.CardsOwned = new List<string>{CardManager.StackableCards[startcard],CardManager.SwordCards[startcard2],CardManager.UsableCards[startcard3]};
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 
     public IEnumerator LoadIn()
     {
         Loading.SetActive(true);
+        LoadingScreen.fillAmount = 0;
         float elapsedTime = 0f;
         while (elapsedTime < transitionDuration)
         {
@@ -38,23 +44,20 @@ public class LoadScenes : MonoBehaviour
 
     public IEnumerator LoadOutAndSwitchScene(string sceneName)
     {
-        yield return StartCoroutine(LoadingQuit());
-        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public IEnumerator LoadingQuit()
-    {
         Loading.SetActive(true);
-        float elapsedTime = 0f;
-        while (elapsedTime < transitionDuration)
+        LoadingScreen.fillAmount = 0;
+        float Timer = 0f;
+        while (Timer < transitionDuration)
         {
             LoadingScreen.fillOrigin = 1;
-            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, elapsedTime / transitionDuration);
-            elapsedTime += Time.deltaTime;
+            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, Timer / transitionDuration);
+            Timer += Time.deltaTime;
             yield return null;
         }
         LoadingScreen.fillAmount = 1;
+
+        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
+        SceneManager.LoadScene(sceneName);
     }
 
     public IEnumerator SpawnMob(string MobName, int Num, float MobSpawnRange)

@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &987571890 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7526439297834481053, guid: 93e042933bb5aa64b82114f76a2b39c1, type: 3}
-  m_PrefabInstance: {fileID: 7426182865941759791}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1319421875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5130253820304063142, guid: acece96ff83d21547b12163d1a64fee3, type: 3}
@@ -141,7 +130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1856517005264804356}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319421875}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d22b67220e06ead4eafc8106fed14465, type: 3}
   m_Name: 
@@ -347,17 +336,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7426182865941759793}
     - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
+      propertyPath: Bar2
+      value: 
+      objectReference: {fileID: 7426182865941759793}
+    - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
+      propertyPath: Loading
+      value: 
+      objectReference: {fileID: 7426182865941759792}
+    - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
       propertyPath: PauseUI
       value: 
       objectReference: {fileID: 1791771418}
     - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
       propertyPath: HealthBar
       value: 
-      objectReference: {fileID: 987571890}
+      objectReference: {fileID: 0}
     - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
       propertyPath: playerDMG
       value: 
       objectReference: {fileID: 1319421877}
+    - target: {fileID: 1446842923677396768, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
+      propertyPath: loadScenes
+      value: 
+      objectReference: {fileID: 4226501222012765799}
     - target: {fileID: 6091454572518184817, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
       propertyPath: m_Name
       value: UIMAnagerB
