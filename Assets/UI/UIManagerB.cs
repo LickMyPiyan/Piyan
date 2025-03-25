@@ -9,15 +9,13 @@ public class UIManagerB : MonoBehaviour
     public GameObject Loading;
     public LoadScenes loadScenes;
     public CardManager cardManager;
-    public Player playerDMG;
-    public Player playerMoving;
+    public Player player;
     private float CurrentHealth;
     private float MaxHealth;
     public GameObject PauseUI;
     public GameObject WinUI;
     public GameObject DropUI;
     public List<string> CardsDropped;
-    public Win ifwin;
 
     private void connect()
     {
@@ -25,8 +23,7 @@ public class UIManagerB : MonoBehaviour
         Loading = FindAndAssign("Loading");
         loadScenes = FindAndAssign<LoadScenes>("UIManagerB");
         cardManager = FindAndAssign<CardManager>("UIManagerB");
-        playerDMG = FindAndAssign<Player>("Player");
-        playerMoving = FindAndAssign<Player>("Player");
+        player = FindAndAssign<Player>("Player");
         PauseUI = FindAndAssign("PauseUI");
         WinUI = FindAndAssign("WinUI");
         DropUI = FindAndAssign("DropUI");
@@ -79,23 +76,21 @@ public class UIManagerB : MonoBehaviour
 
     public void HealthFill()
     {
-        CurrentHealth = playerDMG.PlayerHealth;
-        MaxHealth = playerDMG.PlayerMaxHealth;
-        Bar2.fillAmount = CurrentHealth / MaxHealth;
+        Bar2.fillAmount = Player.PlayerHealth / Player.PlayerMaxHealth ;
     }
 
     public void Paused()
     {
         PauseUI.SetActive(true);
         Time.timeScale = 0;
-        playerMoving.enabled = false;
+        player.enabled = false;
     }
 
     public void Resume()
     {
         PauseUI.SetActive(false);
         Time.timeScale = 1;
-        playerMoving.enabled = true;
+        player.enabled = true;
     }
 
     public void Quit()
@@ -111,8 +106,7 @@ public class UIManagerB : MonoBehaviour
         Loading.SetActive(true);
         Loading.GetComponent<Image>().fillAmount = 0;
         Loading.transform.SetParent(GameObject.Find("MobHealthBars").transform);
-        Time.timeScale = 0;
-        playerMoving.enabled = false;
+        player.enabled = false;
     }
 
     void DetermineDrop()

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float PlayerMaxHealth = 100.0f;
-    public float PlayerHealth = 100.0f;
-    public float PlayerSpeed = 1.5f;
-    public float DashDistance = 2.0f;
-    public float DashCooldown = 2.0f;
+    public static float PlayerMaxHealth = 100.0f;
+    public static float PlayerHealth = 100.0f;
+    public static float PlayerSpeed = 1.5f;
+    public static float DashDistance = 2.0f;
+    public static float DashCooldown = 2.0f;
     float Speed;
     float DashTimer = 0.0f;
     void Move()

@@ -29,7 +29,7 @@ public class Slime : MonoBehaviour
         else if (Win.ifwin == false && Vector3.Distance(player.position, transform.position) <= SlimeATKRange && Time.time - SlimeATKTimer > SlimeATKCD)
         {
             /*在這播攻擊動畫@李彥甫*/
-            player.GetComponent<Player>().PlayerHealth -= SlimeATKDMG;
+            player.GetComponent<Player>().TakePlayerDMG(SlimeATKDMG);
             SlimeATKTimer = Time.time;
         }
     }

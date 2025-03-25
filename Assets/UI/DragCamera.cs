@@ -68,7 +68,6 @@ public class DragCamera : MonoBehaviour
     {
         MainCamera = Camera.main;
         EnterButtons = UIManagerM.EnterButtons;
-        MainCamera.orthographicSize = 5;
     }
 
     // Update is called once per frame

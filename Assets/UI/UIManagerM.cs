@@ -31,7 +31,6 @@ public class UIManagerM : MonoBehaviour
 
     //宣告攝影機
     Camera MainCamera;
-    public Win ifwin;
 
 
     //更新UI狀態
@@ -56,6 +55,7 @@ public class UIManagerM : MonoBehaviour
     {
         if (GameState >= 0 && GameState < PickedScenes.Count)
         {
+            SaveCamera();
             StartUI.SetActive(true);
             StageName.text = PickedScenes[GameState];
             MainCamera.GetComponent<DragCamera>().enabled = false;
@@ -81,7 +81,6 @@ public class UIManagerM : MonoBehaviour
     //按開始可以進不同的節點
     public void StartPressed()
     {
-        SaveCamera();
         StartCoroutine(LoadScenes.LoadOutAndSwitchScene(PickedScenes[GameState]));
     }
 
@@ -94,8 +93,8 @@ public class UIManagerM : MonoBehaviour
 
     void LoadCamera()
     {
-        MainCamera.orthographicSize = PlayerPrefs.GetFloat("zoom");
         MainCamera.transform.position = new Vector3(PlayerPrefs.GetFloat("cameraX"), PlayerPrefs.GetFloat("cameraY"), -10);
+        MainCamera.orthographicSize = PlayerPrefs.GetFloat("zoom");
     }
 
     //節點UI移動
@@ -148,8 +147,6 @@ public class UIManagerM : MonoBehaviour
         UpdateUIState();
 
         LoadCamera();
-
-        Win.ifwin = false;
     }
 
     void Update()

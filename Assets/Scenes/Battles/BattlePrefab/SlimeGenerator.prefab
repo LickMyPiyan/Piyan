@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320ec0a31826f6e44bf8f2cc90144cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadScenes: {fileID: 0}
+  LoadScenes: {fileID: 409008592828388222, guid: 4fd8dacfd077232499d5925788c80435, type: 3}
   SlimeNum: 3
   SlimeSpawnRange: 5
   MobHealth: {fileID: 9016273996583455929, guid: 5f97968af1085a54ea1767f49d969c58, type: 3}
