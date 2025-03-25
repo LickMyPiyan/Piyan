@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour
         {
             Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
             rectTransform.position = screenPos;
-            CurrentHealth = target.GetComponent<SlimeDMG>().SlimeHealth;
+            CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
             healthBar.fillAmount = (float)CurrentHealth / maxHealth;
         }
         else

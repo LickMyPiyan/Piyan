@@ -31,6 +31,7 @@ public class UIManagerM : MonoBehaviour
 
     //宣告攝影機
     Camera MainCamera;
+    public Win ifwin;
 
 
     //更新UI狀態
@@ -148,7 +149,7 @@ public class UIManagerM : MonoBehaviour
 
         LoadCamera();
 
-        PlayerDMG.win = false;
+        Win.ifwin = false;
     }
 
     void Update()

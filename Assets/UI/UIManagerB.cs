@@ -9,14 +9,15 @@ public class UIManagerB : MonoBehaviour
     public GameObject Loading;
     public LoadScenes loadScenes;
     public CardManager cardManager;
-    public PlayerDMG playerDMG;
-    public PlayerMoving playerMoving;
+    public Player playerDMG;
+    public Player playerMoving;
     private float CurrentHealth;
     private float MaxHealth;
     public GameObject PauseUI;
     public GameObject WinUI;
     public GameObject DropUI;
     public List<string> CardsDropped;
+    public Win ifwin;
 
     private void connect()
     {
@@ -24,8 +25,8 @@ public class UIManagerB : MonoBehaviour
         Loading = FindAndAssign("Loading");
         loadScenes = FindAndAssign<LoadScenes>("UIManagerB");
         cardManager = FindAndAssign<CardManager>("UIManagerB");
-        playerDMG = FindAndAssign<PlayerDMG>("Player");
-        playerMoving = FindAndAssign<PlayerMoving>("Player");
+        playerDMG = FindAndAssign<Player>("Player");
+        playerMoving = FindAndAssign<Player>("Player");
         PauseUI = FindAndAssign("PauseUI");
         WinUI = FindAndAssign("WinUI");
         DropUI = FindAndAssign("DropUI");
@@ -163,7 +164,7 @@ public class UIManagerB : MonoBehaviour
 
     void ShowUI()
     {
-        if (PlayerDMG.win == false)
+        if (Win.ifwin == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && PauseUI.activeSelf)
             {

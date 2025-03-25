@@ -18,19 +18,21 @@ public class Sword : MonoBehaviour
         //旋轉
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
+    //打史萊姆
     void HitSlime(Collider2D gameObject)
     {
         if (gameObject.gameObject != null && gameObject.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
         {
-            gameObject.gameObject.GetComponent<SlimeDMG>().TakeSlimeDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage);
             Timer = Time.time;
         }
     }
+    //打花
     void HitFlower(Collider2D gameObject)
     {
         if (gameObject.gameObject != null && gameObject.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
         {
-            gameObject.gameObject.GetComponent<FlowerDMG>().TakeFlowerDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage);
             Timer = Time.time;
         }
     }

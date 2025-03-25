@@ -8,7 +8,7 @@ public class Claim : MonoBehaviour
 {
     public GameObject Loading;
     public Image LoadingScreen;
-    public PlayerDMG playerDMG;
+    public Player playerDMG;
     public float transitionDuration = 0.3f;
     public string targetcard;
 
@@ -45,7 +45,7 @@ public class Claim : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerDMG = GameObject.Find("Player").GetComponent<PlayerDMG>();
+        playerDMG = GameObject.Find("Player").GetComponent<Player>();
         Loading = GameObject.Find("Loading");
         LoadingScreen = GameObject.Find("Loading").GetComponent<Image>();
     }

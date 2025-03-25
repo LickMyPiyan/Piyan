@@ -1,19 +1,31 @@
 using UnityEngine;
 
-public class FlowerATK : MonoBehaviour
+public class Flower : MonoBehaviour
 {
     public float FlowerATKRange = 3.0f;
     public float FlowerATKCD = 1.0f;
     public float FlowerSpeed = 1f;
-    float Timer = 0;
+    public int FlowerHealth = 100;
+    float FlowerATKTimer = 0;
+    public void TakeFlowerDMG(int damage)
+    {
+        FlowerHealth -= damage;
+    }
+    void Die()
+    {
+        if(FlowerHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     void FlowerAttack(GameObject flowerbullets, Transform player)
     {
-        if(Time.time - Timer >= FlowerATKCD && Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
+        if(Win.ifwin == false &&Time.time - FlowerATKTimer >= FlowerATKCD && Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
         {
             Instantiate(flowerbullets, transform.position, Quaternion.identity);
-            Timer = Time.time;
+            FlowerATKTimer = Time.time;
         }
-        else if(Vector3.Distance(player.position, transform.position) > FlowerATKRange)
+        else if(Win.ifwin == false && Vector3.Distance(player.position, transform.position) > FlowerATKRange)
         {
             transform.position += new Vector3(player.position.x - transform.position.x, player.position.y - transform.position.y, 0).normalized * FlowerSpeed * Time.deltaTime;
         }
@@ -29,5 +41,6 @@ public class FlowerATK : MonoBehaviour
     void Update()
     {
         FlowerAttack(Resources.Load("FlowerBullet") as GameObject, GameObject.Find("Player").transform);
+        Die();
     }
 }

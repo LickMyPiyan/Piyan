@@ -24,7 +24,7 @@ public class FlowerBullet : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameObject.Find("Player").GetComponent<PlayerDMG>().TakePlayerDMG(FlowerDMG);
+            GameObject.Find("Player").GetComponent<Player>().TakePlayerDMG(FlowerDMG);
             Destroy(gameObject);
         }
         if(other.tag == "Wall")

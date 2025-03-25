@@ -1,25 +1,26 @@
-using System.Data.Common;
-using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 
-public class PlayerMoving : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    public float PlayerMaxHealth = 100.0f;
+    public float PlayerHealth = 100.0f;
     public float PlayerSpeed = 1.5f;
     public float DashDistance = 2.0f;
     public float DashCooldown = 2.0f;
     float Speed;
     float DashTimer = 0.0f;
-
     void Move()
     {
         if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
         {
+            //走斜線時距離速度除以根號二
             Speed = PlayerSpeed / Mathf.Sqrt(2);
         }
         else
         {
             Speed = PlayerSpeed;
         }
+        //移動
         transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * Time.deltaTime;
     }
     void Dash()
@@ -47,15 +48,28 @@ public class PlayerMoving : MonoBehaviour
             DashTimer = Time.time;
         }
     }
+    public void TakePlayerDMG(int damage)
+    {
+        PlayerHealth -= damage;
+    }
+    void Die()
+    {
+        if(PlayerHealth <= 0)
+        {
+            Destroy(gameObject);
+            PlayerPrefs.SetFloat("Hp", PlayerMaxHealth);
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        PlayerHealth = PlayerPrefs.GetFloat("Hp");
     }
 
     // Update is called once per frame
     void Update()
     {
+        Die();
         Move();
         Dash();
     }
