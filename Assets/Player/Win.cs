@@ -13,7 +13,6 @@ public class Win : MonoBehaviour
             ifwin == false && Time.time > 1.0f)
         {
             Debug.Log("You Win!");
-            PlayerPrefs.SetFloat("Hp", Player.PlayerHealth);
             ifwin = true;
         }
     }

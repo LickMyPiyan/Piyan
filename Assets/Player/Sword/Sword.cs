@@ -2,7 +2,7 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     public float SwordAttackCD = 0.5f;
-    public int SwordDamage = 100;
+    public float SwordDamage = 100.0f;
     float Timer = 0;
     void RotateToMouse()
     {
@@ -21,18 +21,18 @@ public class Sword : MonoBehaviour
     //打史萊姆
     void HitSlime(Collider2D gameObject)
     {
-        if (gameObject.gameObject != null && gameObject.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        if (gameObject.gameObject != null && gameObject.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD*Player.PlayerASpd)
         {
-            gameObject.gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage*Player.PlayerAtkBoost);
             Timer = Time.time;
         }
     }
     //打花
     void HitFlower(Collider2D gameObject)
     {
-        if (gameObject.gameObject != null && gameObject.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD)
+        if (gameObject.gameObject != null && gameObject.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD*Player.PlayerASpd)
         {
-            gameObject.gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage);
+            gameObject.gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage*Player.PlayerAtkBoost);
             Timer = Time.time;
         }
     }

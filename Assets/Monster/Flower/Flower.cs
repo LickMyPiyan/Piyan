@@ -4,10 +4,10 @@ public class Flower : MonoBehaviour
 {
     public float FlowerATKRange = 3.0f;
     public float FlowerATKCD = 1.0f;
-    public float FlowerSpeed = 1f;
-    public int FlowerHealth = 100;
+    public float FlowerSpeed = 1.0f;
+    public float FlowerHealth = 100.0f;
     float FlowerATKTimer = 0;
-    public void TakeFlowerDMG(int damage)
+    public void TakeFlowerDMG(float damage)
     {
         FlowerHealth -= damage;
     }

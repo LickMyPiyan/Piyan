@@ -4,11 +4,11 @@ public class Slime : MonoBehaviour
 {
     public float SlimeATKRange = 1.5f;
     public float SlimeATKCD = 1.0f;
-    public int SlimeATKDMG = 10;
+    public float SlimeATKDMG = 10.0f;
     public float SlimeMovimgSpeed = 1.0f;
-    public int SlimeHealth = 100;
+    public float SlimeHealth = 100;
     float SlimeATKTimer = 0;
-    public void TakeSlimeDMG(int damage)
+    public void TakeSlimeDMG(float damage)
     {
         SlimeHealth -= damage;
     }

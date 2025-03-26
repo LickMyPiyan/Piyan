@@ -73,11 +73,6 @@ public class CardManager: MonoBehaviour
         AvailableCards.AddRange(StackableCards);
         AvailableCards.AddRange(UsableCards);
     }
-
-    void CardsOwnedArrange()
-    {
-
-    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

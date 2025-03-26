@@ -4,7 +4,9 @@ public class Player : MonoBehaviour
 {
     public static float PlayerMaxHealth = 100.0f;
     public static float PlayerHealth = 100.0f;
+    public static float PlayerAtkBoost = 1.0f;
     public static float PlayerSpeed = 1.5f;
+    public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
     float Speed;
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
             DashTimer = Time.time;
         }
     }
-    public void TakePlayerDMG(int damage)
+    public void TakePlayerDMG(float damage)
     {
         PlayerHealth -= damage;
     }
@@ -57,13 +59,13 @@ public class Player : MonoBehaviour
         if(PlayerHealth <= 0)
         {
             Destroy(gameObject);
-            PlayerPrefs.SetFloat("Hp", PlayerMaxHealth);
+            PlayerHealth = PlayerMaxHealth;
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerHealth = PlayerPrefs.GetFloat("Hp");
+        
     }
 
     // Update is called once per frame

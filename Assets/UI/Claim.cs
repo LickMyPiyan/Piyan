@@ -34,13 +34,22 @@ public class Claim : MonoBehaviour
 
     public void ClaimCard()
     {
-        CardManager.CardsOwned.Add(targetcard);
-
-        Debug.Log($"{CardManager.CardsOwned[0]},{CardManager.CardsOwned[1]},{CardManager.CardsOwned[2]}");
-        Debug.Log($"{CardManager.CardsOwned[3]}");
-
+        if (CardManager.CardsOwned.Contains(targetcard))
+        {
+            stack(targetcard);
+        }
+        else
+        {
+            CardManager.CardsOwned.Add(targetcard);
+        }
+        
         UIManagerM.GameState++;
         StartCoroutine(this.LoadOutAndSwitchScene("Map"));
+    }
+
+    public void stack(string card)
+    {
+        
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -409,11 +409,11 @@ MonoBehaviour:
   loadScenes: {fileID: 23367917695743652}
   cardManager: {fileID: 8560190450848598498}
   player: {fileID: 0}
+  Cardseffect: {fileID: 8560190450848598499}
   PauseUI: {fileID: 0}
   WinUI: {fileID: 0}
   DropUI: {fileID: 0}
   CardsDropped: []
-  ifwin: {fileID: 0}
 --- !u!222 &1503810179264388410
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1288,7 +1288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320ec0a31826f6e44bf8f2cc90144cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadScenes: {fileID: 23367917695743652}
   SlimeNum: 3
   SlimeSpawnRange: 5
   MobHealth: {fileID: 9016273996583455929, guid: 5f97968af1085a54ea1767f49d969c58, type: 3}
@@ -1751,11 +1750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4654819c46f223847b53dd296c46fb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMaxHealth: 100
-  PlayerHealth: 100
-  PlayerSpeed: 1.5
-  DashDistance: 2
-  DashCooldown: 2
 --- !u!222 &5709852545404596489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1830,6 +1824,7 @@ GameObject:
   - component: {fileID: 23367917695743652}
   - component: {fileID: 1290883978411068154}
   - component: {fileID: 8560190450848598498}
+  - component: {fileID: 8560190450848598499}
   m_Layer: 0
   m_Name: UIManagerB
   m_TagString: Untagged
@@ -2981,6 +2976,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardUI: {fileID: 0}
+--- !u!114 &8560190450848598499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870198513741820587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f968142e166f3774b9ef92763a54cadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRegenerated: 0
 --- !u!224 &8611453545735242050
 RectTransform:
   m_ObjectHideFlags: 0
