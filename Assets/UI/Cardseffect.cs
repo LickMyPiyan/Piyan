@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine;
 
 public class Cardseffect : MonoBehaviour
-{
-    public void Regeneration()
+{   
+    public void Regeneration(int n)
     {
-        if (Player.PlayerHealth < Player.PlayerMaxHealth - 20.0f)
+        if (Player.PlayerHealth < Player.PlayerMaxHealth - n*20.0f)
         {
-            Player.PlayerHealth += 20.0f;
+            Player.PlayerHealth += n*20.0f;
         }
         else
         {
@@ -16,19 +16,19 @@ public class Cardseffect : MonoBehaviour
         }
     }
 
-    public void AtkBoost()
+    public void AtkBoost(int n)
     {
-        Player.PlayerAtkBoost += 0.2f;
+        Player.PlayerAtkBoost += n*0.2f;
     }
 
-    public void SpdBoost()
+    public void SpdBoost(int n)
     {
-        Player.PlayerSpeed += 0.3f;
+        Player.PlayerSpeed += n*0.3f;
     }
 
-    public void ASpdBoost()
+    public void ASpdBoost(int n)
     {
-        Player.PlayerASpd *= 0.5f;
+        Player.PlayerASpd *= n*0.5f;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,16 +41,16 @@ public class Cardseffect : MonoBehaviour
                 switch (i)
                 {
                     case 0 :
-                        Regeneration();
+                        Regeneration(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")]);
                         break;
                     case 1 :
-                        AtkBoost();
+                        AtkBoost(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("AtkBoost")]);
                         break;
                     case 2 :
-                        SpdBoost();
+                        SpdBoost(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("SpdBoost")]);
                         break;
                     case 3 :
-                        ASpdBoost();
+                        ASpdBoost(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("ASpdBoost")]);
                         break;
                     default:
                         Debug.Log("card index: " + i);

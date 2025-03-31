@@ -36,20 +36,16 @@ public class Claim : MonoBehaviour
     {
         if (CardManager.CardsOwned.Contains(targetcard))
         {
-            stack(targetcard);
+            CardManager.CardsCount[CardManager.CardsOwned.IndexOf(targetcard)]++;
         }
         else
         {
             CardManager.CardsOwned.Add(targetcard);
+            CardManager.CardsCount.Add(1);
         }
         
         UIManagerM.GameState++;
         StartCoroutine(this.LoadOutAndSwitchScene("Map"));
-    }
-
-    public void stack(string card)
-    {
-        
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
