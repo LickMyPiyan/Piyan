@@ -25,6 +25,8 @@ public class LoadScenes : MonoBehaviour
         int startcard3 = Random.Range(0,CardManager.UsableCards.Count);
 
         CardManager.CardsOwned = new List<string>{CardManager.StackableCards[startcard],CardManager.SwordCards[startcard2],CardManager.UsableCards[startcard3]};
+        CardManager.CardsCount = new List<int>{1, 1, 1};
+        
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 

@@ -13,6 +13,7 @@ public class CardManager: MonoBehaviour
     public static List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus","Revive"};
     public static List<string> AvailableCards;
     public static List<string> CardsOwned;
+    public static List<int> CardsCount;
     private List<Vector3> CardsOwnedPos;
     public GameObject CardUI;
 
@@ -31,6 +32,14 @@ public class CardManager: MonoBehaviour
             Card.GetComponent<RectTransform>().localScale = new Vector3(2, 2, 1);
             Card.GetComponent<RectTransform>().position = CardsOwnedPos[i] + new Vector3(Screen.width / 2, Screen.height / 2, 0);
             Card.transform.SetParent(CardUI.transform);
+
+            if (CardsCount[i] > 1)
+            {
+                TextMeshProUGUI CountText = Instantiate(Resources.Load<TextMeshProUGUI>($"Cards/Count"), Vector3.zero, Quaternion.identity);
+                CountText.text = $"{CardsCount[i]}";
+                CountText.transform.SetParent(Card.transform);
+                CountText.GetComponent<RectTransform>().anchoredPosition = new Vector3(60,-50,0);
+            }
         }
     }
 
