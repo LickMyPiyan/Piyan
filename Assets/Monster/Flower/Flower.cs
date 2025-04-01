@@ -6,6 +6,7 @@ public class Flower : MonoBehaviour
     public float FlowerATKCD = 1.0f;
     public float FlowerSpeed = 1.0f;
     public float FlowerHealth = 100.0f;
+    GameObject player;
     float FlowerATKTimer = 0;
     public void TakeFlowerDMG(float damage)
     {
@@ -40,7 +41,11 @@ public class Flower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FlowerAttack(Resources.Load("FlowerBullet") as GameObject, GameObject.Find("Player").transform);
+        if (GameObject.Find("Player") != null)
+        {
+            player = GameObject.Find("Player");
+        }
+        FlowerAttack(Resources.Load("FlowerBullet") as GameObject, player.transform);
         Die();
     }
 }

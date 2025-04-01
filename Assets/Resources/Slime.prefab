@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.09279096, g: 0.7987421, b: 0, a: 1}
+  m_Color: {r: 0.07200098, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,7 +176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlimeATKRange: 1.5
-  SlimeATKCD: 1
+  SlimeATKCD: 4
   SlimeATKDMG: 10
   SlimeMovimgSpeed: 1
-  ifwin: {fileID: 0}
+  SlimeHealth: 100
+  SlimeBeforeATKTime: 2
+  SlimeAfterATKTime: 2

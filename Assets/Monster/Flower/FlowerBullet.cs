@@ -9,6 +9,7 @@ public class FlowerBullet : MonoBehaviour
     public int FlowerDMG = 10;
     public float FlowerBulletSpeed = 5.0f;
     public float BulletDestroyDistance = 10.0f;
+    GameObject player;
     void TrackPlayer(Vector3 target)
     {
         transform.position += new Vector3(target.x - X, target.y - Y, 0).normalized * FlowerBulletSpeed * Time.deltaTime;
@@ -35,8 +36,12 @@ public class FlowerBullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        TargetposX = GameObject.Find("Player").transform.position.x;
-        TargetposY = GameObject.Find("Player").transform.position.y;
+        if (GameObject.Find("Player") != null)
+        {
+            player = GameObject.Find("Player");
+        }
+        TargetposX = player.transform.position.x;
+        TargetposY = player.transform.position.y;
         X = transform.position.x;
         Y = transform.position.y;
     }

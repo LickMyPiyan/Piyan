@@ -27,5 +27,6 @@ public class Win : MonoBehaviour
     void Update()
     {
         win();
+        Debug.Log(Player.PlayerHealth);
     }
 }
