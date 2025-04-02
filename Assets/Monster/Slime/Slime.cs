@@ -45,8 +45,16 @@ public class Slime : MonoBehaviour
 
     void Move(GameObject player)
     {
-        // 追著玩家跑  
+        // 追著玩家跑
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
+        if (hit.collider != null && hit.collider.gameObject.tag == "wall")
+        {
+            
+        }
+        else
+        {
         transform.position += new Vector3((player.transform.position.x - transform.position.x) / Vector3.Distance(transform.position, player.transform.position), (player.transform.position.y - transform.position.y) / Vector3.Distance(transform.position, player.transform.position), 0) * SlimeMovimgSpeed * Time.deltaTime;
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)
