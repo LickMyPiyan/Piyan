@@ -8,7 +8,7 @@ TagManager:
   - Slime
   - Flower
   - Bullet
-  - Enemy
+  - Goblin
   layers:
   - Default
   - TransparentFX

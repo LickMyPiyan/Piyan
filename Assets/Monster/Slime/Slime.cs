@@ -9,9 +9,8 @@ public class Slime : MonoBehaviour
     public float SlimeMaxHealth = 100.0f;
     public float SlimeAttackCooldown = 1.0f;
     public float SlimeDodgeChance = 0.5f;
-    GameObject player;
     float SlimeATKTimer = 0.0f;
-    float v;
+    float Value;
 
 
     public void TakeSlimeDMG(float damage)
@@ -22,8 +21,8 @@ public class Slime : MonoBehaviour
         }
         else if (SlimeHealth / SlimeMaxHealth <= 0.5f)
         {
-            v = Random.value;
-            if (v < SlimeDodgeChance)
+            Value = Random.value;
+            if (Value < SlimeDodgeChance)
             {
                 //閃避特效
             }
@@ -41,20 +40,16 @@ public class Slime : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (GameObject.Find("Player") == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Move(GameObject player)
     {
-        // 追著玩家跑
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
-        if (hit.collider != null && hit.collider.gameObject.tag == "wall")
-        {
-            
-        }
-        else
-        {
-        transform.position += new Vector3((player.transform.position.x - transform.position.x) / Vector3.Distance(transform.position, player.transform.position), (player.transform.position.y - transform.position.y) / Vector3.Distance(transform.position, player.transform.position), 0) * SlimeMovimgSpeed * Time.deltaTime;
-        }
+        // 追著玩家跑     
+        transform.position += Vector3.Normalize(player.transform.position - transform.position) * SlimeMovimgSpeed * Time.deltaTime;
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -73,11 +68,7 @@ public class Slime : MonoBehaviour
     }
     void Update()
     {
-        if (GameObject.Find("Player") != null)
-        {
-            player = GameObject.Find("Player");
-        }
-        Move(player);
+        Move(GameObject.Find("Player"));
         Die();
     }
 }

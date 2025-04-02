@@ -4,9 +4,8 @@ public class Flower : MonoBehaviour
 {
     public float FlowerATKRange = 3.0f;
     public float FlowerATKCD = 1.0f;
-    public float FlowerSpeed = 1.0f;
+    public float FlowerMovingSpeed = 1.0f;
     public float FlowerHealth = 100.0f;
-    GameObject player;
     float FlowerATKTimer = 0;
     public void TakeFlowerDMG(float damage)
     {
@@ -18,17 +17,22 @@ public class Flower : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (GameObject.Find("Player") == null)
+        {
+            Destroy(gameObject);
+        }
     }
-    void FlowerAttack(GameObject flowerbullets, Transform player)
+    void FlowerAttackAndMove(GameObject flowerbullets, Transform player)
     {
-        if(Win.ifwin == false &&Time.time - FlowerATKTimer >= FlowerATKCD && Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
+        if (Win.ifwin == false &&Time.time - FlowerATKTimer >= FlowerATKCD &&
+            Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
         {
             Instantiate(flowerbullets, transform.position, Quaternion.identity);
             FlowerATKTimer = Time.time;
         }
         else if(Win.ifwin == false && Vector3.Distance(player.position, transform.position) > FlowerATKRange)
         {
-            transform.position += new Vector3(player.position.x - transform.position.x, player.position.y - transform.position.y, 0).normalized * FlowerSpeed * Time.deltaTime;
+            transform.position += Vector3.Normalize(player.transform.position - transform.position) * FlowerMovingSpeed * Time.deltaTime;
         }
     }
     
@@ -41,11 +45,7 @@ public class Flower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("Player") != null)
-        {
-            player = GameObject.Find("Player");
-        }
-        FlowerAttack(Resources.Load("FlowerBullet") as GameObject, player.transform);
+        FlowerAttackAndMove(Resources.Load("FlowerBullet") as GameObject, GameObject.Find("Player").transform);
         Die();
     }
 }

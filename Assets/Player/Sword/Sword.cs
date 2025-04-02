@@ -21,18 +21,35 @@ public class Sword : MonoBehaviour
     //打史萊姆
     void HitSlime(Collider2D gameObject)
     {
-        if (gameObject.gameObject != null && gameObject.CompareTag("Slime") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD*Player.PlayerASpd)
+        if (gameObject != null && 
+        gameObject.CompareTag("Slime") && 
+        Input.GetMouseButton(0) && 
+        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
         {
-            gameObject.gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage*Player.PlayerAtkBoost);
+            gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage * Player.PlayerAtkBoost);
             Timer = Time.time;
         }
     }
     //打花
     void HitFlower(Collider2D gameObject)
     {
-        if (gameObject.gameObject != null && gameObject.CompareTag("Flower") && Input.GetMouseButton(0) && Time.time - Timer >= SwordAttackCD*Player.PlayerASpd)
+        if (gameObject != null && 
+        gameObject.CompareTag("Flower") && 
+        Input.GetMouseButton(0) && 
+        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
         {
-            gameObject.gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage*Player.PlayerAtkBoost);
+            gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage * Player.PlayerAtkBoost);
+            Timer = Time.time;
+        }
+    }
+    void HitGoblin(Collider2D gameObject)
+    {
+        if (gameObject != null && 
+        gameObject.CompareTag("Goblin") && 
+        Input.GetMouseButton(0) && 
+        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
+        {
+            gameObject.GetComponent<Goblin>().TakeGoblinDMG(SwordDamage * Player.PlayerAtkBoost);
             Timer = Time.time;
         }
     }
@@ -45,5 +62,6 @@ public class Sword : MonoBehaviour
     {
         HitSlime(other);
         HitFlower(other);
+        HitGoblin(other);
     }
 }
