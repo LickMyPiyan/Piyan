@@ -175,10 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893679ef93ad68644bacafc6f3e743dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeATKRange: 1.5
-  SlimeATKCD: 4
   SlimeATKDMG: 10
   SlimeMovimgSpeed: 1
   SlimeHealth: 100
-  SlimeBeforeATKTime: 2
-  SlimeAfterATKTime: 2
+  SlimeAttackCooldown: 1

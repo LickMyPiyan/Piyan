@@ -3,22 +3,36 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    public float SlimeATKRange = 1.5f;
     public float SlimeATKDMG = 10.0f;
     public float SlimeMovimgSpeed = 1.0f;
     public float SlimeHealth = 100;
-    public float SlimeBeforeATKTime = 0.5f;
-    public float SlimeAfterATKTime = 0.5f;
+    public float SlimeMaxHealth = 100.0f;
+    public float SlimeAttackCooldown = 1.0f;
+    public float SlimeDodgeChance = 0.5f;
     GameObject player;
-    float SlimeATKTimerB = 0;
-    float SlimeATKTimerA = 0;
-    bool SlimeAttack = false;
-    bool Aing = false;
+    float SlimeATKTimer = 0.0f;
+    float v;
 
 
     public void TakeSlimeDMG(float damage)
     {
-        SlimeHealth -= damage;
+        if(SlimeHealth / SlimeMaxHealth > 0.5f)
+        {
+            SlimeHealth -= damage;
+        }
+        else if (SlimeHealth / SlimeMaxHealth <= 0.5f)
+        {
+            v = Random.value;
+            if (v < SlimeDodgeChance)
+            {
+                //閃避特效
+            }
+            else
+            {
+                //受擊特效
+                SlimeHealth -= damage;
+            }
+        }
     }
     
     void Die()
@@ -29,34 +43,19 @@ public class Slime : MonoBehaviour
         }
     }
 
-    void MoveAndAttack(GameObject player)
+    void Move(GameObject player)
     {
-        if (Vector3.Distance(player.transform.position, transform.position) > SlimeATKRange && Aing == false)
-        {
-            // 追著玩家跑
-            GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);   
-            transform.position += new Vector3((player.transform.position.x - transform.position.x) / Vector3.Distance(transform.position, player.transform.position), (player.transform.position.y - transform.position.y) / Vector3.Distance(transform.position, player.transform.position), 0) * SlimeMovimgSpeed * Time.deltaTime;
-        }
-        else if (Vector3.Distance(player.transform.position, transform.position) <= SlimeATKRange && !SlimeAttack)
-        {
-            GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
-            SlimeATKTimerA = Time.time;
-            SlimeAttack = true;
-        }
+        // 追著玩家跑  
+        transform.position += new Vector3((player.transform.position.x - transform.position.x) / Vector3.Distance(transform.position, player.transform.position), (player.transform.position.y - transform.position.y) / Vector3.Distance(transform.position, player.transform.position), 0) * SlimeMovimgSpeed * Time.deltaTime;
+    }
 
-        if (SlimeAttack && Time.time - SlimeATKTimerA >= SlimeBeforeATKTime && !Aing)
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && Time.time - SlimeATKTimer >= SlimeAttackCooldown)
         {
-            GetComponent<SpriteRenderer>().color = new Color(0, 0, 255, 255);
-            player.GetComponent<Player>().TakePlayerDMG(SlimeATKDMG);
-            SlimeATKTimerB = Time.time;
-            Aing = true;
-        }
-
-        if (Aing && Time.time - SlimeATKTimerB >= SlimeAfterATKTime)
-        {
-            SlimeAttack = false;
-            Aing = false;
-            GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
+            // 讓Slime攻擊玩家
+            collision.gameObject.GetComponent<Player>().TakePlayerDMG(SlimeATKDMG);
+            SlimeATKTimer = Time.time;  
         }
     }
 
@@ -70,7 +69,7 @@ public class Slime : MonoBehaviour
         {
             player = GameObject.Find("Player");
         }
-        MoveAndAttack(player);
+        Move(player);
         Die();
     }
 }
