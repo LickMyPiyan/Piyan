@@ -15,6 +15,7 @@ public class CardManager: MonoBehaviour
     public static List<string> CardsOwned;
     public static List<int> CardsCount;
     private List<Vector3> CardsOwnedPos;
+    public static int Coin;
     public GameObject CardUI;
 
     void ShowCardUI()

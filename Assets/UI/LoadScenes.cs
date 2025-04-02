@@ -26,8 +26,17 @@ public class LoadScenes : MonoBehaviour
 
         CardManager.CardsOwned = new List<string>{CardManager.StackableCards[startcard],CardManager.SwordCards[startcard2],CardManager.UsableCards[startcard3]};
         CardManager.CardsCount = new List<int>{1, 1, 1};
+
+        CardManager.Coin = 0;
         
         StartCoroutine(LoadOutAndSwitchScene("Map"));
+    }
+
+    public void BacktoMenu()
+    {
+        UIManagerM.GameState = 0;
+        CardManager.CardsOwned.Clear();
+        StartCoroutine(LoadOutAndSwitchScene("MainMenu"));
     }
 
     public IEnumerator LoadIn()
