@@ -95,8 +95,7 @@ public class UIManagerB : MonoBehaviour
 
     public void Quit()
     {
-        StartCoroutine(loadScenes.LoadOutAndSwitchScene("Main Menu"));
-        UIManagerM.GameState = 0;
+        StartCoroutine(loadScenes.LoadOutAndSwitchScene("Result"));
     }
 
     void win()

@@ -44,6 +44,8 @@ public class Claim : MonoBehaviour
             CardManager.CardsCount.Add(1);
         }
         
+        CardManager.Coin += Random.Range(5,8);
+        
         UIManagerM.GameState++;
         StartCoroutine(this.LoadOutAndSwitchScene("Map"));
     }

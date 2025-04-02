@@ -13,6 +13,7 @@ public class UIManagerM : MonoBehaviour
     public GameObject StartUI;
     public GameObject CardUI;
     public TextMeshProUGUI StageName;
+    public TextMeshProUGUI CoinCount;
     public GameObject EnterB01, EnterE01, EnterS01, 
                     EnterB02, EnterE02, EnterS02, 
                     EnterB03, EnterE03, EnterS03;
@@ -28,7 +29,6 @@ public class UIManagerM : MonoBehaviour
     private List<string> ShopScenes = new List<string> { "ShopP01", "ShopF01", "ShopS01", "ShopT01" };
     //選擇場景清單
     private List<string> PickedScenes;
-
     //宣告攝影機
     Camera MainCamera;
 
@@ -48,6 +48,9 @@ public class UIManagerM : MonoBehaviour
                 }
             }
         }
+
+        CoinCount.text = $"{CardManager.Coin}";
+        GameObject.Find("Bar2").GetComponent<Image>().fillAmount = Player.PlayerHealth / Player.PlayerMaxHealth;
     }
     
     //開關進節點UI

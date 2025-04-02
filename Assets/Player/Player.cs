@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,10 +7,12 @@ public class Player : MonoBehaviour
     public static float PlayerMaxHealth = 100.0f;
     public static float PlayerHealth = 100.0f;
     public static float PlayerAtkBoost = 1.0f;
-    public static float PlayerSpeed = 1.5f;
+    public static float PlayerSpeed = 1.0f;
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
+
+    public List<float> PlayerDefaultStats = new List<float>{100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     float Speed;
     float DashTimer = 0.0f;
     void Move()
@@ -23,7 +27,7 @@ public class Player : MonoBehaviour
             Speed = PlayerSpeed;
         }
         //移動
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * Time.deltaTime;
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * 1.5f * Time.deltaTime;
     }
     void Dash()
     {
