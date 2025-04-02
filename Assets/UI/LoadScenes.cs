@@ -35,8 +35,16 @@ public class LoadScenes : MonoBehaviour
     public void BacktoMenu()
     {
         UIManagerM.GameState = 0;
+        ResetPlayerStats();
+        CardManager.Coin = 0;
         CardManager.CardsOwned.Clear();
+        CardManager.CardsCount.Clear();
         StartCoroutine(LoadOutAndSwitchScene("MainMenu"));
+    }
+
+    public void ResetPlayerStats()
+    {
+        
     }
 
     public IEnumerator LoadIn()
@@ -56,18 +64,21 @@ public class LoadScenes : MonoBehaviour
     public IEnumerator LoadOutAndSwitchScene(string sceneName)
     {
         Loading.SetActive(true);
+        Loading.transform.SetParent(GameObject.Find("Canvas").transform);
         LoadingScreen.fillAmount = 0;
-        float Timer = 0f;
-        while (Timer < transitionDuration)
+        LoadingScreen.fillOrigin = 1;
+        Time.timeScale = 1;
+
+        float timer = 0f;
+
+        while (timer < transitionDuration)
         {
-            LoadingScreen.fillOrigin = 1;
-            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, Timer / transitionDuration);
-            Timer += Time.deltaTime;
+            timer += Time.deltaTime;
+            LoadingScreen.fillAmount = Mathf.Lerp(0, 1, timer / transitionDuration);
             yield return null;
         }
-        LoadingScreen.fillAmount = 1;
 
-        yield return new WaitUntil(() => LoadingScreen.fillAmount == 1);
+        LoadingScreen.fillAmount = 1;
         SceneManager.LoadScene(sceneName);
     }
     

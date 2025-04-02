@@ -50,6 +50,7 @@ public class UIManagerM : MonoBehaviour
         }
 
         CoinCount.text = $"{CardManager.Coin}";
+        GameObject.Find("Bar2").GetComponent<Image>().fillAmount = Player.PlayerHealth / Player.PlayerMaxHealth;
     }
     
     //開關進節點UI

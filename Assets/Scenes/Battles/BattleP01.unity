@@ -409,7 +409,6 @@ MonoBehaviour:
   loadScenes: {fileID: 23367917695743652}
   cardManager: {fileID: 8560190450848598498}
   player: {fileID: 0}
-  Cardseffect: {fileID: 8560190450848598499}
   PauseUI: {fileID: 0}
   WinUI: {fileID: 0}
   DropUI: {fileID: 0}
@@ -2705,7 +2704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4822421290567237396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1290883978411068154}
+        m_TargetAssemblyTypeName: UIManagerB, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8075442648224426873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2988,7 +2999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f968142e166f3774b9ef92763a54cadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasRegenerated: 0
 --- !u!224 &8611453545735242050
 RectTransform:
   m_ObjectHideFlags: 0
