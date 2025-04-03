@@ -366,6 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4654819c46f223847b53dd296c46fb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Weapon:
+  - {fileID: 0}
+  - {fileID: 0}
   PlayerDefaultStats:
   - 100
   - 100
@@ -657,11 +660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 1
+  SlimeNum: 2
   SlimeSpawnRange: 10
-  FlowerNum: 0
+  FlowerNum: 1
   FlowerSpawnRange: 10
-  GoblinNum: 0
+  GoblinNum: 2
   GoblinSpawnRange: 10
 --- !u!1 &825139704
 GameObject:
@@ -892,7 +895,7 @@ GameObject:
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1112,7 +1115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1255103028
 SpriteRenderer:
   m_ObjectHideFlags: 0

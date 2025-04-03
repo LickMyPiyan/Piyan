@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System;
+using System.Globalization;
 
 public class Player : MonoBehaviour
 {
@@ -11,10 +13,14 @@ public class Player : MonoBehaviour
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
+    static public GameObject sword;
+    static public GameObject bow;
+    public GameObject[] Weapon = new GameObject[2];
 
     public List<float> PlayerDefaultStats = new List<float>{100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     float Speed;
     float DashTimer = 0.0f;
+
     void Move()
     {
         if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
@@ -66,17 +72,51 @@ public class Player : MonoBehaviour
             PlayerHealth = PlayerMaxHealth;
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void SwitchWeapon()
     {
-        
+        //武器切換
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            foreach(GameObject weapon in Weapon)
+            {
+                if (weapon.activeSelf == true)
+                {
+                    int num = System.Array.IndexOf(Weapon, weapon);
+                    if(num != (Weapon.Length - 1))
+                    {
+                        Weapon[num].SetActive(false); 
+                        Weapon[num + 1].SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log(num);
+                        Weapon[num].SetActive(false);
+                        Weapon[0].SetActive(true);
+                        
+                    }
+                }
+            }
+        }
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        sword = GameObject.Find("SwordRange");
+        bow = GameObject.Find("Bow");
+        Weapon = new GameObject[] {sword, bow};
+        foreach(GameObject weapon in Weapon)
+        {
+            weapon.SetActive(false);
+        }
+        Weapon[0].SetActive(true);
+    }
+
     void Update()
     {
         Die();
         Move();
         Dash();
+        SwitchWeapon();
     }
 }

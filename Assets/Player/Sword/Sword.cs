@@ -4,6 +4,7 @@ public class Sword : MonoBehaviour
     public float SwordAttackCD = 0.5f;
     public float SwordDamage = 100.0f;
     float Timer = 0;
+    static public string[] MobName = { "Slime", "Flower", "Goblin" };
     void RotateToMouse()
     {
         //以螢幕中心為原點的座標系統
@@ -18,39 +19,30 @@ public class Sword : MonoBehaviour
         //旋轉
         transform.rotation = Quaternion.Euler(0, 0, Angle);
     }
-    //打史萊姆
-    void HitSlime(Collider2D gameObject)
+
+    void HitMob(Collider2D gameObject)
     {
-        if (gameObject != null && 
-        gameObject.CompareTag("Slime") && 
-        Input.GetMouseButton(0) && 
-        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
+        foreach (string name in MobName)
         {
-            gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage * Player.PlayerAtkBoost);
-            Timer = Time.time;
-        }
-    }
-    //打花
-    void HitFlower(Collider2D gameObject)
-    {
-        if (gameObject != null && 
-        gameObject.CompareTag("Flower") && 
-        Input.GetMouseButton(0) && 
-        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
-        {
-            gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage * Player.PlayerAtkBoost);
-            Timer = Time.time;
-        }
-    }
-    void HitGoblin(Collider2D gameObject)
-    {
-        if (gameObject != null && 
-        gameObject.CompareTag("Goblin") && 
-        Input.GetMouseButton(0) && 
-        Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
-        {
-            gameObject.GetComponent<Goblin>().TakeGoblinDMG(SwordDamage * Player.PlayerAtkBoost);
-            Timer = Time.time;
+            if (gameObject != null && 
+            gameObject.CompareTag(name) && 
+            Input.GetMouseButton(0) && 
+            Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
+            {
+                switch (name)
+                {
+                    case "Slime":
+                        gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage * Player.PlayerAtkBoost);
+                        break;
+                    case "Flower":
+                        gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage * Player.PlayerAtkBoost);
+                        break;
+                    case "Goblin":
+                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(SwordDamage * Player.PlayerAtkBoost);
+                        break;
+                }
+                Timer = Time.time;
+            }
         }
     }
     // Update is called once per frame
@@ -60,8 +52,6 @@ public class Sword : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        HitSlime(other);
-        HitFlower(other);
-        HitGoblin(other);
+        HitMob(other);
     }
 }

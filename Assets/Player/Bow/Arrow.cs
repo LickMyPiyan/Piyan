@@ -24,13 +24,7 @@ public class Arrow : MonoBehaviour
             angles[i] = Vector2.Angle(MousePos, monster[i].transform.position - transform.position);
         }
         float minAngle = angles.Min();
-        for (int i = 0; i < monster.Length; i++)
-        {
-            if (angles[i] == minAngle)
-            {
-                target = i;
-            }
-        }
+        target = System.Array.IndexOf(angles, minAngle);
     }
 
     void Move()
@@ -38,40 +32,29 @@ public class Arrow : MonoBehaviour
         transform.position += Vector3.Normalize(monster[target].transform.position - transform.position) * Time.deltaTime * ArrowMovingSpeed;
     }
 
-    void HitSlime(Collider2D gameObject)
+    void Hit(Collider2D gameObject)
     {
-        if (gameObject != null && 
-        gameObject.CompareTag("Slime"))
+        foreach (string name in Sword.MobName.Concat(new string[] { "Wall" }))
         {
-            gameObject.GetComponent<Slime>().TakeSlimeDMG(ArrowATKDMG);
-            Destroy(arrow);
-        }
-    }
-    //打花
-    void HitFlower(Collider2D gameObject)
-    {
-        if (gameObject != null && 
-        gameObject.CompareTag("Flower"))
-        {
-            gameObject.GetComponent<Flower>().TakeFlowerDMG(ArrowATKDMG);
-            Destroy(arrow);
-        }
-    }
-    void HitGoblin(Collider2D gameObject)
-    {
-        if (gameObject != null && 
-        gameObject.CompareTag("Goblin"))
-        {
-            gameObject.GetComponent<Goblin>().TakeGoblinDMG(ArrowATKDMG);
-            Destroy(arrow);
-        }
-    }
-    void HitWall(Collider2D gameObject)
-    {
-        if (gameObject != null && 
-        gameObject.CompareTag("Wall"))
-        {
-            Destroy(arrow);
+            if (gameObject != null && 
+            gameObject.CompareTag(name))
+            {
+                switch (name)
+                {
+                    case "Slime":
+                        gameObject.GetComponent<Slime>().TakeSlimeDMG(ArrowATKDMG);
+                        break;
+                    case "Flower":
+                        gameObject.GetComponent<Flower>().TakeFlowerDMG(ArrowATKDMG);
+                        break;
+                    case "Goblin":
+                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(ArrowATKDMG);
+                        break;
+                    case "Wall":
+                        break;
+                }
+                Destroy(arrow);
+            }
         }
     }
     void Destroy()
@@ -98,10 +81,7 @@ public class Arrow : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        HitSlime(other);
-        HitFlower(other);
-        HitGoblin(other);
-        HitWall(other);
+        Hit(other);
         Destroy();
     }
 }
