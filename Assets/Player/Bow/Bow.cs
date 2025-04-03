@@ -1,10 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Bow : MonoBehaviour
 {
-    static public float BowDMG = 3.0f;
+    static public float BowDMG = 40.0f;
     static public float BowMaxHoldTime = 3.0f;
     static public float BowATKDMG;
     float MouseTimer = 0.0f;
