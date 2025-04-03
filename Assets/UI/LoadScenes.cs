@@ -11,7 +11,7 @@ public class LoadScenes : MonoBehaviour
     public float transitionDuration = 0.3f;
     
     //離開節點
-    private void Out()
+    public void Out()
     {
         //加Map裡的遊戲進度計數
         UIManagerM.GameState++;
