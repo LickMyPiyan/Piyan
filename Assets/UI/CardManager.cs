@@ -39,7 +39,7 @@ public class CardManager: MonoBehaviour
                 TextMeshProUGUI CountText = Instantiate(Resources.Load<TextMeshProUGUI>($"Cards/Count"), Vector3.zero, Quaternion.identity);
                 CountText.text = $"{CardsCount[i]}";
                 CountText.transform.SetParent(Card.transform);
-                CountText.GetComponent<RectTransform>().anchoredPosition = new Vector3(60,-50,0);
+                CountText.GetComponent<RectTransform>().anchoredPosition = new Vector3(50,-42,0);
             }
         }
     }
