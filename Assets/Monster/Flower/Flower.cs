@@ -6,6 +6,9 @@ public class Flower : MonoBehaviour
     public float FlowerATKCD = 1.0f;
     public float FlowerMovingSpeed = 1.0f;
     public float FlowerHealth = 100.0f;
+    public float FlowerMaxHealth = 100.0f;
+    public float FlowerSwitchMode = 0.3f;
+    public float FlowerEscapeDistance = 5.0f;
     float FlowerATKTimer = 0;
     public void TakeFlowerDMG(float damage)
     {
@@ -15,24 +18,44 @@ public class Flower : MonoBehaviour
     {
         if(FlowerHealth <= 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); return;
         }
         if (GameObject.Find("Player") == null)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); return;
         }
     }
     void FlowerAttackAndMove(GameObject flowerbullets, Transform player)
     {
-        if (Win.ifwin == false &&Time.time - FlowerATKTimer >= FlowerATKCD &&
-            Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
+        if (FlowerHealth / FlowerMaxHealth > FlowerSwitchMode)
         {
-            Instantiate(flowerbullets, transform.position, Quaternion.identity);
-            FlowerATKTimer = Time.time;
+            if (Time.time - FlowerATKTimer >= FlowerATKCD &&
+                Vector3.Distance(player.position, transform.position) <= FlowerATKRange)
+            {
+                Instantiate(flowerbullets, transform.position, Quaternion.identity);
+                FlowerATKTimer = Time.time;
+                return;
+            }
+            else if(Vector3.Distance(player.position, transform.position) > FlowerATKRange)
+            {
+                transform.position += Vector3.Normalize(player.transform.position - transform.position) * FlowerMovingSpeed * Time.deltaTime;
+                return;
+            }
         }
-        else if(Win.ifwin == false && Vector3.Distance(player.position, transform.position) > FlowerATKRange)
+        else if (FlowerHealth / FlowerMaxHealth <= FlowerSwitchMode)
         {
-            transform.position += Vector3.Normalize(player.transform.position - transform.position) * FlowerMovingSpeed * Time.deltaTime;
+            if (Time.time - FlowerATKTimer >= FlowerATKCD &&
+                Vector3.Distance(player.position, transform.position) >= FlowerEscapeDistance)
+            {
+                Instantiate(flowerbullets, transform.position, Quaternion.identity);
+                FlowerATKTimer = Time.time;
+                return;
+            }
+            else if (Vector3.Distance(player.position, transform.position) < FlowerEscapeDistance)
+            {
+                transform.position += Vector3.Normalize(transform.position - player.transform.position) * FlowerMovingSpeed * Time.deltaTime;
+                return;
+            }
         }
     }
     

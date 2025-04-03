@@ -351,6 +351,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1255103029}
+  - {fileID: 2100513501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &381127585
@@ -365,6 +366,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4654819c46f223847b53dd296c46fb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDefaultStats:
+  - 100
+  - 100
+  - 1
+  - 1
+  - 1
+  - 2
+  - 2
 --- !u!114 &381127586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,11 +657,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 3
+  SlimeNum: 0
   SlimeSpawnRange: 5
-  FlowerNum: 3
+  FlowerNum: 0
   FlowerSpawnRange: 10
-  GoblinNum: 3
+  GoblinNum: 0
   GoblinSpawnRange: 10
 --- !u!1 &825139704
 GameObject:
@@ -1329,7 +1338,7 @@ Transform:
   m_GameObject: {fileID: 1283282638}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.78, y: 0.05, z: 0}
+  m_LocalPosition: {x: 2.11, y: -0.07, z: 0}
   m_LocalScale: {x: 0.34903792, y: 14.995253, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1736,6 +1745,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804549865}
   m_CullTransparentMesh: 1
+--- !u!1 &2100513500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100513501}
+  - component: {fileID: 2100513503}
+  - component: {fileID: 2100513502}
+  m_Layer: 0
+  m_Name: Bow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100513501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100513500}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 381127584}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100513502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100513500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9240f51451a58424cbd65e690fe21a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2100513503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100513500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1d829c6f7e88e43bd6ab857afb42f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

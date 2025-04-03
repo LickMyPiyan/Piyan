@@ -12,10 +12,12 @@ public class FlowerBullet : MonoBehaviour
     GameObject player;
     void TrackPlayer(Vector3 target)
     {
+        //讓子彈朝著生成時玩家位置移動
         transform.position += new Vector3(target.x - X, target.y - Y, 0).normalized * FlowerBulletSpeed * Time.deltaTime;
     }
     void Destroy()
     {
+        //當子彈與玩家的距離大於銷毀距離時，銷毀子彈
         if(Vector3.Distance(new Vector3(TargetposX, TargetposY, 0), transform.position) > BulletDestroyDistance)
         {
             Destroy(gameObject);
@@ -23,25 +25,28 @@ public class FlowerBullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        //當子彈碰到玩家時，對玩家造成傷害並銷毀子彈
         if(other.tag == "Player")
         {
             GameObject.Find("Player").GetComponent<Player>().TakePlayerDMG(FlowerDMG);
             Destroy(gameObject);
+            return;
         }
+        //當子彈碰到牆壁時，銷毀子彈
         if(other.tag == "Wall")
         {
             Destroy(gameObject);
+            return;
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (GameObject.Find("Player") != null)
-        {
-            player = GameObject.Find("Player");
-        }
+        player = GameObject.Find("Player");
+        //紀錄生成時玩家的位置
         TargetposX = player.transform.position.x;
         TargetposY = player.transform.position.y;
+        //紀錄生成時的位置
         X = transform.position.x;
         Y = transform.position.y;
     }

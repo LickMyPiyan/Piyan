@@ -11,7 +11,6 @@ public class Win : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Flower").Length == 0 &&
             GameObject.FindGameObjectsWithTag("Slime").Length == 0 && 
             GameObject.FindGameObjectsWithTag("Goblin").Length == 0 &&
-            GameObject.FindGameObjectsWithTag("Player").Length != 0 &&
             ifwin == false)
         {
             Debug.Log("You Win!");
@@ -29,6 +28,5 @@ public class Win : MonoBehaviour
     void Update()
     {
         win();
-        Debug.Log(Player.PlayerHealth);
     }
 }
