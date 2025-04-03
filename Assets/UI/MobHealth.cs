@@ -16,7 +16,6 @@ public class HealthBar : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         mainCamera = Camera.main;
         healthBar = transform.GetChild(1).GetComponent<Image>();
-        maxHealth = 100;
     }
 
     void Update()
@@ -26,6 +25,7 @@ public class HealthBar : MonoBehaviour
             Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
             rectTransform.position = screenPos;
             CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
+            maxHealth = target.GetComponent<Slime>().SlimeMaxHealth;
             healthBar.fillAmount = (float)CurrentHealth / maxHealth;
         }
         else
