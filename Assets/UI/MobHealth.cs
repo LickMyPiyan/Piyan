@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Transform target;
+    public GameObject target;
     public Vector3 offset;
     private RectTransform rectTransform;
     private Camera mainCamera;
@@ -22,10 +22,28 @@ public class HealthBar : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(target.transform.position + offset);
             rectTransform.position = screenPos;
-            CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
-            maxHealth = target.GetComponent<Slime>().SlimeMaxHealth;
+
+            string targetName = target.name.Replace("(Clone)", "");
+            switch (targetName)
+                {
+                    case "Slime":
+                        CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
+                        maxHealth = target.GetComponent<Slime>().SlimeMaxHealth;
+                        break;
+                    case "Flower":
+                        CurrentHealth = target.GetComponent<Flower>().FlowerHealth;
+                        maxHealth = target.GetComponent<Flower>().FlowerMaxHealth;
+                        break;
+                    case "Goblin":
+                        CurrentHealth = target.GetComponent<Goblin>().GoblinHealth;
+                        maxHealth = target.GetComponent<Goblin>().GoblinMaxHealth;
+                        break;
+                    default:
+                        Debug.LogError("Unknown mob type: " + target.name);
+                        break;
+                }
             healthBar.fillAmount = (float)CurrentHealth / maxHealth;
         }
         else

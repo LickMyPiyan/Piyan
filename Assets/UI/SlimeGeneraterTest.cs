@@ -17,7 +17,7 @@ public class SlimeGeneraterTest : MonoBehaviour
             healthBar.transform.SetParent(GameObject.Find("MobHealthBars").transform);
 
             HealthBar MobHealth = healthBar.GetComponent<HealthBar>();
-            MobHealth.target = Mob.transform;
+            MobHealth.target = Mob;
             MobHealth.offset = new Vector3(0, -1, 0);
         }
         yield return null;

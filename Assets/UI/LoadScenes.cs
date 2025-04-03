@@ -20,7 +20,7 @@ public class LoadScenes : MonoBehaviour
 
     public void MapPressed()
     {
-        int startcard = Random.Range(0,CardManager.StackableCards.Count);
+        int startcard = Random.Range(0,1);
         int startcard2 = Random.Range(0,CardManager.SwordCards.Count);
         int startcard3 = Random.Range(0,CardManager.UsableCards.Count);
 
