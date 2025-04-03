@@ -23,6 +23,8 @@ public class HealthFollow : MonoBehaviour
     void Start()
     {
         MainCamera = Camera.main;
+        Player = GameObject.Find("Player");
+        PlayerHealth = GameObject.Find("PlayerHealth");
     }
 
     // Update is called once per frame

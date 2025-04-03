@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MonsterGenerator : MonoBehaviour
@@ -8,27 +10,32 @@ public class MonsterGenerator : MonoBehaviour
     public float FlowerSpawnRange = 10.0f;
     public int GoblinNum = 3;
     public float GoblinSpawnRange = 10.0f;
-    void generate(GameObject slime, GameObject flower, GameObject goblin)
+    public IEnumerator SpawnMob(string MobName, int Num, float MobSpawnRange)
     {
-        for(int i = 0; i < SlimeNum; i++)
+        for (int i = 0; i < Num; i++)
         {
-            Instantiate(slime, new Vector3(Random.Range(-SlimeSpawnRange, SlimeSpawnRange), Random.Range(-SlimeSpawnRange,SlimeSpawnRange), 0), Quaternion.identity);
+            GameObject Mob = Instantiate(Resources.Load(MobName), new Vector3(Random.Range(-MobSpawnRange, MobSpawnRange), Random.Range(-MobSpawnRange, MobSpawnRange), 0), Quaternion.identity) as GameObject;
+            GameObject healthBar = Instantiate(Resources.Load("MobHealth"), Vector3.zero, Quaternion.identity) as GameObject;
+            healthBar.transform.SetParent(GameObject.Find("MobHealthBars").transform);
+
+            HealthBar MobHealth = healthBar.GetComponent<HealthBar>();
+            MobHealth.target = Mob;
+            MobHealth.offset = new Vector3(0, -1, 0);
         }
-        for(int i = 0; i < FlowerNum; i++)
-        {
-            Instantiate(flower, new Vector3(Random.Range(-FlowerSpawnRange, FlowerSpawnRange), Random.Range(-FlowerSpawnRange,FlowerSpawnRange), 0), Quaternion.identity);
-        }
-        for(int i = 0; i < GoblinNum; i++)
-        {
-            Instantiate(goblin, new Vector3(Random.Range(-GoblinSpawnRange, GoblinSpawnRange), Random.Range(-GoblinSpawnRange,GoblinSpawnRange), 0), Quaternion.identity);
-        }
+        yield return null;
     }
+
+    void genarate()
+    {
+        StartCoroutine(SpawnMob("Slime", SlimeNum, SlimeSpawnRange));
+        StartCoroutine(SpawnMob("Flower", FlowerNum, FlowerSpawnRange));
+        StartCoroutine(SpawnMob("Goblin", GoblinNum, GoblinSpawnRange));
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        generate(Resources.Load("Slime") as GameObject
-                , Resources.Load("Flower") as GameObject
-                , Resources.Load("Goblin") as GameObject);
+        genarate();
     }
 
     // Update is called once per frame

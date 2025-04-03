@@ -38,6 +38,7 @@ public class Cardseffect : MonoBehaviour
         {
             if (CardManager.CardsOwned.Contains(CardManager.StackableCards[i]))
             {
+                Debug.Log("card index: " + i);
                 switch (i)
                 {
                     case 0 :
