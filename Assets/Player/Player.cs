@@ -13,9 +13,7 @@ public class Player : MonoBehaviour
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
-    static public GameObject sword;
-    static public GameObject bow;
-    public GameObject[] Weapon = new GameObject[2];
+    public GameObject[] Weapon;
 
     public List<float> PlayerDefaultStats = new List<float>{100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     float Speed;
@@ -66,11 +64,23 @@ public class Player : MonoBehaviour
     }
     void Die()
     {
+        //血量歸零時死亡
         if(PlayerHealth <= 0)
         {
             Destroy(gameObject);
             PlayerHealth = PlayerMaxHealth;
         }
+    }
+    void SetWeapon(GameObject sword, GameObject bow)
+    {
+        //將使用的武器放入Weapon陣列
+        Weapon = new GameObject[] {sword, bow};
+        //將第0個武器以外的武器都收起
+        foreach(GameObject weapon in Weapon)
+        {
+            weapon.SetActive(false);
+        }
+        Weapon[0].SetActive(true);
     }
     void SwitchWeapon()
     {
@@ -79,17 +89,20 @@ public class Player : MonoBehaviour
         {
             foreach(GameObject weapon in Weapon)
             {
+                //找出現在正在使用的武器
                 if (weapon.activeSelf == true)
                 {
                     int num = System.Array.IndexOf(Weapon, weapon);
                     if(num != (Weapon.Length - 1))
                     {
+                        //當武器不是最後一個時將本武器收起拿出下一個武器
                         Weapon[num].SetActive(false); 
                         Weapon[num + 1].SetActive(true);
                         break;
                     }
                     else
                     {
+                        //當武器是最後一個時收起本武器拿出第0個武器
                         Debug.Log(num);
                         Weapon[num].SetActive(false);
                         Weapon[0].SetActive(true);
@@ -102,14 +115,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        sword = GameObject.Find("SwordRange");
-        bow = GameObject.Find("Bow");
-        Weapon = new GameObject[] {sword, bow};
-        foreach(GameObject weapon in Weapon)
-        {
-            weapon.SetActive(false);
-        }
-        Weapon[0].SetActive(true);
+        SetWeapon(GameObject.Find("SwordRange"), GameObject.Find("Bow"));
     }
 
     void Update()
@@ -118,5 +124,6 @@ public class Player : MonoBehaviour
         Move();
         Dash();
         SwitchWeapon();
+        Debug.Log(PlayerHealth);
     }
 }

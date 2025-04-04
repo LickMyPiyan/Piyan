@@ -661,10 +661,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlimeNum: 2
-  SlimeSpawnRange: 10
-  FlowerNum: 1
+  SlimeSpawnRange: 5
+  FlowerNum: 0
   FlowerSpawnRange: 10
-  GoblinNum: 2
+  GoblinNum: 0
   GoblinSpawnRange: 10
 --- !u!1 &825139704
 GameObject:
