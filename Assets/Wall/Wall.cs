@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    Vector3 wall;
+    Vector3 wallpos;
+    Quaternion wallrot;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        wall = transform.position;
+        wallpos = transform.position;
+        wallrot = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = wall;
+        transform.position = wallpos;
+        transform.rotation = wallrot;
     }
 }
