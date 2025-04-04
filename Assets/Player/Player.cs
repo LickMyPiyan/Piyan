@@ -14,9 +14,9 @@ public class Player : MonoBehaviour
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
+    public static List<float> DefaultStats = new List<float>{100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     public GameObject[] Weapon;
 
-    public List<float> PlayerDefaultStats = new List<float>{100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     float Speed;
     float DashTimer = 0.0f;
 

@@ -16,7 +16,8 @@ public class UIManagerM : MonoBehaviour
     public TextMeshProUGUI CoinCount;
     public GameObject EnterB01, EnterE01, EnterS01, 
                     EnterB02, EnterE02, EnterS02, 
-                    EnterB03, EnterE03, EnterS03;
+                    EnterB03, EnterE03, EnterS03,
+                    EnterBB;
     public static List<GameObject> EnterButtons;
     public float transitionDuration = 0.3f;
     //遊戲進度計數(static讓它在切場景時不變)
@@ -56,13 +57,20 @@ public class UIManagerM : MonoBehaviour
     //開關進節點UI
     public void ButtonPressed()
     {
-        if (GameState >= 0 && GameState < PickedScenes.Count)
+        if (GameState < (PickedScenes.Count - 1))
         {
             SaveCamera();
             StartUI.SetActive(true);
             StageName.text = PickedScenes[GameState];
             MainCamera.GetComponent<DragCamera>().enabled = false;
             BasicUI.SetActive(false);
+        }
+        else
+        {
+            SaveCamera();
+            MainCamera.GetComponent<DragCamera>().enabled = false;
+            BasicUI.SetActive(false);
+            StartPressed();
         }
     }
 
@@ -115,7 +123,8 @@ public class UIManagerM : MonoBehaviour
     {
         EnterButtons = new List<GameObject> {EnterB01, EnterE01, EnterS01,
                                             EnterB02, EnterE02, EnterS02, 
-                                            EnterB03, EnterE03, EnterS03};
+                                            EnterB03, EnterE03, EnterS03,
+                                            EnterBB};
 
         //宣告UI跟物件配對
         followPairs = new List<(Vector3, GameObject)>
@@ -128,7 +137,8 @@ public class UIManagerM : MonoBehaviour
             (new Vector3(6,6,0), EnterS02),
             (new Vector3(8,1,0), EnterB03),
             (new Vector3(12,-3,0), EnterE03),
-            (new Vector3(14,2,0), EnterS03)
+            (new Vector3(14,2,0), EnterS03),
+            (new Vector3(14,8,0), EnterBB)
         };
 
         //隨機挑選場景清單

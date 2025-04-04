@@ -20,12 +20,17 @@ public class LoadScenes : MonoBehaviour
 
     public void MapPressed()
     {
-        int startcard = Random.Range(0,1);
-        int startcard2 = Random.Range(0,CardManager.SwordCards.Count);
-        int startcard3 = Random.Range(0,CardManager.UsableCards.Count);
+        int startcard = Random.Range(0, 1);
+        int startcard2 = Random.Range(0, CardManager.SwordCards.Count);
+        int startcard3 = Random.Range(0, CardManager.UsableCards.Count);
 
-        CardManager.CardsOwned = new List<string>{CardManager.StackableCards[startcard],CardManager.SwordCards[startcard2],CardManager.UsableCards[startcard3]};
-        CardManager.CardsCount = new List<int>{1, 1, 1};
+        CardManager.CardsOwned.Add(CardManager.StackableCards[startcard]);
+        CardManager.CardsOwned.Add(CardManager.SwordCards[startcard2]);
+        CardManager.CardsOwned.Add(CardManager.UsableCards[startcard3]);
+    
+        CardManager.CardsCount.Add(1);
+        CardManager.CardsCount.Add(1);
+        CardManager.CardsCount.Add(1);
 
         CardManager.Coin = 0;
         
@@ -34,17 +39,7 @@ public class LoadScenes : MonoBehaviour
 
     public void BacktoMenu()
     {
-        UIManagerM.GameState = 0;
-        ResetPlayerStats();
-        CardManager.Coin = 0;
-        CardManager.CardsOwned.Clear();
-        CardManager.CardsCount.Clear();
         StartCoroutine(LoadOutAndSwitchScene("MainMenu"));
-    }
-
-    public void ResetPlayerStats()
-    {
-        
     }
 
     public IEnumerator LoadIn()
