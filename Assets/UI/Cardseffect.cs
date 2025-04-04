@@ -23,7 +23,7 @@ public class Cardseffect : MonoBehaviour
 
     public void SpdBoost(int n)
     {
-        Player.PlayerSpeed += n*0.3f;
+        Player.PlayerCardSpeed += n*0.3f;
     }
 
     public void ASpdBoost(int n)

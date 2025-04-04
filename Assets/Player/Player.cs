@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     public static float PlayerMaxHealth = 100.0f;
     public static float PlayerHealth = 100.0f;
     public static float PlayerAtkBoost = 1.0f;
-    public static float PlayerSpeed = 1.0f;
+    public static float PlayerCardSpeed = 1.0f;
+    public static float PlayerBasicSpeed = 1.5f;
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
@@ -21,17 +22,21 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if (Bow.BowHolding == true)
+        {
+            PlayerBasicSpeed *= Bow.BowSpeedDecrease;
+        }
         if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
         {
             //走斜線時距離速度除以根號二
-            Speed = PlayerSpeed / Mathf.Sqrt(2);
+            Speed = PlayerBasicSpeed / Mathf.Sqrt(2);
         }
         else
         {
-            Speed = PlayerSpeed;
+            Speed = PlayerBasicSpeed;
         }
         //移動
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * 1.5f * Time.deltaTime;
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * PlayerCardSpeed * Time.deltaTime;
     }
     void Dash()
     {
