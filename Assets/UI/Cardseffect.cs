@@ -18,17 +18,17 @@ public class Cardseffect : MonoBehaviour
 
     public void AtkBoost(int n)
     {
-        Player.PlayerAtkBoost = Player.DefaultStats[1] + n*0.2f;
+        Player.PlayerAtkBoost = Player.PlayerDefaultStats[1] + n*0.2f;
     }
 
     public void SpdBoost(int n)
     {
-        Player.PlayerCardSpeed = Player.DefaultStats[2] + n*0.2f;
+        Player.PlayerCardSpeed = Player.PlayerDefaultStats[2] + n*0.2f;
     }
 
     public void ASpdBoost(int n)
     {
-        Player.PlayerASpd = Player.DefaultStats[3] * Mathf.Pow(0.5f, n);
+        Player.PlayerASpd = Player.PlayerDefaultStats[3] * Mathf.Pow(0.5f, n);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

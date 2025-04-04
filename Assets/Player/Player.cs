@@ -11,10 +11,11 @@ public class Player : MonoBehaviour
     public static float PlayerAtkBoost = 1.0f;
     public static float PlayerCardSpeed = 1.0f;
     public static float PlayerBasicSpeed = 1.5f;
+    public static float PlayerBowSpeed = 1.0f;
     public static float PlayerASpd = 1.0f;
     public static float DashDistance = 2.0f;
     public static float DashCooldown = 2.0f;
-    public static List<float> DefaultStats = new List<float>{100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
+    public static List<float> PlayerDefaultStats = new List<float>{100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     public GameObject[] Weapon;
 
     float Speed;
@@ -24,19 +25,23 @@ public class Player : MonoBehaviour
     {
         if (Bow.BowHolding == true)
         {
-            PlayerBasicSpeed *= Bow.BowSpeedDecrease;
+            PlayerBowSpeed = Bow.BowSpeedDecrease;
+        }
+        else if (Bow.BowHolding)
+        {
+            PlayerBowSpeed = 1.0f;
         }
         if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
         {
             //走斜線時距離速度除以根號二
-            Speed = PlayerBasicSpeed / Mathf.Sqrt(2);
+            Speed = PlayerCardSpeed * PlayerBowSpeed * PlayerBasicSpeed / Mathf.Sqrt(2);
         }
         else
         {
-            Speed = PlayerBasicSpeed;
+            Speed = PlayerCardSpeed * PlayerBowSpeed * PlayerBasicSpeed;
         }
         //移動
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * PlayerCardSpeed * Time.deltaTime;
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * Time.deltaTime;
     }
     void Dash()
     {
