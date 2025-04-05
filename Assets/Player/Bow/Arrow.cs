@@ -19,17 +19,34 @@ public class Arrow : MonoBehaviour
                     Concat(GameObject.FindGameObjectsWithTag("Flower")).
                     Concat(GameObject.FindGameObjectsWithTag("Goblin")).ToArray();
         float[] angles = new float[monster.Length];
-        for (int i = 0; i < monster.Length; i++)
+        if (monster.Length != 0)
         {
-            angles[i] = Vector2.Angle(MousePos, monster[i].transform.position - transform.position);
+            for (int i = 0; i < monster.Length; i++)
+            {
+                angles[i] = Vector2.Angle(MousePos, monster[i].transform.position - transform.position);
+            }
+            float minAngle = angles.Min();
+            target = System.Array.IndexOf(angles, minAngle);
         }
-        float minAngle = angles.Min();
-        target = System.Array.IndexOf(angles, minAngle);
     }
 
     void Move()
     {
-        transform.position += Vector3.Normalize(monster[target].transform.position - transform.position) * Time.deltaTime * ArrowMovingSpeed;
+        if (monster.Length != 0)
+        {
+            if (monster[target] != null)
+            {
+                transform.position += Vector3.Normalize(monster[target].transform.position - transform.position) * Time.deltaTime * ArrowMovingSpeed;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Hit(Collider2D gameObject)

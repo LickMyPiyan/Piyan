@@ -369,14 +369,6 @@ MonoBehaviour:
   Weapon:
   - {fileID: 0}
   - {fileID: 0}
-  PlayerDefaultStats:
-  - 100
-  - 100
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
 --- !u!114 &381127586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,9 +652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 2
+  SlimeNum: 0
   SlimeSpawnRange: 5
-  FlowerNum: 0
+  FlowerNum: 2
   FlowerSpawnRange: 10
   GoblinNum: 0
   GoblinSpawnRange: 10
@@ -1342,7 +1334,7 @@ GameObject:
   - component: {fileID: 1283282640}
   - component: {fileID: 1283282639}
   - component: {fileID: 1283282643}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1357,7 +1349,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283282638}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

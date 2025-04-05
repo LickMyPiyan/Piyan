@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.82871264, g: 0, b: 0.8679245, a: 1}
+  m_Color: {r: 0.87058824, g: 0, b: 0.87058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,3 +179,6 @@ MonoBehaviour:
   FlowerATKCD: 1
   FlowerMovingSpeed: 1
   FlowerHealth: 100
+  FlowerMaxHealth: 100
+  FlowerSwitchMode: 0.3
+  FlowerEscapeDistance: 5

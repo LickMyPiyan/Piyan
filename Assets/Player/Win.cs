@@ -8,9 +8,12 @@ public class Win : MonoBehaviour
 
     void win()
     {
-        if (GameObject.FindGameObjectsWithTag("Flower").Length == 0 &&
-            GameObject.FindGameObjectsWithTag("Slime").Length == 0 && 
-            GameObject.FindGameObjectsWithTag("Goblin").Length == 0 &&
+        if ((GameObject.FindGameObjectsWithTag("Flower").Length == 0 ||
+            GameObject.FindGameObjectsWithTag("Flower") == null) &&
+            (GameObject.FindGameObjectsWithTag("Slime").Length == 0 ||
+            GameObject.FindGameObjectsWithTag("Slime") == null) && 
+            (GameObject.FindGameObjectsWithTag("Goblin").Length == 0 ||
+            GameObject.FindGameObjectsWithTag("Goblin") == null) &&
             ifwin == false)
         {
             Debug.Log("You Win!");
