@@ -113,7 +113,7 @@ public class UIManagerB : MonoBehaviour
         CardsDropped.Clear();
         List<int> picker = new List<int>{};
 
-        if (CardManager.AvailableCards.Count >3)
+        if (CardManager.AvailableCards.Count >= 3)
         {
             while (picker.Count < 3)
             {
@@ -124,9 +124,13 @@ public class UIManagerB : MonoBehaviour
                 }
             }
         }
-        else 
+        else
         {
-            Debug.Log("AvailableCards is null");
+            while (picker.Count < 3)
+            {
+                int value = Random.Range(0, CardManager.AvailableCards.Count);
+                picker.Add(value);
+            }
         }
 
         for (int i = 0; i < picker.Count; i++)

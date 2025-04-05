@@ -68,7 +68,7 @@ public class CardManager: MonoBehaviour
         }
     }
 
-    void AvailableCardsTweak()
+    public void AvailableCardsTweak()
     {
         AvailableCards = new List<string>{};
         AvailableCards.AddRange(SwordCards);

@@ -32,7 +32,7 @@ public class LoadScenes : MonoBehaviour
         CardManager.CardsCount.Add(1);
         CardManager.CardsCount.Add(1);
 
-        CardManager.Coin = 0;
+        CardManager.Coin = 5;
         
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
