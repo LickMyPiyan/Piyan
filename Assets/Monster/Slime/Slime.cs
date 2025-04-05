@@ -14,6 +14,7 @@ public class Slime : MonoBehaviour
     public float SlimeAttackDistance = 2.0f;
     public float SlimeBeforeAttackTime = 1.0f;
     public float SlimeAfterAttackTime = 1.0f;
+    public bool SlimePauseAttack = false;
     bool Attacking = false;
     float AttackingTimer = 0.0f;
     float Value;
@@ -61,7 +62,13 @@ public class Slime : MonoBehaviour
         //這裡是攻擊前搖
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
         yield return new WaitForSeconds(SlimeBeforeAttackTime);
-        if (Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance)
+        if (SlimePauseAttack)
+        {
+            SlimePauseAttack = false;
+            Attacking = false;
+            yield return null;
+        }
+        else if (Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance)
         {
             //攻擊前搖結束若玩家仍在範圍內則造成傷害並進入攻擊後搖
             player.GetComponent<Player>().TakePlayerDMG(SlimeATKDMG);
@@ -88,6 +95,7 @@ public class Slime : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
             transform.position += Vector3.Normalize(player.transform.position - transform.position) * SlimeMovimgSpeed * Time.deltaTime;
             Attacking = false;
+            SlimePauseAttack = false;
         }
         else if (Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance &&
                 !Attacking &&
@@ -110,5 +118,6 @@ public class Slime : MonoBehaviour
     {
         MoveAndAttack(GameObject.Find("Player"));
         Die();
+        Debug.Log(SlimePauseAttack);
     }
 }

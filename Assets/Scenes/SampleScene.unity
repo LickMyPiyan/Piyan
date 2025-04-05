@@ -652,9 +652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 0
+  SlimeNum: 1
   SlimeSpawnRange: 5
-  FlowerNum: 2
+  FlowerNum: 0
   FlowerSpawnRange: 10
   GoblinNum: 0
   GoblinSpawnRange: 10

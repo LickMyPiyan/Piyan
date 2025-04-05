@@ -4,7 +4,6 @@ public class Sword : MonoBehaviour
     public float SwordAttackCD = 0.5f;
     public float SwordDamage = 100.0f;
     float Timer = 0;
-    static public string[] MobName = { "Slime", "Flower", "Goblin" };
     void RotateToMouse()
     {
         //以螢幕中心為原點的座標系統
@@ -22,7 +21,7 @@ public class Sword : MonoBehaviour
 
     void HitMob(Collider2D gameObject)
     {
-        foreach (string name in MobName)
+        foreach (string name in Player.MonsterName)
         {
             if (gameObject != null && 
             gameObject.CompareTag(name) && 

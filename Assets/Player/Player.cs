@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public static float DashCooldown = 2.0f;
     public static List<float> PlayerDefaultStats = new List<float>{100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
     public GameObject[] Weapon;
+    static public string[] MonsterName = new string[] {"Slime", "Flower", "Goblin"};
 
     float Speed;
     float DashTimer = 0.0f;

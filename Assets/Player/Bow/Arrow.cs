@@ -8,19 +8,20 @@ public class Arrow : MonoBehaviour
     public float ArrowDestroyDistance = 10.0f;
     float ArrowATKDMG;
     int target;
-    GameObject[] monster;
+    GameObject[] monster = new GameObject[0];
     GameObject arrow;
     GameObject player;
 
     void TrackMonster()
     {
         Vector2 MousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-        monster = GameObject.FindGameObjectsWithTag("Slime").
-                    Concat(GameObject.FindGameObjectsWithTag("Flower")).
-                    Concat(GameObject.FindGameObjectsWithTag("Goblin")).ToArray();
-        float[] angles = new float[monster.Length];
+        foreach(string name in Player.MonsterName)
+        {
+            monster = monster.Concat(GameObject.FindGameObjectsWithTag(name)).ToArray();
+        }
         if (monster.Length != 0)
         {
+            float[] angles = new float[monster.Length];
             for (int i = 0; i < monster.Length; i++)
             {
                 angles[i] = Vector2.Angle(MousePos, monster[i].transform.position - transform.position);
@@ -51,7 +52,7 @@ public class Arrow : MonoBehaviour
 
     void Hit(Collider2D gameObject)
     {
-        foreach (string name in Sword.MobName.Concat(new string[] { "Wall" }))
+        foreach (string name in Player.MonsterName.Concat(new string[] { "Wall" }))
         {
             if (gameObject != null && 
             gameObject.CompareTag(name))
@@ -60,6 +61,7 @@ public class Arrow : MonoBehaviour
                 {
                     case "Slime":
                         gameObject.GetComponent<Slime>().TakeSlimeDMG(ArrowATKDMG);
+                        gameObject.GetComponent<Slime>().SlimePauseAttack = true;
                         break;
                     case "Flower":
                         gameObject.GetComponent<Flower>().TakeFlowerDMG(ArrowATKDMG);

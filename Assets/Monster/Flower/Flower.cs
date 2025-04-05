@@ -30,7 +30,7 @@ public class Flower : MonoBehaviour
     IEnumerator Attack(GameObject flowerbullets)
     {
         Instantiate(flowerbullets, transform.position, Quaternion.identity);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255, 255);
         yield return new WaitForSeconds(FlowerATKCD);
         Attacking = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(222, 0, 222, 255);
