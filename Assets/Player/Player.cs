@@ -23,11 +23,11 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        if (Bow.BowHolding == true)
+        if (Bow.BowHolding)
         {
             PlayerBowSpeed = Bow.BowSpeedDecrease;
         }
-        else if (Bow.BowHolding)
+        else if (!Bow.BowHolding)
         {
             PlayerBowSpeed = 1.0f;
         }
