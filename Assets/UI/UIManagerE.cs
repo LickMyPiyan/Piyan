@@ -9,10 +9,11 @@ public class UIManagerE : MonoBehaviour
     public GameObject CardDisplay;
     public TextMeshProUGUI CoinCount;
     public LoadScenes LoadScenes;
+    private int prise = 3;
 
     public void Sure()
     {
-        CardManager.Coin -= 3;
+        CardManager.Coin -= prise;
 
         string targetcard = CardManager.AvailableCards[Random.Range(0, CardManager.AvailableCards.Count)];
         if (CardManager.CardsOwned.Contains(targetcard))
@@ -46,7 +47,7 @@ public class UIManagerE : MonoBehaviour
     {
         CoinCount.text = $"{CardManager.Coin}";
         
-        if (CardManager.Coin < 3)
+        if (CardManager.Coin < prise)
         {
             GameObject.Find("Sure").GetComponent<Button>().interactable = false;
         }

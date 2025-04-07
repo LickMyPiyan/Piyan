@@ -10,16 +10,19 @@ public class CardManager: MonoBehaviour
     public static List<string> StackableCards = new List<string>{"Regeneration","AtkBoost","SpdBoost","ASpdBoost"};
     public static List<string> SwordCards = new List<string>{"SlowDown","Vampirism","BroadRange","AtkCountUp","Knockback"};
     public static List<string> BowCards = new List<string>{"ChargeAtkUp","ChargeUnSlow","QuickCharge","MultiFire","Punch"};
-    public static List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus","Revive"};
+    public static List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus"};
+    public static List<string> AutoCards = new List<string>{"Revive"};
     public static List<string> AvailableCards;
     public static List<string> CardsOwned;
     public static List<int> CardsCount;
+    public Cardseffect Cardseffect;
+    public static List<(string, int)> TempEffect = new List<(string, int)>();
     private List<Vector3> CardsOwnedPos;
     public static int Coin;
     public GameObject CardUI;
 
     void ShowCardUI()
-    {
+    {   
         for (int i = 0; i < CardsOwned.Count; i++)
         {
             GameObject cardPrefab = Resources.Load<GameObject>($"Cards/{CardsOwned[i]}");
@@ -71,8 +74,6 @@ public class CardManager: MonoBehaviour
     public void AvailableCardsTweak()
     {
         AvailableCards = new List<string>{};
-        AvailableCards.AddRange(SwordCards);
-        AvailableCards.AddRange(BowCards);
         for (int i = 0; i <CardsOwned.Count; i++)
         {
             if (AvailableCards.Contains(CardsOwned[i]) == true)
@@ -83,18 +84,115 @@ public class CardManager: MonoBehaviour
         AvailableCards.AddRange(StackableCards);
         AvailableCards.AddRange(UsableCards);
     }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void UseCard(string cardname)
     {
+        if (CardsCount[CardsOwned.IndexOf(cardname)] == 1)
+        {
+            switch (cardname)
+            {
+                case "HpPlus":
+                    Cardseffect.HpPlus();
+                    break;
+                default:
+                    Debug.LogError($"Card effect not implemented for: {cardname}");
+                    break;
+            }
+            CardsCount.RemoveAt(CardsOwned.IndexOf(cardname));
+            CardsOwned.Remove(cardname);
+        }
+        else
+        {
+            switch (cardname)
+            {
+                case "HpPlus":
+                    Cardseffect.HpPlus();
+                    break;
+                default:
+                    Debug.LogError($"Card effect not implemented for: {cardname}");
+                    break;
+            }
+            CardsCount[CardsOwned.IndexOf(cardname)] -= 1;
+        }
+        RefreshCardUI();
+    }
+
+    public void UseCardWithDuration(string cardname)
+    {   
+        int duration;
+
+        switch (cardname)
+        {
+            default:
+                duration = 3;
+                break;
+        }
+        
+        if (CardsCount[CardsOwned.IndexOf(cardname)] == 1)
+        {
+            TempEffect.Add((cardname, duration));
+            CardsCount.RemoveAt(CardsOwned.IndexOf(cardname));
+            CardsOwned.Remove(cardname);
+            RefreshCardUI();
+        }
+        else
+        {
+            TempEffect.Add((cardname, duration));
+            CardsCount[CardsOwned.IndexOf(cardname)] -= 1;
+            RefreshCardUI();
+        }
+    }
+
+    public int LastGameState = 0;
+    public void CheckAndRemoveTempEffects()
+    {
+        if (UIManagerM.GameState != LastGameState)
+        {
+            LastGameState = UIManagerM.GameState;
+            foreach (var (Card, last) in TempEffect)
+            {
+                if (last == 1)
+                {
+                    TempEffect.Remove((Card, last));
+                }
+                else
+                {
+                    TempEffect[TempEffect.IndexOf((Card, last))] = (Card, last - 1);
+                }
+            }
+        }
+    }
+
+    public void RefreshCardUI()
+    {
+        foreach (Transform child in CardUI.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Debug.Log("Card UI refreshed.");
         AvailableCardsTweak();
         SetCardPos();
         ShowCardUI();
     }
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Cardseffect = GameObject.Find("UIManagerM").GetComponent<Cardseffect>();
+        if (CardUI == null)
+        {
+            CardUI = GameObject.Find("CardUI");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CardsOwned.ForEach(card => Debug.Log(card));
+            CardsCount.ForEach(count => Debug.Log(count));
+            TempEffect.ForEach(effect => Debug.Log(effect));
+        }
     }
 }

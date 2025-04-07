@@ -8,6 +8,7 @@ using TMPro;
 public class UIManagerM : MonoBehaviour
 {
     public LoadScenes LoadScenes;
+    public CardManager CardManager;
     //抓場景裡的物件
     public GameObject BasicUI;
     public GameObject StartUI;
@@ -21,7 +22,7 @@ public class UIManagerM : MonoBehaviour
     public static List<GameObject> EnterButtons;
     public float transitionDuration = 0.3f;
     //遊戲進度計數(static讓它在切場景時不變)
-    public static int GameState;
+    public static int GameState = 0;
     //UI跟座標配對清單
     private List<(Vector3, GameObject)> followPairs;
     //場景名稱清單
@@ -156,10 +157,14 @@ public class UIManagerM : MonoBehaviour
         StartCoroutine(LoadScenes.LoadIn());
 
         MainCamera = Camera.main;
+        CardManager = GameObject.Find("UIManagerM").GetComponent<CardManager>();
 
         UpdateUIState();
 
         LoadCamera();
+
+        CardManager.CheckAndRemoveTempEffects();
+        CardManager.RefreshCardUI();
     }
 
     void Update()

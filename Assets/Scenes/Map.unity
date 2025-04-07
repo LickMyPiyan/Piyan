@@ -1468,7 +1468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cardseffect: {fileID: 0}
   CardUI: {fileID: 2029399152}
+  LastGameState: 0
 --- !u!1 &377512310
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
         CardManager.Coin = 0;
         CardManager.CardsOwned = new List<string>();
         CardManager.CardsCount = new List<int>();
-        CardManager.CardsOwned.Clear();
-        CardManager.CardsCount.Clear();
+        CardManager.TempEffect = new List<(string, int)>();
     }
 }
