@@ -25,7 +25,7 @@ public class MonsterGenerator : MonoBehaviour
         yield return null;
     }
 
-    void genarate()
+    void generate()
     {
         StartCoroutine(SpawnMob("Slime", SlimeNum, SlimeSpawnRange));
         StartCoroutine(SpawnMob("Flower", FlowerNum, FlowerSpawnRange));
@@ -35,7 +35,7 @@ public class MonsterGenerator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        genarate();
+        generate();
     }
 
     // Update is called once per frame

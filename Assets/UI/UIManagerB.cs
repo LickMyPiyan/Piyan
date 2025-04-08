@@ -110,32 +110,39 @@ public class UIManagerB : MonoBehaviour
 
     void DetermineDrop()
     {
-        CardsDropped.Clear();
-        List<int> picker = new List<int>{};
-
-        if (CardManager.AvailableCards.Count >= 3)
+        if (CardManager.AvailableCards != null)
         {
-            while (picker.Count < 3)
+            CardsDropped.Clear();
+            List<int> picker = new List<int>{};
+
+            if (CardManager.AvailableCards.Count >= 3)
             {
-                int value = Random.Range(0, CardManager.AvailableCards.Count);
-                if (!picker.Contains(value))
+                while (picker.Count < 3)
                 {
+                    int value = Random.Range(0, CardManager.AvailableCards.Count);
+                    if (!picker.Contains(value))
+                    {
+                        picker.Add(value);
+                    }
+                }
+            }
+            else
+            {
+                while (picker.Count < 3)
+                {
+                    int value = Random.Range(0, CardManager.AvailableCards.Count);
                     picker.Add(value);
                 }
+            }
+
+            for (int i = 0; i < picker.Count; i++)
+            {
+                CardsDropped.Add(CardManager.AvailableCards[picker[i]]);
             }
         }
         else
         {
-            while (picker.Count < 3)
-            {
-                int value = Random.Range(0, CardManager.AvailableCards.Count);
-                picker.Add(value);
-            }
-        }
-
-        for (int i = 0; i < picker.Count; i++)
-        {
-            CardsDropped.Add(CardManager.AvailableCards[picker[i]]);
+            Debug.Log("CardManager.AvailableCards == null");
         }
     }
 
