@@ -1,8 +1,8 @@
 using UnityEngine;
 public class Sword : MonoBehaviour
 {
-    public float SwordAttackCD = 0.5f;
-    public float SwordDamage = 100.0f;
+    static public float SwordAttackCD = 0.5f;
+    static public float SwordDamage = 10.0f;
     float Timer = 0;
     void RotateToMouse()
     {
@@ -32,6 +32,7 @@ public class Sword : MonoBehaviour
                 {
                     case "Slime":
                         gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage * Player.PlayerAtkBoost);
+                        gameObject.GetComponent<Slime>().SlimePauseAttack = true;
                         break;
                     case "Flower":
                         gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage * Player.PlayerAtkBoost);

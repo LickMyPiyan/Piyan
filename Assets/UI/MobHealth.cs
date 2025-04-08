@@ -30,15 +30,15 @@ public class HealthBar : MonoBehaviour
                 {
                     case "Slime":
                         CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
-                        maxHealth = target.GetComponent<Slime>().SlimeMaxHealth;
+                        maxHealth = Slime.SlimeMaxHealth;
                         break;
                     case "Flower":
                         CurrentHealth = target.GetComponent<Flower>().FlowerHealth;
-                        maxHealth = target.GetComponent<Flower>().FlowerMaxHealth;
+                        maxHealth = Flower.FlowerMaxHealth;
                         break;
                     case "Goblin":
                         CurrentHealth = target.GetComponent<Goblin>().GoblinHealth;
-                        maxHealth = target.GetComponent<Goblin>().GoblinMaxHealth;
+                        maxHealth = Goblin.GoblinMaxHealth;
                         break;
                     default:
                         Debug.LogError("Unknown mob type: " + target.name);

@@ -652,11 +652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 1
+  SlimeNum: 4
   SlimeSpawnRange: 5
-  FlowerNum: 0
+  FlowerNum: 4
   FlowerSpawnRange: 10
-  GoblinNum: 0
+  GoblinNum: 4
   GoblinSpawnRange: 10
 --- !u!1 &825139704
 GameObject:
@@ -1249,8 +1249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b74e065eb81eab469fcd1943661bc4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwordAttackCD: 0.5
-  SwordDamage: 100
 --- !u!114 &1255103033
 MonoBehaviour:
   m_ObjectHideFlags: 0

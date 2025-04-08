@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Goblin : MonoBehaviour
 {
-    public float GoblinMovimgSpeed = 1.0f;
-    public float GoblinATKDMG = 10.0f;
+    static public float GoblinMovimgSpeed = 1.0f;
+    static public float GoblinATKDMG = 10.0f;
     public float GoblinHealth = 100.0f;
-    public float GoblinMaxHealth = 100.0f;
+    static public float GoblinMaxHealth = 100.0f;
 
 
     public void TakeGoblinDMG(float damage)

@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    public float FlowerATKRange = 3.0f;
-    public float FlowerATKCD = 2.0f;
-    public float FlowerMovingSpeed = 1.0f;
+    static public float FlowerATKRange = 3.0f;
+    static public float FlowerATKCD = 2.0f;
+    static public float FlowerMovingSpeed = 1.0f;
     public float FlowerHealth = 100.0f;
-    public float FlowerMaxHealth = 100.0f;
-    public float FlowerSwitchMode = 0.3f;
-    public float FlowerEscapeDistance = 5.0f;
+    static public float FlowerMaxHealth = 100.0f;
+    static public float FlowerSwitchMode = 0.3f;
+    static public float FlowerEscapeDistance = 5.0f;
     bool Attacking = false;
     float FlowerATKTimer = 0;
     public void TakeFlowerDMG(float damage)
