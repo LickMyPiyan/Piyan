@@ -1548,21 +1548,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3381171965757729111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5793502848792361995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320ec0a31826f6e44bf8f2cc90144cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlimeNum: 3
-  SlimeSpawnRange: 5
-  MobHealth: {fileID: 9016273996583455929, guid: 5f97968af1085a54ea1767f49d969c58, type: 3}
 --- !u!1 &3454275692002910682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2193708058121587936}
-  - component: {fileID: 3381171965757729111}
+  - component: {fileID: 5793502848792361996}
   m_Layer: 0
   m_Name: SlimeGenerator
   m_TagString: Untagged
@@ -1938,6 +1923,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5793502848792361996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5793502848792361995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlimeNum: 3
+  SlimeSpawnRange: 5
+  FlowerNum: 0
+  FlowerSpawnRange: 10
+  GoblinNum: 0
+  GoblinSpawnRange: 10
 --- !u!224 &5817082547758366048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3081,7 +3084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cardseffect: {fileID: 0}
   CardUI: {fileID: 0}
   LastGameState: 0
 --- !u!114 &8560190450848598499

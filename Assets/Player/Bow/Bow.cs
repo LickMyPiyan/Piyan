@@ -1,34 +1,49 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Bow : MonoBehaviour
 {
-    static public float BowDMG = 40.0f;
-    static public float BowMaxHoldTime = 3.0f;
-    static public float BowATKDMG;
-    static public float BowSpeedDecrease = 0.3f;
-    static public bool BowHolding = false;
+    float BowAtk = 8.0f;
+    float BowAimSpd = 0.9f;
+    float minAimAtkC = 0.3f;
+    float maxAimAtkC = 3.0f;
+    float AimSlowC = 0.6f;
+    float BowAtkCD = 0.8f;
+
     float MouseTimer = 0.0f;
+    float CDTimer = 0.0f;
+
+    static public float BowAtkDmg;
 
     void Attack()
     {
         if (Input.GetMouseButtonDown(0))
         {
             MouseTimer = Time.time;
-            BowHolding = true;
+            Coefficient.SpdC -= AimSlowC;
         }
+
         if (Input.GetMouseButtonUp(0))
         {
-            if (Time.time - MouseTimer < BowMaxHoldTime)
+            if (Time.time < CDTimer + BowAtkCD * Player.PlayerASpd * Coefficient.ASpdC)
             {
-                BowATKDMG = (Time.time - MouseTimer) * BowDMG; 
+                Coefficient.SpdC += AimSlowC;
+                return;
             }
-            else if (Time.time - MouseTimer >= BowMaxHoldTime)
+            else
             {
-                BowATKDMG = BowMaxHoldTime * BowDMG;
+                MouseTimer = Mathf.Clamp(MouseTimer, CDTimer - BowAtkCD * Player.PlayerASpd * Coefficient.ASpdC, Time.time);
+
+                float AimAtkC = (Time.time - MouseTimer) * BowAimSpd * Coefficient.ChargeSpdC + minAimAtkC;
+                AimAtkC = Mathf.Clamp(AimAtkC, minAimAtkC, maxAimAtkC);
+                BowAtkDmg = AimAtkC * BowAtk * Coefficient.AtkC * Coefficient.RAtkC * Coefficient.ChargeAtkC;
+
+                Coefficient.SpdC += AimSlowC;
+                Instantiate(Resources.Load("Arrow"), transform.position, Quaternion.identity);
+                CDTimer = Time.time;
             }
-            BowHolding = false;
-            Instantiate(Resources.Load("Arrow"), transform.position, Quaternion.identity);
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

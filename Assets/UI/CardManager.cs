@@ -7,19 +7,20 @@ using TMPro;
 
 public class CardManager: MonoBehaviour
 {
+    public GameObject CardUI;
+
+    //統計持有的卡片、金幣及相關資訊
     public static List<string> StackableCards = new List<string>{"Regeneration","AtkBoost","SpdBoost","ASpdBoost"};
-    public static List<string> SwordCards = new List<string>{"SlowDown","Vampirism","BroadRange","AtkCountUp","Knockback"};
-    public static List<string> BowCards = new List<string>{"ChargeAtkUp","ChargeUnSlow","QuickCharge","MultiFire","Punch"};
     public static List<string> UsableCards = new List<string>{"HpPlus","AtkPlus","SpdPlus","ASpdPlus"};
     public static List<string> AutoCards = new List<string>{"Revive"};
     public static List<string> AvailableCards;
     public static List<string> CardsOwned;
     public static List<int> CardsCount;
-    public Cardseffect Cardseffect;
-    public static List<(string, int)> TempEffect = new List<(string, int)>();
     private List<Vector3> CardsOwnedPos;
     public static int Coin;
-    public GameObject CardUI;
+
+    //一次性卡片的效果及持續時間(回合數)
+    public static List<(string, int)> TempEffect = new List<(string, int)>();
 
     void ShowCardUI()
     {   
@@ -149,15 +150,18 @@ public class CardManager: MonoBehaviour
         if (UIManagerM.GameState != LastGameState)
         {
             LastGameState = UIManagerM.GameState;
-            foreach (var (Card, last) in TempEffect)
+            if (TempEffect != null && TempEffect.Count > 0)
             {
-                if (last == 1)
+                foreach (var (Card, last) in TempEffect)
                 {
-                    TempEffect.Remove((Card, last));
-                }
-                else
-                {
-                    TempEffect[TempEffect.IndexOf((Card, last))] = (Card, last - 1);
+                    if (last == 1)
+                    {
+                        TempEffect.Remove((Card, last));
+                    }
+                    else
+                    {
+                        TempEffect[TempEffect.IndexOf((Card, last))] = (Card, last - 1);
+                    }
                 }
             }
         }
@@ -178,7 +182,6 @@ public class CardManager: MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Cardseffect = GameObject.Find("UIManagerM").GetComponent<Cardseffect>();
         if (CardUI == null)
         {
             CardUI = GameObject.Find("CardUI");

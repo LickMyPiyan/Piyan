@@ -1,8 +1,8 @@
 using UnityEngine;
 public class Sword : MonoBehaviour
 {
-    static public float SwordAttackCD = 0.5f;
-    static public float SwordDamage = 10.0f;
+    float SwordAtk = 15.0f;
+    float SwordAtkCD = 0.5f;
     float Timer = 0;
     void RotateToMouse()
     {
@@ -21,24 +21,25 @@ public class Sword : MonoBehaviour
 
     void HitMob(Collider2D gameObject)
     {
+        float SwordAtkDmg = SwordAtk * Coefficient.AtkC * Coefficient.MAtkC;
         foreach (string name in Player.MonsterName)
         {
             if (gameObject != null && 
             gameObject.CompareTag(name) && 
             Input.GetMouseButton(0) && 
-            Time.time - Timer >= SwordAttackCD * Player.PlayerASpd)
+            Time.time - Timer >= SwordAtkCD * Player.PlayerASpd * Coefficient.ASpdC)
             {
                 switch (name)
                 {
                     case "Slime":
-                        gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordDamage * Player.PlayerAtkBoost);
+                        gameObject.GetComponent<Slime>().TakeSlimeDMG(SwordAtkDmg);
                         gameObject.GetComponent<Slime>().SlimePauseAttack = true;
                         break;
                     case "Flower":
-                        gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordDamage * Player.PlayerAtkBoost);
+                        gameObject.GetComponent<Flower>().TakeFlowerDMG(SwordAtkDmg);
                         break;
                     case "Goblin":
-                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(SwordDamage * Player.PlayerAtkBoost);
+                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(SwordAtkDmg);
                         break;
                 }
                 Timer = Time.time;

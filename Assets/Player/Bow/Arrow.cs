@@ -4,9 +4,8 @@ using Unity.VisualScripting;
 
 public class Arrow : MonoBehaviour
 {
-    public float ArrowMovingSpeed = 5.0f;
-    public float ArrowDestroyDistance = 10.0f;
-    float ArrowATKDMG;
+    float ArrowMoveSpd = 5.0f;
+    float ArrowDestroyD = 10.0f;
     int target;
     GameObject[] monster = new GameObject[0];
     GameObject arrow;
@@ -37,7 +36,7 @@ public class Arrow : MonoBehaviour
         {
             if (monster[target] != null)
             {
-                transform.position += Vector3.Normalize(monster[target].transform.position - transform.position) * Time.deltaTime * ArrowMovingSpeed;
+                transform.position += Vector3.Normalize(monster[target].transform.position - transform.position) * Time.deltaTime * ArrowMoveSpd;
             }
             else
             {
@@ -60,14 +59,14 @@ public class Arrow : MonoBehaviour
                 switch (name)
                 {
                     case "Slime":
-                        gameObject.GetComponent<Slime>().TakeSlimeDMG(ArrowATKDMG);
+                        gameObject.GetComponent<Slime>().TakeSlimeDMG(Bow.BowAtkDmg);
                         gameObject.GetComponent<Slime>().SlimePauseAttack = true;
                         break;
                     case "Flower":
-                        gameObject.GetComponent<Flower>().TakeFlowerDMG(ArrowATKDMG);
+                        gameObject.GetComponent<Flower>().TakeFlowerDMG(Bow.BowAtkDmg);
                         break;
                     case "Goblin":
-                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(ArrowATKDMG);
+                        gameObject.GetComponent<Goblin>().TakeGoblinDMG(Bow.BowAtkDmg);
                         break;
                     case "Wall":
                         break;
@@ -79,7 +78,7 @@ public class Arrow : MonoBehaviour
     void Destroy()
     {
         //當箭矢與怪物的距離大於銷毀距離時，銷毀箭矢
-        if (Vector3.Distance(player.transform.position, transform.position) > ArrowDestroyDistance)
+        if (Vector3.Distance(player.transform.position, transform.position) > ArrowDestroyD)
         {
             Destroy(arrow);
         }
@@ -87,10 +86,9 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
-        ArrowATKDMG = Bow.BowATKDMG;
+        player = GameObject.Find("Player");
         arrow = gameObject;
         TrackMonster();
-        player = GameObject.Find("Player");
     }
 
     void Update()

@@ -41,7 +41,7 @@ public class HealthBar : MonoBehaviour
                         maxHealth = Goblin.GoblinMaxHealth;
                         break;
                     default:
-                        Debug.LogError("Unknown mob type: " + target.name);
+                        Debug.LogError("Unknown mob type: " + targetName);
                         break;
                 }
             healthBar.fillAmount = (float)CurrentHealth / maxHealth;

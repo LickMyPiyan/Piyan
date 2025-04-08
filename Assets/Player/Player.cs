@@ -8,14 +8,11 @@ public class Player : MonoBehaviour
 {
     public static float PlayerMaxHealth = 100.0f;
     public static float PlayerHealth = 100.0f;
-    public static float PlayerAtkBoost = 1.0f;
-    public static float PlayerCardSpeed = 1.0f;
-    public static float PlayerBasicSpeed = 1.5f;
-    public static float PlayerBowSpeed = 1.0f;
+    public static float PlayerSpd = 1.5f;
     public static float PlayerASpd = 1.0f;
-    public static float DashDistance = 2.0f;
-    public static float DashCooldown = 2.0f;
-    public static List<float> PlayerDefaultStats = new List<float>{100.0f, 1.0f, 1.0f, 1.0f, 2.0f, 2.0f};
+    public static float DashD = 2.0f;
+    public static float DashCD = 2.0f;
+
     public GameObject[] Weapon;
     static public string[] MonsterName = new string[] {"Slime", "Flower", "Goblin"};
 
@@ -24,22 +21,14 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        if (Bow.BowHolding)
-        {
-            PlayerBowSpeed = Bow.BowSpeedDecrease;
-        }
-        else if (!Bow.BowHolding)
-        {
-            PlayerBowSpeed = 1.0f;
-        }
         if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
         {
             //走斜線時距離速度除以根號二
-            Speed = PlayerCardSpeed * PlayerBowSpeed * PlayerBasicSpeed / Mathf.Sqrt(2);
+            Speed = PlayerSpd * Coefficient.SpdC / Mathf.Sqrt(2);
         }
         else
         {
-            Speed = PlayerCardSpeed * PlayerBowSpeed * PlayerBasicSpeed;
+            Speed = PlayerSpd * Coefficient.SpdC;
         }
         //移動
         transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Speed * Time.deltaTime;
@@ -49,11 +38,11 @@ public class Player : MonoBehaviour
         //以螢幕中心為原點的座標系統
         Vector3 MousePos = new Vector3(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2, 0);
         //終點座標
-        Vector3 Posf = Vector3.Normalize(MousePos) * DashDistance;
+        Vector3 Posf = Vector3.Normalize(MousePos) * DashD * Coefficient.DashDC;
         //射線檢測
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Posf);
         //撞牆的情況     
-        if (Input.GetKeyDown(KeyCode.Space) && hit.collider != null && Vector2.Distance(transform.position, hit.point) < DashDistance && Time.time - DashTimer > DashCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && hit.collider != null && Vector2.Distance(transform.position, hit.point) < DashD * Coefficient.DashDC && Time.time - DashTimer > DashCD * Coefficient.DashCDC)
         {
             //傳送到撞牆的位置
             transform.position = new Vector3(hit.point.x, hit.point.y, 0);
@@ -61,7 +50,7 @@ public class Player : MonoBehaviour
             DashTimer = Time.time;
         }
         //沒撞牆的情況
-        else if(Input.GetKeyDown(KeyCode.Space) && Time.time - DashTimer > DashCooldown)
+        else if(Input.GetKeyDown(KeyCode.Space) && Time.time - DashTimer > DashCD * Coefficient.DashCDC)
         {
             //傳送到滑鼠位置
             transform.position += Posf;
@@ -135,6 +124,5 @@ public class Player : MonoBehaviour
         Move();
         Dash();
         SwitchWeapon();
-        Debug.Log(PlayerHealth);
     }
 }

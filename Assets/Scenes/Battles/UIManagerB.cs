@@ -189,10 +189,29 @@ public class UIManagerB : MonoBehaviour
     void Start()
     {
         connect();
-        DetermineDrop();
         PauseUI.SetActive(false);
         WinUI.SetActive(false);
         DropUI.SetActive(false);
+
+        if (CardManager.CardsOwned != null)
+        {
+            for (int i = 0; i < CardManager.CardsOwned.Count; i++)
+            {
+                switch (CardManager.CardsOwned[i])
+                {
+                    case "Regeneration":
+                        Cardseffect.Regeneration(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            //Cardseffect.AtkCTweak();
+            //Cardseffect.SpdCTweak();
+            //Cardseffect.ASpdCTweak();
+            DetermineDrop();
+        }
     }
 
     // Update is called once per frame
