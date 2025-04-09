@@ -17,7 +17,6 @@ public static class Coefficient
 
     public static void Reset()
     {
-        MaxHealthC = 1.0f;
         AtkC = 1.0f;
         MAtkC = 1.0f;
         RAtkC = 1.0f;

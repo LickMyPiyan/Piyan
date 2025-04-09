@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -20,17 +21,25 @@ public class LoadScenes : MonoBehaviour
 
     public void MapPressed()
     {
-        int startcard1 = Random.Range(0, CardManager.StackableCards.Count);
-        int startcard2 = Random.Range(0, CardManager.UsableCards.Count);
-
+        //清空上一局的數值
+        Player.PlayerHealth = Player.PlayerMaxHealth;
+        UIManagerM.GameState = 0;
+        CardManager.Coin = 5;
+        CardManager.CardsOwned = new List<string>();
+        CardManager.CardsCount = new List<int>();
+        CardManager.TempEffect = new List<(string, int)>();
+        Coefficient.MaxHealthC = 1.0f;
+        Coefficient.Reset();
+        
+        //給開局卡片
+        int startcard1 = UnityEngine.Random.Range(0, CardManager.StackableCards.Count);
+        int startcard2 = UnityEngine.Random.Range(0, CardManager.UsableCards.Count);
         CardManager.CardsOwned.Add(CardManager.StackableCards[startcard1]);
         CardManager.CardsCount.Add(1);
-        
         CardManager.CardsOwned.Add(CardManager.UsableCards[startcard2]);
         CardManager.CardsCount.Add(1);
 
-        CardManager.Coin = 5;
-        
+        MainManager.GameStartTime = DateTime.Now;
         StartCoroutine(LoadOutAndSwitchScene("Map"));
     }
 

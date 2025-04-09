@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -101,11 +102,14 @@ public class UIManagerB : MonoBehaviour
     void win()
     {
         PauseUI.SetActive(false);
-        WinUI.SetActive(true);
         Loading.SetActive(true);
         Loading.GetComponent<Image>().fillAmount = 0;
         Loading.transform.SetParent(GameObject.Find("MobHealthBars").transform);
         player.enabled = false;
+        WinUI.SetActive(true);
+        
+        Coefficient.Reset();
+        DetermineDrop();
     }
 
     void DetermineDrop()
@@ -119,7 +123,7 @@ public class UIManagerB : MonoBehaviour
             {
                 while (picker.Count < 3)
                 {
-                    int value = Random.Range(0, CardManager.AvailableCards.Count);
+                    int value = UnityEngine.Random.Range(0, CardManager.AvailableCards.Count);
                     if (!picker.Contains(value))
                     {
                         picker.Add(value);
@@ -130,7 +134,7 @@ public class UIManagerB : MonoBehaviour
             {
                 while (picker.Count < 3)
                 {
-                    int value = Random.Range(0, CardManager.AvailableCards.Count);
+                    int value = UnityEngine.Random.Range(0, CardManager.AvailableCards.Count);
                     picker.Add(value);
                 }
             }
@@ -148,6 +152,13 @@ public class UIManagerB : MonoBehaviour
 
     public void Next()
     {
+        if (UIManagerM.GameState == 9)
+        {
+            MainManager.Ending = MainManager.Destination;
+            loadScenes.LoadOutAndSwitchScene("Result");
+            return;
+        }
+        
         for (int i = 0; i < CardsDropped.Count; i++)
         {
             GameObject Card = Instantiate(Resources.Load<GameObject>($"Cards/{CardsDropped[i]}"), Vector3.zero, Quaternion.identity);
@@ -185,6 +196,55 @@ public class UIManagerB : MonoBehaviour
         }
     }
 
+    private void ApplyCardEffects(Dictionary<string, Action> effectMap)
+    {
+        for (int i = 0; i < CardManager.CardsOwned.Count; i++)
+        {
+            if (effectMap.TryGetValue(CardManager.CardsOwned[i], out var effect))
+            {
+                effect();
+            }
+        }
+    }
+
+    private void ApplyTempEffects(Dictionary<string, Action> effectMap)
+    {
+        for (int i = 0; i < CardManager.TempEffect.Count; i++)
+        {
+            if (effectMap.TryGetValue(CardManager.TempEffect[i].Item1 , out var effect))
+            {
+                effect();
+            }
+        }
+    }
+
+    void CoefficientTweak()
+    {
+        if (CardManager.CardsOwned != null)
+        {
+            var CardsEffectDict = new Dictionary<string, Action>
+            {
+                {"Regeneration", Cardseffect.Regeneration},
+                {"AtkBoost", Cardseffect.AtkBoost},
+                {"SpdBoost", Cardseffect.SpdBoost},
+                {"ASpdBoost", Cardseffect.ASpdBoost}
+            };
+
+            ApplyCardEffects(CardsEffectDict);
+        }
+        if (CardManager.TempEffect != null)
+        {
+            var TempEffectDict = new Dictionary<string, Action>
+            {
+                {"AtkPlus", Cardseffect.AtkPlus},
+                {"SpdPlus", Cardseffect.SpdPlus},
+                {"ASpdPlus", Cardseffect.ASpdPlus}
+            };
+
+            ApplyTempEffects(TempEffectDict);
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -193,25 +253,7 @@ public class UIManagerB : MonoBehaviour
         WinUI.SetActive(false);
         DropUI.SetActive(false);
 
-        if (CardManager.CardsOwned != null)
-        {
-            for (int i = 0; i < CardManager.CardsOwned.Count; i++)
-            {
-                switch (CardManager.CardsOwned[i])
-                {
-                    case "Regeneration":
-                        Cardseffect.Regeneration(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")]);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            
-            //Cardseffect.AtkCTweak();
-            //Cardseffect.SpdCTweak();
-            //Cardseffect.ASpdCTweak();
-            DetermineDrop();
-        }
+        CoefficientTweak();
     }
 
     // Update is called once per frame

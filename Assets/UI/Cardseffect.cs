@@ -5,16 +5,31 @@ using UnityEngine;
 
 public class Cardseffect: MonoBehaviour
 {   
-    public static void Regeneration(int n)
+    public static void Regeneration()
     {
-        if (Player.PlayerHealth < Player.PlayerMaxHealth - 10*n)
+        if (Player.PlayerHealth < Player.PlayerMaxHealth - 10 * CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")])
         {
-            Player.PlayerHealth += 10*n;
+            Player.PlayerHealth += 10 * CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")];
         }
         else
         {
             Player.PlayerHealth = Player.PlayerMaxHealth;
         }
+    }
+
+    public static void AtkBoost()
+    {
+        Coefficient.AtkC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("AtkBoost")]);
+    }
+
+    public static void SpdBoost()
+    {
+        Coefficient.SpdC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("SpdBoost")]);
+    }
+
+    public static void ASpdBoost()
+    {
+        Coefficient.ASpdC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("ASpdBoost")]);
     }
 
     public static void HpPlus()
@@ -29,18 +44,18 @@ public class Cardseffect: MonoBehaviour
         }
     }
 
-    public static void AtkCTweak()
+    public static void AtkPlus()
     {
-        Coefficient.AtkC = 1 + 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("AtkBoost")]) + 0.5f*(CardManager.TempEffect.Count(x => x.Item1 == "AtkPlus"));
+        Coefficient.AtkC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "AtkPlus");
     }
 
-    public static void SpdCTweak()
+    public static void SpdPlus()
     {
-        Coefficient.SpdC = 1 + 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("SpdBoost")]) + 0.5f*(CardManager.TempEffect.Count(x => x.Item1 == "SpdPlus"));
+        Coefficient.SpdC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "SpdPlus");
     }
 
-    public static void ASpdCTweak()
+    public static void ASpdPlus()
     {
-        Coefficient.ASpdC = Mathf.Pow(0.5f,(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("ASpdBoost")])) * Mathf.Pow(0.3f, CardManager.TempEffect.Count(x => x.Item1 == "ASpdPlus"));
+        Coefficient.ASpdC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "ASpdPlus");
     }
 }
