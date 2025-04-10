@@ -170,15 +170,18 @@ public class CardManager: MonoBehaviour
             if (TempEffect != null && TempEffect.Count > 0)
             {
                 //更新剩餘持續回合數及移除時效
-                foreach (var (Card, last) in TempEffect)
+                //用foreach會炸掉 因為List在迴圈進行中被修改
+                //所以要用for由後往前刪除
+                for (int i = TempEffect.Count - 1; i >= 0; i--)
                 {
+                    var (Card, last) = TempEffect[i];
                     if (last == 1)
                     {
-                        TempEffect.Remove((Card, last));
+                        TempEffect.RemoveAt(i);
                     }
                     else
                     {
-                        TempEffect[TempEffect.IndexOf((Card, last))] = (Card, last - 1);
+                        TempEffect[i] = (Card, last - 1);
                     }
                 }
             }
@@ -191,7 +194,10 @@ public class CardManager: MonoBehaviour
         //刪除舊的卡片UI&&重新生成
         foreach (Transform child in CardUI.transform)
         {
-            Destroy(child.gameObject);
+            if (child.name != "CardUIBoard" && child.name != "Button")
+            {
+                Destroy(child.gameObject);
+            }
         }
         AvailableCardsTweak();
         SetCardPos();

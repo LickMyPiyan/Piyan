@@ -17,13 +17,12 @@ public class UIManagerB : MonoBehaviour
     public GameObject WinUI;
     public GameObject DropUI;
     public List<string> CardsDropped;
+    bool check = true;
 
     private void connect()
     {
         Bar2 = FindAndAssign<Image>("Bar2");
         Loading = FindAndAssign("Loading");
-        loadScenes = FindAndAssign<LoadScenes>("UIManagerB");
-        cardManager = FindAndAssign<CardManager>("UIManagerB");
         player = FindAndAssign<Player>("Player");
         PauseUI = FindAndAssign("PauseUI");
         WinUI = FindAndAssign("WinUI");
@@ -154,7 +153,8 @@ public class UIManagerB : MonoBehaviour
     {
         if (UIManagerM.GameState == 9)
         {
-            loadScenes.LoadOutAndSwitchScene("Result");
+            MainManager.Ending = MainManager.Destination;
+            StartCoroutine(loadScenes.LoadOutAndSwitchScene("Result"));
             return;
         }
         
@@ -179,7 +179,6 @@ public class UIManagerB : MonoBehaviour
 
     void ShowUI()
     {
-        bool check = true;
         if (Win.ifwin == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && PauseUI.activeSelf)
@@ -191,7 +190,7 @@ public class UIManagerB : MonoBehaviour
                 Paused();
             }
         }
-        else if (DropUI.activeSelf && check)
+        else if (!DropUI.activeSelf && check)
         {
             check = false;
             win();
@@ -256,7 +255,6 @@ public class UIManagerB : MonoBehaviour
         DropUI.SetActive(false);
 
         CoefficientTweak();
-        StartCoroutine(loadScenes.LoadIn());
     }
 
     // Update is called once per frame
@@ -264,5 +262,10 @@ public class UIManagerB : MonoBehaviour
     {
         HealthFill();
         ShowUI();
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            loadScenes.Out();
+        }
     }
 }

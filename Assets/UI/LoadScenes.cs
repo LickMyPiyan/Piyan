@@ -22,6 +22,8 @@ public class LoadScenes : MonoBehaviour
     public void MapPressed()
     {
         //清空上一局的數值
+        MainManager.Ending = 0;
+        MainManager.Destination = 1;
         Player.PlayerHealth = Player.PlayerMaxHealth;
         UIManagerM.GameState = 0;
         CardManager.Coin = 5;
@@ -94,7 +96,8 @@ public class LoadScenes : MonoBehaviour
     void Start()
     {
         Loading = GameObject.Find("Loading");
-        LoadingScreen = GameObject.Find("Loading").GetComponent<Image>();
+        LoadingScreen = Loading.GetComponent<Image>();
+        StartCoroutine(LoadIn());
     }
 
     // Update is called once per frame

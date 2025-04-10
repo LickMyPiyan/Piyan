@@ -423,7 +423,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6725520631442643405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 571397883236655791}
+        m_TargetAssemblyTypeName: UIManagerB, Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3548400019224523166
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +812,10 @@ GameObject:
   - component: {fileID: 3258659815373709374}
   - component: {fileID: 5394823237684819385}
   - component: {fileID: 3588204852913416730}
+  - component: {fileID: 3520710719826678531}
+  - component: {fileID: 571397883236655791}
+  - component: {fileID: 5260668170200009835}
+  - component: {fileID: 8836993971593534515}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -895,6 +911,68 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3520710719826678531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092853595792148232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loading: {fileID: 0}
+  LoadingScreen: {fileID: 0}
+  transitionDuration: 0.3
+--- !u!114 &571397883236655791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092853595792148232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92144cef85437004da1e67a59556f4c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bar2: {fileID: 0}
+  Loading: {fileID: 0}
+  loadScenes: {fileID: 3520710719826678531}
+  cardManager: {fileID: 5260668170200009835}
+  player: {fileID: 0}
+  PauseUI: {fileID: 0}
+  WinUI: {fileID: 0}
+  DropUI: {fileID: 0}
+  CardsDropped: []
+--- !u!114 &5260668170200009835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092853595792148232}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardUI: {fileID: 0}
+  LastGameState: 0
+--- !u!114 &8836993971593534515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092853595792148232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f968142e166f3774b9ef92763a54cadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4293487289888792741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3930165443077421218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 571397883236655791}
+        m_TargetAssemblyTypeName: UIManagerB, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4543146242467029584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1441,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 571397883236655791}
         m_TargetAssemblyTypeName: UIManagerB, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1

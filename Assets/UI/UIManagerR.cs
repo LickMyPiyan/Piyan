@@ -12,6 +12,7 @@ public class UIManagerR : MonoBehaviour
     public TextMeshProUGUI TimeText;
     public TextMeshProUGUI CalcText;
     public TextMeshProUGUI ExpText;
+    public TimeSpan timeSpan;
     string CalcRecorder;
 
     //檢查達到的結局
@@ -38,7 +39,7 @@ public class UIManagerR : MonoBehaviour
     {
         //計算遊戲完成時間
         MainManager.GameEndTime = DateTime.Now;
-        TimeSpan timeSpan = MainManager.GameEndTime - MainManager.GameStartTime;
+        timeSpan = MainManager.GameEndTime - MainManager.GameStartTime;
         //10分鐘內完成給更多經驗值
         if (timeSpan < ExpBonusTime)
         {
@@ -57,8 +58,8 @@ public class UIManagerR : MonoBehaviour
     //更新結算畫面文字
     void TextUpdate()
     {
-        TimeText.text = "Game Set At:"+(MainManager.GameEndTime.ToString())+"/n"+"Used Time:"+(MainManager.GameEndTime - MainManager.GameStartTime).ToString(@"hh\:mm\:ss");
-        CalcText.text = "Completion:"+CalcRecorder+"/n"+"Owned Cards:"+$"{CardManager.CardsOwned.Count}"+"/n"+"Coins:"+$"{CardManager.Coin}";
+        TimeText.text = "Game Set At:"+DateTime.Now.ToString("MM/dd HH:mm:ss")+"\nUsed Time:"+(MainManager.GameEndTime - MainManager.GameStartTime).ToString(@"hh\:mm\:ss");
+        CalcText.text = $"Completion:{CalcRecorder}\nOwned Cards Count:{CardManager.CardsOwned.Count} * 3\nLeft Coins:{CardManager.Coin} * 1";
         ExpText.text = "Exp: +"+$"{Exp}";
     }
 

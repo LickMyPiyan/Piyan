@@ -241,6 +241,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4757849152336665165, guid: 3065b62d391f9d94682bfd4eb17348fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1692624713}
+    - target: {fileID: 4757849152336665165, guid: 3065b62d391f9d94682bfd4eb17348fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Out
+      objectReference: {fileID: 0}
     - target: {fileID: 5364860779488167573, guid: 3065b62d391f9d94682bfd4eb17348fb, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -325,6 +333,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8936285347148112049, guid: 3065b62d391f9d94682bfd4eb17348fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1692624712}
+    - target: {fileID: 8936285347148112049, guid: 3065b62d391f9d94682bfd4eb17348fb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sure
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -387,6 +403,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03924766be891d343b3519c62c15418f, type: 3}
+--- !u!114 &1692624712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6422640737045517339, guid: 03924766be891d343b3519c62c15418f, type: 3}
+  m_PrefabInstance: {fileID: 1692624711}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ae9bbc7a3ef564292b2a0f795b4f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1692624713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4472521237786876732, guid: 03924766be891d343b3519c62c15418f, type: 3}
+  m_PrefabInstance: {fileID: 1692624711}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

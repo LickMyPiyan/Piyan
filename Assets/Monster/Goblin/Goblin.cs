@@ -38,7 +38,7 @@ public class Goblin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(GameObject.Find("Player"));
         Die();
+        Move(GameObject.Find("Player"));
     }
 }

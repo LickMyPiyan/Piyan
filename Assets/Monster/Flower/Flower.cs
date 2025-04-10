@@ -85,7 +85,7 @@ public class Flower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FlowerAttackAndMove(Resources.Load("FlowerBullet") as GameObject, GameObject.Find("Player").transform);
         Die();
+        FlowerAttackAndMove(Resources.Load("FlowerBullet") as GameObject, GameObject.Find("Player").transform);
     }
 }

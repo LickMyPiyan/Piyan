@@ -131,6 +131,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1791799018644709982, guid: 92b2985018b3b2646aad337acd252f49, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1858450472}
+    - target: {fileID: 1791799018644709982, guid: 92b2985018b3b2646aad337acd252f49, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Out
+      objectReference: {fileID: 0}
     - target: {fileID: 6809553387654971775, guid: 92b2985018b3b2646aad337acd252f49, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -387,6 +395,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7d3ece7f68388840a83ab01f2345d61, type: 3}
+--- !u!114 &1858450472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4081699881468988174, guid: b7d3ece7f68388840a83ab01f2345d61, type: 3}
+  m_PrefabInstance: {fileID: 1858450471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -12,10 +12,11 @@ public class MainManager : MonoBehaviour
     public static DateTime GameStartTime;
     public static DateTime GameEndTime;
     public static int Ending = 0;
+    public static int Destination = 1;
 
     public static int PlayerLv = 0;
     public static float PlayerExp = 0.0f;
-    private float LvUpExp = 200.0f;
+    private float LvUpExp = 100.0f;
 
     public Image ExpBar;
     public TextMeshProUGUI PlayerLvText;
@@ -39,7 +40,6 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadScenes.LoadIn());
         levelup();
         ShowPlayerLv();
     }

@@ -133,7 +133,7 @@ public class Slime : MonoBehaviour
     }
     void Update()
     {
-        MoveAndAttack(GameObject.Find("Player"));
         Die();
+        MoveAndAttack(GameObject.Find("Player"));
     }
 }
