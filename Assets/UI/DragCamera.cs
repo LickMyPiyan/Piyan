@@ -17,6 +17,7 @@ public class DragCamera : MonoBehaviour
     //滑鼠拉相機
     void CameraMove()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             MousePosI = MainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -28,6 +29,7 @@ public class DragCamera : MonoBehaviour
             MainCamera.transform.position += MousePosI - MousePosF;
         }
 
+        //限制相機移動範圍
         MainCamera.transform.position = new Vector3
             (
                 Mathf.Clamp(MainCamera.transform.position.x, minCameraPosition.x, maxCameraPosition.x),
@@ -39,6 +41,7 @@ public class DragCamera : MonoBehaviour
 
     void CameraZoom()
     {
+        //滑鼠滾輪縮放相機
         if (Input.mouseScrollDelta.y > 0)
         {
             MainCamera.orthographicSize -= 1;
@@ -47,6 +50,7 @@ public class DragCamera : MonoBehaviour
         {
             MainCamera.orthographicSize += 1;
         }
+        //限制相機縮放範圍&&平衡相機縮放用的調整
         MainCamera.orthographicSize = Mathf.Clamp(MainCamera.orthographicSize, 4, 8);
         float MoveRange = (8-MainCamera.orthographicSize)/3;
         minCameraPosition = new Vector3(5-5*MoveRange, 3-3*MoveRange, -10);
@@ -54,6 +58,7 @@ public class DragCamera : MonoBehaviour
         ScaleButtons();
     }
 
+    //調關卡按鍵大小(讓它雖然是UI 但看起來像地圖物件)
     void ScaleButtons()
     {
         float scaleFactor = 10 / MainCamera.orthographicSize;

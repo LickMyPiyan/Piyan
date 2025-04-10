@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Cardseffect: MonoBehaviour
 {   
+    //所有卡片的效果
     public static void Regeneration()
     {
         if (Player.PlayerHealth < Player.PlayerMaxHealth - 10 * CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")])

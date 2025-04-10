@@ -5,7 +5,7 @@ using UnityEngine;
 public class Slime : MonoBehaviour
 {
     static public float SlimeATKDMG = 10.0f;
-    static public float SlimeMovimgSpeed = 1.0f;
+    static public float SlimeMovingSpeed = 1.0f;
     public float SlimeHealth = SlimeMaxHealth;
     static public float SlimeMaxHealth = 100.0f;
     static public float SlimeAttackCooldown = 1.0f;
@@ -48,12 +48,8 @@ public class Slime : MonoBehaviour
     void Die()
     {
         //血量歸零時死亡
-        if(SlimeHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
         //玩家死掉時跟著死掉，讓遊戲清空
-        if (GameObject.Find("Player") == null)
+        if(SlimeHealth <= 0 || GameObject.Find("Player") == null)
         {
             Destroy(gameObject);
         }
@@ -114,7 +110,7 @@ public class Slime : MonoBehaviour
         {
             //當玩家位於攻擊範圍外則追蹤玩家
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
-            transform.position += Vector3.Normalize(player.transform.position - transform.position) * SlimeMovimgSpeed * Time.deltaTime;
+            transform.position += Vector3.Normalize(player.transform.position - transform.position) * SlimeMovingSpeed * Time.deltaTime;
             Attacking = false;
             SlimePauseAttack = false;
         }

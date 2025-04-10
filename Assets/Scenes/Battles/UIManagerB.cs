@@ -154,7 +154,6 @@ public class UIManagerB : MonoBehaviour
     {
         if (UIManagerM.GameState == 9)
         {
-            MainManager.Ending = MainManager.Destination;
             loadScenes.LoadOutAndSwitchScene("Result");
             return;
         }
@@ -173,12 +172,14 @@ public class UIManagerB : MonoBehaviour
             claim.transform.SetParent(DropUI.transform);
             Card.transform.SetParent(DropUI.transform);
         }
+
         DropUI.SetActive(true);
         WinUI.SetActive(false);
     }
 
     void ShowUI()
     {
+        bool check = true;
         if (Win.ifwin == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape) && PauseUI.activeSelf)
@@ -190,8 +191,9 @@ public class UIManagerB : MonoBehaviour
                 Paused();
             }
         }
-        else if (!DropUI.activeSelf)
+        else if (DropUI.activeSelf && check)
         {
+            check = false;
             win();
         }
     }
@@ -254,6 +256,7 @@ public class UIManagerB : MonoBehaviour
         DropUI.SetActive(false);
 
         CoefficientTweak();
+        StartCoroutine(loadScenes.LoadIn());
     }
 
     // Update is called once per frame

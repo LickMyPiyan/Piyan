@@ -58,21 +58,11 @@ public class UIManagerM : MonoBehaviour
     //開關進節點UI
     public void ButtonPressed()
     {
-        if (GameState < (PickedScenes.Count - 1))
-        {
-            SaveCamera();
-            StartUI.SetActive(true);
-            StageName.text = PickedScenes[GameState];
-            MainCamera.GetComponent<DragCamera>().enabled = false;
-            BasicUI.SetActive(false);
-        }
-        else
-        {
-            SaveCamera();
-            MainCamera.GetComponent<DragCamera>().enabled = false;
-            BasicUI.SetActive(false);
-            StartPressed();
-        }
+        SaveCamera();
+        StartUI.SetActive(true);
+        StageName.text = PickedScenes[GameState];
+        MainCamera.GetComponent<DragCamera>().enabled = false;
+        BasicUI.SetActive(false);
     }
 
     public void CardPressed()
@@ -149,7 +139,8 @@ public class UIManagerM : MonoBehaviour
         PickedScenes.AddRange(new List<string> { BattleScenes[0], EventScenes[PickEP], ShopScenes[0], 
                                                 BattleScenes[PickBF], EventScenes[2], ShopScenes[1],
                                                 BattleScenes[3], EventScenes[3], ShopScenes[2],
-                                                BattleScenes[4], EventScenes[4], ShopScenes[3], BattleScenes[5] });
+                                                //BattleScenes[4], EventScenes[4], ShopScenes[3], 
+                                                BattleScenes[5] });
 
         StartUI.SetActive(false);
         CardUI.SetActive(false);

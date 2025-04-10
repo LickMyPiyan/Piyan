@@ -1425,6 +1425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadScenes: {fileID: 375375655}
+  CardManager: {fileID: 375375656}
   BasicUI: {fileID: 1113675001}
   StartUI: {fileID: 177308810}
   CardUI: {fileID: 2029399152}
@@ -1448,7 +1449,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375375651}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
   m_Name: 
@@ -1468,7 +1469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cardseffect: {fileID: 0}
   CardUI: {fileID: 2029399152}
   LastGameState: 0
 --- !u!1 &377512310

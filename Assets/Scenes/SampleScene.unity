@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94122bfa87f8c74b9933ea7f89b50b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cardseffect: {fileID: 0}
   CardUI: {fileID: 0}
   LastGameState: 0
 --- !u!114 &32400677
@@ -201,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8772a5f3c3b7bc64a8a9f69e229de85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loading: {fileID: 0}
-  LoadingScreen: {fileID: 0}
+  Loading: {fileID: 8333638411404024044}
+  LoadingScreen: {fileID: 1337393355793227761}
   transitionDuration: 0.3
 --- !u!1 &92013665
 GameObject:
@@ -661,11 +660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4e2dfb062834742a36562dc76b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlimeNum: 4
+  SlimeNum: 1
   SlimeSpawnRange: 5
-  FlowerNum: 4
+  FlowerNum: 1
   FlowerSpawnRange: 10
-  GoblinNum: 4
+  GoblinNum: 1
   GoblinSpawnRange: 10
 --- !u!1 &1030182054
 GameObject:
