@@ -27,7 +27,7 @@ public class UIManagerM : MonoBehaviour
     private List<(Vector3, GameObject)> followPairs;
     //場景名稱清單
     private List<string> BattleScenes = new List<string> { "BattleP01", "BattleF01", "BattleF02", "BattleS01", "BattleT01", "BossBattle01" };
-    private List<string> EventScenes = new List<string> { "EventP01", "EventP02", "EventF01", "Events01", "EventT01" };
+    private List<string> EventScenes = new List<string> { "EventP01", "EventP02", "EventF01", "EventS01", "EventT01" };
     private List<string> ShopScenes = new List<string> { "ShopP01", "ShopF01", "ShopS01", "ShopT01" };
     //選擇場景清單
     private List<string> PickedScenes;
@@ -116,7 +116,7 @@ public class UIManagerM : MonoBehaviour
                                             EnterB03, EnterE03, EnterS03,
                                             EnterBB};
 
-        //宣告UI跟物件配對
+        //按鈕和對應位置的配對
         followPairs = new List<(Vector3, GameObject)>
         {
             (new Vector3(-6,1,0), EnterB01),
