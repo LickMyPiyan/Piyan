@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ public class Slime : MonoBehaviour
     static public float SlimeMovimgSpeed = 1.0f;
     public float SlimeHealth = SlimeMaxHealth;
     static public float SlimeMaxHealth = 100.0f;
-    static public float SlimeAttackCooldown = 1.0f;
     static public float SlimeDodgeChance = 0.5f;
     static public float SlimeDodgeHealth = 0.5f;
     static public float SlimeTrackDistance = 2.0f;
@@ -61,10 +61,11 @@ public class Slime : MonoBehaviour
 
     IEnumerator BeforeAttack(GameObject player)
     {
+        //前搖結束前若玩家離開攻擊範圍或史萊姆被玩家攻擊則取消本次攻擊
         while (Time.time - AttackingTimer < SlimeBeforeAttackTime)
         {
             if (SlimePauseAttack ||
-                Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance)
+                UnityEngine.Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance)
             {
                 yield break;
             }
@@ -80,7 +81,7 @@ public class Slime : MonoBehaviour
         //這裡是攻擊前搖
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
         yield return StartCoroutine(BeforeAttack(player));
-        if (Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance &&
+        if (UnityEngine.Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance &&
             !SlimePauseAttack)
         {
             //攻擊前搖結束若玩家仍在範圍內則造成傷害並進入攻擊後搖
@@ -91,7 +92,7 @@ public class Slime : MonoBehaviour
             Attacking = false;
             yield return null;
         }
-        else if (Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance &&
+        else if (UnityEngine.Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance &&
                 !SlimePauseAttack)
         {
             //攻擊前搖結束若玩家離開攻擊範圍則取消攻擊
@@ -109,16 +110,16 @@ public class Slime : MonoBehaviour
 
     void MoveAndAttack(GameObject player)
     {
-        if (Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance &&
+        if (UnityEngine.Vector3.Distance(player.transform.position, transform.position) > SlimeAttackDistance &&
             !Attacking)
         {
             //當玩家位於攻擊範圍外則追蹤玩家
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
-            transform.position += Vector3.Normalize(player.transform.position - transform.position) * SlimeMovimgSpeed * Time.deltaTime;
+            transform.position += UnityEngine.Vector3.Normalize(player.transform.position - transform.position) * SlimeMovimgSpeed * Time.deltaTime;
             Attacking = false;
             SlimePauseAttack = false;
         }
-        else if (Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance &&
+        else if (UnityEngine.Vector3.Distance(player.transform.position, transform.position) <= SlimeAttackDistance &&
                 !Attacking &&
                 Time.time - AttackingTimer >= SlimeBeforeAttackTime)
         {
