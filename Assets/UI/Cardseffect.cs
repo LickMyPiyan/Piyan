@@ -3,13 +3,14 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class Cardseffect : MonoBehaviour
+public class Cardseffect: MonoBehaviour
 {   
-    public void Regeneration(int n)
+    //所有卡片的效果
+    public static void Regeneration()
     {
-        if (Player.PlayerHealth < Player.PlayerMaxHealth - 10*n)
+        if (Player.PlayerHealth < Player.PlayerMaxHealth - 10 * CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")])
         {
-            Player.PlayerHealth += 10*n;
+            Player.PlayerHealth += 10 * CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")];
         }
         else
         {
@@ -17,7 +18,22 @@ public class Cardseffect : MonoBehaviour
         }
     }
 
-    public void HpPlus()
+    public static void AtkBoost()
+    {
+        Coefficient.AtkC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("AtkBoost")]);
+    }
+
+    public static void SpdBoost()
+    {
+        Coefficient.SpdC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("SpdBoost")]);
+    }
+
+    public static void ASpdBoost()
+    {
+        Coefficient.ASpdC += 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("ASpdBoost")]);
+    }
+
+    public static void HpPlus()
     {
         if (Player.PlayerHealth < Player.PlayerMaxHealth - 30)
         {
@@ -29,48 +45,18 @@ public class Cardseffect : MonoBehaviour
         }
     }
 
-    public void AtkBoostTweak()
+    public static void AtkPlus()
     {
-        Player.PlayerAtkBoost = Player.PlayerDefaultStats[1] + 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("AtkBoost")])
-                                                       + 0.5f*(CardManager.TempEffect.Count(x => x.Item1 == "AtkPlus"));
+        Coefficient.AtkC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "AtkPlus");
     }
 
-    public void CardSpeedTweak()
+    public static void SpdPlus()
     {
-        Player.PlayerCardSpeed = Player.PlayerDefaultStats[2] + 0.2f*(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("SpdBoost")])
-                                                              + 0.5f*(CardManager.TempEffect.Count(x => x.Item1 == "SpdPlus"));
+        Coefficient.SpdC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "SpdPlus");
     }
 
-    public void ASpdTweak()
+    public static void ASpdPlus()
     {
-        Player.PlayerASpd = Player.PlayerDefaultStats[3] * Mathf.Pow(0.5f,(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("ASpdBoost")]))
-                                                         * Mathf.Pow(0.3f, CardManager.TempEffect.Count(x => x.Item1 == "ASpdPlus"));
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        for (int i = 0; i < CardManager.CardsOwned.Count; i++)
-        {
-            switch (CardManager.CardsOwned[i])
-            {
-                case "Regeneration":
-                    Regeneration(CardManager.CardsCount[CardManager.CardsOwned.IndexOf("Regeneration")]);
-                    break;
-                default:
-                    Debug.LogError($"Card effect not implemented for: {CardManager.CardsOwned[0]}");
-                    break;
-            }
-        }
-        
-        AtkBoostTweak();
-        CardSpeedTweak();
-        ASpdTweak();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Coefficient.ASpdC += 0.5f * CardManager.TempEffect.Count(x => x.Item1 == "ASpdPlus");
     }
 }

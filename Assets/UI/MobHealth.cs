@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +10,40 @@ public class HealthBar : MonoBehaviour
     private RectTransform rectTransform;
     private Camera mainCamera;
     public Image healthBar;
-    private float CurrentHealth;
+
+    private float currentHealth;
     private float maxHealth;
+
+    void FollowMob()
+    {
+        //跟隨怪物
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(target.transform.position + offset);
+        rectTransform.position = screenPos;
+    }
+
+    void UpdateHealth(string targetName)
+    {
+        //更新血條(適配不同怪物)
+        switch (targetName)
+        {
+            case "Slime":
+                currentHealth = target.GetComponent<Slime>().SlimeHealth;
+                maxHealth = Slime.SlimeMaxHealth;
+                break;
+            case "Flower":
+                currentHealth = target.GetComponent<Flower>().FlowerHealth;
+                maxHealth = Flower.FlowerMaxHealth;
+                break;
+            case "Goblin":
+                currentHealth = target.GetComponent<Goblin>().GoblinHealth;
+                maxHealth = Goblin.GoblinMaxHealth;
+                break;
+            default:
+                Debug.LogError("Unknown target name: " + targetName);
+                break;
+        }
+        healthBar.fillAmount = currentHealth / maxHealth;
+    }
 
     void Start()
     {
@@ -22,29 +56,8 @@ public class HealthBar : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(target.transform.position + offset);
-            rectTransform.position = screenPos;
-
-            string targetName = target.name.Replace("(Clone)", "");
-            switch (targetName)
-                {
-                    case "Slime":
-                        CurrentHealth = target.GetComponent<Slime>().SlimeHealth;
-                        maxHealth = Slime.SlimeMaxHealth;
-                        break;
-                    case "Flower":
-                        CurrentHealth = target.GetComponent<Flower>().FlowerHealth;
-                        maxHealth = Flower.FlowerMaxHealth;
-                        break;
-                    case "Goblin":
-                        CurrentHealth = target.GetComponent<Goblin>().GoblinHealth;
-                        maxHealth = Goblin.GoblinMaxHealth;
-                        break;
-                    default:
-                        Debug.LogError("Unknown mob type: " + target.name);
-                        break;
-                }
-            healthBar.fillAmount = (float)CurrentHealth / maxHealth;
+            FollowMob();
+            UpdateHealth(target.name.Replace("(Clone)", ""));
         }
         else
         {

@@ -27,7 +27,7 @@ public class UIManagerM : MonoBehaviour
     private List<(Vector3, GameObject)> followPairs;
     //場景名稱清單
     private List<string> BattleScenes = new List<string> { "BattleP01", "BattleF01", "BattleF02", "BattleS01", "BattleT01", "BossBattle01" };
-    private List<string> EventScenes = new List<string> { "EventP01", "EventP02", "EventF01", "Events01", "EventT01" };
+    private List<string> EventScenes = new List<string> { "EventP01", "EventP02", "EventF01", "EventS01", "EventT01" };
     private List<string> ShopScenes = new List<string> { "ShopP01", "ShopF01", "ShopS01", "ShopT01" };
     //選擇場景清單
     private List<string> PickedScenes;
@@ -52,27 +52,16 @@ public class UIManagerM : MonoBehaviour
         }
 
         CoinCount.text = $"{CardManager.Coin}";
-        GameObject.Find("Bar2").GetComponent<Image>().fillAmount = Player.PlayerHealth / Player.PlayerMaxHealth;
     }
     
     //開關進節點UI
     public void ButtonPressed()
     {
-        if (GameState < (PickedScenes.Count - 1))
-        {
-            SaveCamera();
-            StartUI.SetActive(true);
-            StageName.text = PickedScenes[GameState];
-            MainCamera.GetComponent<DragCamera>().enabled = false;
-            BasicUI.SetActive(false);
-        }
-        else
-        {
-            SaveCamera();
-            MainCamera.GetComponent<DragCamera>().enabled = false;
-            BasicUI.SetActive(false);
-            StartPressed();
-        }
+        SaveCamera();
+        StartUI.SetActive(true);
+        StageName.text = PickedScenes[GameState];
+        MainCamera.GetComponent<DragCamera>().enabled = false;
+        BasicUI.SetActive(false);
     }
 
     public void CardPressed()
@@ -127,7 +116,7 @@ public class UIManagerM : MonoBehaviour
                                             EnterB03, EnterE03, EnterS03,
                                             EnterBB};
 
-        //宣告UI跟物件配對
+        //按鈕和對應位置的配對
         followPairs = new List<(Vector3, GameObject)>
         {
             (new Vector3(-6,1,0), EnterB01),
@@ -149,12 +138,11 @@ public class UIManagerM : MonoBehaviour
         PickedScenes.AddRange(new List<string> { BattleScenes[0], EventScenes[PickEP], ShopScenes[0], 
                                                 BattleScenes[PickBF], EventScenes[2], ShopScenes[1],
                                                 BattleScenes[3], EventScenes[3], ShopScenes[2],
-                                                BattleScenes[4], EventScenes[4], ShopScenes[3], BattleScenes[5] });
+                                                //BattleScenes[4], EventScenes[4], ShopScenes[3], 
+                                                BattleScenes[5] });
 
         StartUI.SetActive(false);
         CardUI.SetActive(false);
-
-        StartCoroutine(LoadScenes.LoadIn());
 
         MainCamera = Camera.main;
         CardManager = GameObject.Find("UIManagerM").GetComponent<CardManager>();
@@ -174,6 +162,11 @@ public class UIManagerM : MonoBehaviour
             UnPressed();
         }
 
+        if (BasicUI.activeSelf)
+        {
+            GameObject.Find("Bar2").GetComponent<Image>().fillAmount = Player.PlayerHealth / Player.PlayerMaxHealth;
+        }
+        
         Follow();
     }
 }

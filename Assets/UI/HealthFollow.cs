@@ -6,6 +6,7 @@ public class HealthFollow : MonoBehaviour
     public GameObject PlayerHealth;
     Camera MainCamera;
 
+    //讓血條跟著玩家
     void FollowPlayer()
     {
         if (Player != null)
